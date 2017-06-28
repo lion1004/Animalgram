@@ -1,48 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<title>SB Admin - Bootstrap Admin Template</title>
+	<!-- jQuery -->
+	<script src="/resources/bootstrapPro/js/jquery.js"></script>
+	
+	<!-- Bootstrap Core JavaScript -->
+	<script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
+	
+	<!-- Bootstrap Core CSS -->
+	<link href="/resources/bootstrapPro/css/bootstrap.min.css"
+		rel="stylesheet">
+	
+	<!-- Custom CSS -->
+	<link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
+	
+	<!-- Custom Fonts -->
+	<link
+		href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css"
+		rel="stylesheet" type="text/css">
+	
+	<style>
+	.modal-header, h4, .close {
+		background-color: #5cb85c;
+		color: white !important;
+		text-align: center;
+		font-size: 30px;
+	}
+	
+	.modal-footer {
+		background-color: #f9f9f9;
+	}
+	</style>
 
-<title>SB Admin - Bootstrap Admin Template</title>
-
-<!-- Bootstrap Core CSS -->
-<link href="/resources/bootstrapPro/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- jQuery -->
-		<script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-		<script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-<!-- Custom CSS -->
-<link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-<!-- Custom Fonts -->
-<link
-	href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-
-<!-- 로그인창 오픈 -->
-<style>
-.modal-header, h4, .close {
-	background-color: #5cb85c;
-	color: white !important;
-	text-align: center;
-	font-size: 30px;
-}
-
-.modal-footer {
-	background-color: #f9f9f9;
-}
-</style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -194,26 +196,28 @@
 						<li class="divider"></li>
 						<li><a href="#">View All</a></li>
 					</ul></li>
-					<c:if test="false">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown"><i class="fa fa-user"></i> Smith <b
-								class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="fa fa-fw fa-user"></i>
-										Profile</a></li>
-								<li><a href="#"><i class="fa fa-fw fa-envelope"></i>
-										Inbox</a></li>
-								<li><a href="#"><i class="fa fa-fw fa-gear"></i>
-										Settings</a></li>
-								<li class="divider"></li>
-								<li><a href="#"><i class="fa fa-fw fa-power-off"></i>
-										Log Out</a></li>
-							</ul></li>
-					</c:if>
-					<c:if test="true">
-						<!-- <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button> -->
-						<li id="myBtn"><a> Login </a></li>
-					</c:if>
+				<c:if test="false">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+							class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
+							<li><a href="#"><i class="fa fa-fw fa-envelope"></i>Inbox</a></li>
+							<li><a href="#"><i class="fa fa-fw fa-gear"></i>
+									Settings</a></li>
+							<li class="divider"></li>
+							<li><a href="#"><i class="fa fa-fw fa-power-off"></i>
+									LogOut</a></li>
+						</ul></li>
+				</c:if>
+				<c:if test="true">
+					<li id="myBtn"><a> Login </a></li>
+				</c:if>
+
+
+
+
+
 			</ul>
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -254,70 +258,70 @@
 			</div>
 			<!-- /.navbar-collapse -->
 		</nav>
-		
+
+		<!-- /#wrapper -->
+
 		<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal fade" id="myModal" role="dialog" style="margin-top: 100px">
+			<div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header" style="padding: 35px 50px;">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4>
-						<span class="glyphicon glyphicon-lock"></span> Login
-					</h4>
-				</div>
-				<div class="modal-body" style="padding: 40px 50px;">
-					<form role="form">
-						<div class="form-group">
-							<label for="usrname"><span
-								class="glyphicon glyphicon-user"></span> Username</label> <input
-								type="text" class="form-control" id="usrname"
-								placeholder="Enter email">
-						</div>
-						<div class="form-group">
-							<label for="psw"><span
-								class="glyphicon glyphicon-eye-open"></span> Password</label> <input
-								type="text" class="form-control" id="psw"
-								placeholder="Enter password">
-						</div>
-						<div class="checkbox">
-							<label><input type="checkbox" value="" checked>Remember
-								me</label>
-						</div>
-						<button type="submit" class="btn btn-success btn-block">
-							<span class="glyphicon glyphicon-off"></span> Login
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 35px 50px;">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4>
+							<span class="glyphicon glyphicon-lock"></span> Login
+						</h4>
+					</div>
+					<div class="modal-body" style="padding: 40px 50px;">
+						<form role="form">
+							<div class="form-group">
+								<label for="usrname"><span
+									class="glyphicon glyphicon-user"></span> Username</label> <input
+									type="text" class="form-control" id="usrname"
+									placeholder="Enter email">
+							</div>
+							<div class="form-group">
+								<label for="psw"><span
+									class="glyphicon glyphicon-eye-open"></span> Password</label> <input
+									type="text" class="form-control" id="psw"
+									placeholder="Enter password">
+							</div>
+							<div class="checkbox">
+								<label><input type="checkbox" value="" checked>Remember
+									me</label>
+							</div>
+							<button type="submit" class="btn btn-success btn-block">
+								<span class="glyphicon glyphicon-off"></span> Login
+							</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-danger btn-default pull-left"
+							data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> Cancel
 						</button>
-					</form>
+						<p>
+							Not a member? <a href="#">Sign Up</a>
+						</p>
+						<p>
+							Forgot <a href="#">Password?</a>
+						</p>
+					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-danger btn-default pull-left"
-						data-dismiss="modal">
-						<span class="glyphicon glyphicon-remove"></span> Cancel
-					</button>
-					<p>
-						Not a member? <a href="#">Sign Up</a>
-					</p>
-					<p>
-						Forgot <a href="#">Password?</a>
-					</p>
-				</div>
-			</div>
 
+			</div>
 		</div>
-	</div>
-		
+
+
 		<!-- 로그인창 오픈 -->
-	<script type="text/javascript">
+		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#myBtn").click(function() {
 					$("#myModal").modal();
 				});
 			});
-	</script>
-
-		<!-- /#wrapper -->
-
+		</script>
 </body>
 
 </html>
