@@ -6,6 +6,7 @@ create table amember( --회원DB
    mno number primary key, --회원번호
    idmail varchar2(50) unique, --회원아이디(이메일)
    mpass varchar2(30) not null, --비밀번호
+   mhint varchar2(30) not null, --비밀힌트
    nickname varchar2(30) unique, --닉네임
    mname varchar2(30) not null, --이름
    birth varchar2(30) not null, --생년월일
@@ -92,6 +93,7 @@ create table bill_ep( --주문후기DB
    bno number references bill(bno),--주문서DB(주문서번호)
    bestar number not null,--별점
    becontent varchar2(100) not null--후기내용
+   bedate date default sysdate--후기등록날짜
 );
 
 drop sequence bill_ep_seq; -- 주문후기 댓글 번호 시퀀스
@@ -386,3 +388,55 @@ create sequence shop_seq
    nocache;
 
 select * from shop;
+
+drop table fastqa;
+create table fastqa(--FAQDB
+   faqno number primary key, --FAQ번호
+   faqtitle varchar2(100) not null, --FAQ제목
+   faqcontent varchar2(1500) not null, --FAQ내용
+   faqreply varchar2(1500) not null, --FAQ답글
+);
+
+drop sequence fastqa_seq; --FAQ 번호 시퀀스
+create sequence fastqa_seq
+   start with 1
+   increment by 1
+   nocycle
+   nocache;
+
+select * from fastqa;
+   
+drop table center;
+create table center(--고객문의DB
+   ctno number primary key, --고객문의번호
+   mno number references amember(mno), --고객번호
+   cttitle varchar2(100) not null, --고객문의제목
+   ctcontent varchar2(1500) not null, --고객문의내용
+);
+
+drop sequence center_seq; --문의번호 시퀀스
+create sequence center_seq
+   start with 1
+   increment by 1
+   nocycle
+   nocache;
+   
+select * from center;
+   
+   
+drop table center_reply;
+create table center_reply(--고객답변DB
+   ctrno number primary key, --고객답변번호
+   ctno number references center(ctno), --문의번호
+   ctrtitle varchar2(100) not null, --고객문의답볍제목
+   ctrcontent varchar2(1500) not null, --고객문의답변내용
+);
+
+drop sequence center_reply_seq; --문의번호 시퀀스
+create sequence center_reply_seq
+   start with 1
+   increment by 1
+   nocycle
+   nocache;
+
+select * from center_reply;   

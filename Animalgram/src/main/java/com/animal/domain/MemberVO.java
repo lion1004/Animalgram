@@ -6,6 +6,7 @@ public class MemberVO {
 	private int mno; // 회원번호
 	private String idmail; // 회원아이디(이메일)
 	private String mpass; // 비밀번호
+	private String mhint; // 비밀힌트
 	private String nickname; // 닉네임
 	private String mname; // 이름
 	private String birth; // 생년월일
@@ -16,22 +17,26 @@ public class MemberVO {
 	private String favorite; // 관심분야
 	private Date mdate; // 가입일자
 
+	
+
 	@Override
 	public String toString() {
-		return "MemberVO [mno=" + mno + ", idmail=" + idmail + ", mpass=" + mpass + ", nickname=" + nickname
-				+ ", mname=" + mname + ", birth=" + birth + ", mgender=" + mgender + ", job=" + job + ", mtel=" + mtel
-				+ ", maddr=" + maddr + ", favorite=" + favorite + ", mdate=" + mdate + "]";
+		return "MemberVO [mno=" + mno + ", idmail=" + idmail + ", mpass=" + mpass + ", mhint=" + mhint + ", nickname="
+				+ nickname + ", mname=" + mname + ", birth=" + birth + ", mgender=" + mgender + ", job=" + job
+				+ ", mtel=" + mtel + ", maddr=" + maddr + ", favorite=" + favorite + ", mdate=" + mdate + "]";
 	}
 
 	public MemberVO() {
 	}
 
-	public MemberVO(int mno, String idmail, String mpass, String nickname, String mname, String birth, String mgender,
-			String job, String mtel, String maddr, String favorite, Date mdate) {
+
+	public MemberVO(int mno, String idmail, String mpass, String mhint, String nickname, String mname, String birth,
+			String mgender, String job, String mtel, String maddr, String favorite, Date mdate) {
 		super();
 		this.mno = mno;
 		this.idmail = idmail;
 		this.mpass = mpass;
+		this.mhint = mhint;
 		this.nickname = nickname;
 		this.mname = mname;
 		this.birth = birth;
@@ -41,6 +46,15 @@ public class MemberVO {
 		this.maddr = maddr;
 		this.favorite = favorite;
 		this.mdate = mdate;
+	}
+
+	
+	public String getMhint() {
+		return mhint;
+	}
+
+	public void setMhint(String mhint) {
+		this.mhint = mhint;
 	}
 
 	public int getMno() {
