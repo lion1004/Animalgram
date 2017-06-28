@@ -6,7 +6,7 @@ create table amember( --회원DB
    mno number primary key, --회원번호
    idmail varchar2(50) unique, --회원아이디(이메일)
    mpass varchar2(30) not null, --비밀번호
-   nickname varchar2(30) not null, --닉네임
+   nickname varchar2(30) unique, --닉네임
    mname varchar2(30) not null, --이름
    birth varchar2(30) not null, --생년월일
    mgender varchar2(20)not null, --성별
@@ -50,7 +50,7 @@ drop table custom;
 create table custom( --주문제작 DB
    cuno number primary key, --주문제작번호
    sno number references seller(sno),--판매자DB(판매자번호)
-   ctitle varchar2(100) not null,--글번호
+   ctitle varchar2(100) not null,--글제목
    cprice number not null,--가격
    cimage varchar2(100),--주문제작물품이미지
    cinfo varchar2(1500) not null,--품목정보
