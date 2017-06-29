@@ -244,9 +244,12 @@ create table agroup(--소모임DB
    gtitle varchar2(100) not null, --소모임제목
    gplace varchar2(100) not null, --소모임장소
    glimit number not null, --소모임참가제한인원
-   gtype varchar2(30) not null, --소모임종류
-   gstate varchar2(30) not null, --소모임진행상태
-   gdate date default sysdate --소모임글등록일자
+   gcount number default 1, --소모임참가제한인원
+   gtype  varchar2(30) not null, --소모임종류
+   gstate varchar2(30) default '모집', --소모임진행상태
+   gdate  varchar2(50) not null,--소모임글등록일자
+   gimage varchar2(100) not null,
+   gwdate date default sysdate --소모임글등록일자
 );
 
 drop sequence agroup_seq; --소모임 번호 시퀀스
