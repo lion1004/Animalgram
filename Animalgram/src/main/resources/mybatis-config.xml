@@ -3,6 +3,7 @@
 <configuration>
 	<!-- MyBatis 환경설정 -->
 	<typeAliases>
-		
+		<typeAlias type="com.animal.domain.GroupVO" alias="groupVO"/>
+		<typeAlias type="com.animal.domain.GroupPersonVO" alias="grouppersonVO"/>
 	</typeAliases>
 </configuration>

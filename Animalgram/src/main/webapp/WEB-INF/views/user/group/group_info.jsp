@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@include file="../base/main.jsp"%>
 
 <head>
 
@@ -21,12 +21,6 @@
     <!-- Custom Fonts -->
     <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
@@ -42,7 +36,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Forms
+                           	소모임 정보보기
                         </h1>
               
                     </div>
@@ -52,72 +46,59 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form role="form">
-
+                        <form role="form" method="post">
                             <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
+                                <label>소모임 제목</label>
+                                <input class="form-control" readonly="readonly" value="${groupVO.gtitle}">
                             </div>
-
                             <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
+                                <label>소모임 장소</label>
+                                <input class="form-control" readonly="readonly" value="${groupVO.gplace}">
                             </div>
-
+                      		<div class="form-group">
+                                <label>소모임 인원</label>
+								<input class="form-control" readonly="readonly" value="${groupVO.gcount}명 / ${groupVO.glimit}명">
+                      		</div>
                             <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
+                                <label>소모임 날짜</label>
+								<input class="form-control" readonly="readonly" value="${groupVO.gdate}">
                             </div>
-
                             <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
+                                <label>참여가능 반려동물</label>
+								<input class="form-control" readonly="readonly" value="${groupVO.gtype}">
                             </div>
-
                             <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                    			 <img src="${groupVO.gimage}" alt="">
                             </div>
-
-                      <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
                             <div class="form-group">
-                                <label>Multiple Selects</label>
+                                <label>참여자 정보</label>
                                 <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+									<%-- <c:forEach items="${personlist }" var="memberVO" varStatus="stat">
+										<option value="">${memberVO.nickname}(${memberVO.mname})</option>
+									</c:forEach> --%>
                                 </select>
                             </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
+                            <button type="submit" class="btn btn-primary">✿참여 하기✿</button>
+ 							<a href="/group/list" class="btn btn-default">✿목록으로 가기✿</a>
             </div>
             <!-- /.container-fluid -->
 
+        
         </div>
         <!-- /#page-wrapper -->
-
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
+        <hr>
+    	<br>
+        <!-- Footer -->
+    	<footer>
+        	<div class="container">
+            	<div class="row">
+                	<div class="col-lg-6">
+                    	<p>Copyright &copy; AnimalGram Corp. Make by 홍일점</p>
+                	</div>
+            	</div>
+            	<!-- /.row -->
+        	</div>
+    	</footer>
+        <br>
 </body>
 
-</html>
