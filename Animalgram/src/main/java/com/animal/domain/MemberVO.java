@@ -16,14 +16,24 @@ public class MemberVO {
 	private String maddr; // 사는지역
 	private String favorite; // 관심분야
 	private Date mdate; // 가입일자
-
 	
+	private boolean listCheck = false; 
+	//관리자페이지 블랙리스트 체크용 
 
 	@Override
 	public String toString() {
 		return "MemberVO [mno=" + mno + ", idmail=" + idmail + ", mpass=" + mpass + ", mhint=" + mhint + ", nickname="
 				+ nickname + ", mname=" + mname + ", birth=" + birth + ", mgender=" + mgender + ", job=" + job
-				+ ", mtel=" + mtel + ", maddr=" + maddr + ", favorite=" + favorite + ", mdate=" + mdate + "]";
+				+ ", mtel=" + mtel + ", maddr=" + maddr + ", favorite=" + favorite + ", mdate=" + mdate + ", listCheck="
+				+ listCheck + "]";
+	}
+
+	public boolean isListCheck() {
+		return listCheck;
+	}
+
+	public void setListCheck(boolean listCheck) {
+		this.listCheck = listCheck;
 	}
 
 	public MemberVO() {

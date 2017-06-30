@@ -1,23 +1,24 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Full Width Pics - Start Bootstrap Template</title>
+    <title>관리자 메인페이지</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="/resources/bootstrapPro/css/full-width-pics.css" rel="stylesheet">
-
+    
+    <link href="/resources/bootstrapPro/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -28,7 +29,6 @@
 </head>
 
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -40,19 +40,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="mem_list">Start Management</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a class="navbar-collapse" href="logout">
+                         <i class="fa fa-power-off fa-fw"></i>Log-out
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -64,7 +60,7 @@
     <!-- Full Width Image Header with Logo -->
     <!-- Image backgrounds are set within the full-width-pics.css file. -->
     <header class="image-bg-fluid-height">
-        <img class="img-responsive img-center" src="http://placehold.it/200x200&text=Logo" alt="">
+        <img class="img-responsive img-center" src="/resources/images/admin_cat.jpg" alt="">
     </header>
 
     <!-- Content Section -->
@@ -72,9 +68,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="section-heading">Section Heading</h1>
-                    <p class="lead section-lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    <p class="section-paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
+                    <h1 class="section-heading">Welcome, Admin</h1>
+                    <p class="lead section-lead">환영합니다. 관리자 [<c:out value="${sessionScope.admin.mname}" />]</p>
+                    <p class="section-paragraph"><a href="mem_list">관리 페이지로 가기</a></p>
+                    <p class="section-paragraph"><a href="/base/main">사이트 메인으로 가기</a></p>
                 </div>
             </div>
         </div>

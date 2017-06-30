@@ -5,5 +5,8 @@
 	<typeAliases>
 		<typeAlias type="com.animal.domain.GroupVO" alias="groupVO"/>
 		<typeAlias type="com.animal.domain.GroupPersonVO" alias="grouppersonVO"/>
+		<typeAlias type="com.animal.domain.MemberVO" alias="member"/>
+  <typeAlias type="com.animal.domain.BlacklistVO" alias="blacklist"/>
+  <typeAlias type="com.animal.domain.NoticeTextVO" alias="noticetext"/>
 	</typeAliases>
 </configuration>

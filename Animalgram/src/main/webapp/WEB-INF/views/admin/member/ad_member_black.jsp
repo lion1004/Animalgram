@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                                                           소모임 관리
+                                                           블랙 리스트
                         </h1>
                      
                     </div>
@@ -26,23 +26,20 @@
                                 style="width:160px; float:right;" id="keywordInput" value="${cri.keyword }"> 
                                 
                                 <select name="searchType" id="searchType"
-						class="form-control" style="width: 80px; float: right;">
+						class="form-control" style="width: 110px; float: right;">
 
 						<option value=""
 							<c:out value="${cri.searchType == null?'selected':''}"/>>
 							---</option>
-						<option value="gno"
-							<c:out value="${cri.searchType eq 'gno'?'selected':''}"/>>
-							번호</option>
-						<option value="gtitle"
-							<c:out value="${cri.searchType eq 'gtitle'?'selected':''}"/>>
-							제목</option>
-						<option value="gplace"
-							<c:out value="${cri.searchType eq 'gplace'?'selected':''}"/>>
-							장소</option>
-						<option value="gstate"
-							<c:out value="${cri.searchType eq 'gstate'?'selected':''}"/>>
-							상태</option>
+						<option value="lno"
+							<c:out value="${cri.searchType eq 'lno'?'selected':''}"/>>
+							식별번호</option>
+						<option value="mno"
+							<c:out value="${cri.searchType eq 'mno'?'selected':''}"/>>
+							회원번호</option>
+						<option value="lcause"
+							<c:out value="${cri.searchType eq 'lcause'?'selected':''}"/>>
+							사유</option>
 					</select> 
 					        <span class="input-group-btn">
                                     <button id="searchBtn" class="btn btn-default" type="button">
@@ -57,33 +54,34 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th style="width:50px;"></th>
-                                        <th style="width:60px; text-align:center;">번호</th>
-                                        <th>제목</th>
-                                        <th>장소</th>
-                                        <th>작성일자</th>
-                                        <th>모임일자</th>
-                                        <th>상태</th>
+                                        <th></th>
+                                        <th style="text-align:center;">식별번호</th>
+                                        <th style="text-align:center;">회원번호</th>
+                                        <th style="text-align:center">제재 사유</th>
+                                        <th style="text-align:center">등록일자</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 
-                                 <c:forEach items="${list }" var="group">
+                                 <c:forEach items="${list }" var="black">
                                     <tr>
-                                        <td align="center">
-                                          <input type="checkbox" value="${group.gno }">
+                                        <td width="30px;" align="center">
+                                          <input type="checkbox" value="${black.lno }">
                                         </td>
-                                        <td align="center">${group.gno}</td>
-                                        <td><a data-toggle="modal" data-target="#myModal${group.gno } }" style="text-decoration:none;">
-                                           ${group.gtitle}
-                                          </a>
+                                        <td style="width:80px; text-align:center;">
+                                         ${black.lno}
                                         </td>
-                                        <td>${group.gplace }</td>
-                                        <td>
-                                        <fmt:formatDate value="${group.gwdate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
+                                        <td style="width:80px; text-align:center;">
+                                           ${black.mno}
                                         </td>
-                                        <td>${group.gdate}</td>
-                                        <td>${group.gstate }</td>
+                                        <td width="100px" style="text-align:center">
+                                        <a data-toggle="modal" data-target="#myModal${black.lno }" style="text-decoration: none;">
+                                                                                                       사유 보기
+                                        </a>
+                                        </td>
+                                        <td width="120px" style="text-align:center">
+                                        <fmt:formatDate value="${black.ldate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
+                                        </td>
                                     </tr>
                                  </c:forEach>
                                
@@ -125,7 +123,8 @@
         <!-- /#page-wrapper -->
         </div>
         
-    <div class="modal fade" id="myModal${person.gno }" role="dialog"
+        <c:forEach items="${list}" var='black' >
+    <div class="modal fade" id="myModal${black.lno }" role="dialog"
      style="margin-top:100px;">
     <div class="modal-dialog">
     
@@ -133,10 +132,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
+          <h4 class="modal-title">식별번호[${black.lno }] 회원번호[${black.mno }]번의 제재 사유</h4>
         </div>
          <div class="modal-body">
-			 
+			 ${black.lcause }
 		 </div>
 		 <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -144,6 +143,7 @@
 	   </div> 
       </div>
      </div>
+ </c:forEach>
    
    <script type="text/javascript">
     var msg = '${msg}';
@@ -176,17 +176,17 @@
 	 
     	  $("#delete").on("click",function(){
     		  
-    		  if( confirm("삭제하시겠습니까?") ){
+    		  if( confirm("블랙리스트에서 삭제하시겠습니까?") ){
     		  
         	  var param = "";
               $("input[type=checkbox]:checked").each(function() {
                 if( param=="" )
-                  param = "gno="+$(this).val();
-                else param = param + "&gno="+$(this).val();
+                  param = "lno="+$(this).val();
+                else param = param + "&lno="+$(this).val();
               });
                  
               $.ajax({
-                url: '/admin/gro_delete',
+                url: '/admin/mem_black_delete',
                 type: 'post',
                 data: param,
                 success : function(data) {
@@ -203,7 +203,7 @@
 					"click",
 					function(event) {
 
-						self.location = "gro_list"
+						self.location = "mem_black"
 								+ '${pageMaker.makeQuery(1)}'
 								+ "&searchType="
 								+ $("select[name=searchType] option:selected").val()
