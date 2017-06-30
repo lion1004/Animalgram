@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminGroup">
+
+<sql id="search">
+   <if test="searchType != null">
+    <if test="searchType == 'gno'.toString()">
+     where gno like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'gtitle'.toString()">
+     where gtitle like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'gplace'.toString()">
+     where gplace like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'gstate'.toString()">
+     where gstate like '%'||#{keyword}||'%'
+    </if>
+   </if>
+  </sql>
+
+ <select id="listGroup" resultType="groupVO">
+  select * from agroup
+  <include refid="search"></include>
+  order by gno desc
+ </select>
+ 
+ <select id="groupCount" resultType="int">
+  select count(gno) from agroup
+  <include refid="search"></include>
+  order by gno desc
+ </select>
+ 
+ <delete id="deleteGroup">
+  delete from agroup
+  <where>
+   gno in
+   <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item.value}
+   </foreach>
+  </where>
+ </delete>
+</mapper>

@@ -1,101 +1,65 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>중복확인</title>
+<%-- toyLoginCheck.jsp --%>
+<script type="text/javascript">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
+	function useId(param){
+		$("#join_form [name=idmail]",opener.document).val(param);
+		
+		window.close();
+	}
+	
+	function Check(){
+	      
+	      var id  = $('[name=idmail]').val();
+	      var emailExp = /^[a-zA-Z0-9]{3,15}@[a-zA-Z]+\.[a-zA-Z]+$/g;
+	      
+	      if(!emailExp.test(id)){
+	    	  alert("이메일 형식으로 입력 해 주세요.");
+	    	  return;
+	      } else {
+	    	  $.ajax({
+	    		 	url:'/aniidcheck',
+	    		 	cache:false,
+	    		 	data:'id='+id,
+	    		 	success:function(result){
+	    		 		if(result == 'possible'){
+	    		 			$('.idOk').html('[ <font color=red>'+id+'</font> ]는(은) 사용가능합니다. 사용하시겠습니까?<br><br><input type="button" class="btn btn-warning" onclick="useId(\''+id+'\')" value="사용하기" style="width: 200px;" display: inline;>')
+	    		 		} else {
+	    		 			$('.idOk').html('[ <font color=red>'+id+'</font> ]는(은) 이미 존재하는 아이디입니다.')
 
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/simple-sidebar.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+	    		 		}
+	    		 	}
+	    		 	
+	    	  });
+	      }
+	      }
+</script>
 </head>
-
 <body>
-
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Simple Sidebar</h1>
-                        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
+		<div class="body" style="text-align: center">
+			<br>
+			<label><b><font size=4>사용할 아이디(이메일)를 입력하세요.</font></b></label><br><br>
+			<input type="email" class="form-control" size="5" name="idmail" 
+			required="required" autocomplete="off" style="width: 200px; display: inline">
+			<input type="button" class="btn btn-info" value="중복확인" name = "checkB" onclick="Check()">
+			<br><br>
+			<div class="idOk" style="text-align: center;"></div>
+		</div>
+		
 </body>
-
 </html>
+

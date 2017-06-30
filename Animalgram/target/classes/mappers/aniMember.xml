@@ -1,4 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="amember">
+<mapper namespace="member">
+<!-- mno,idmail,mpass,nickname,mname,birth,mgender,job,mtel,maddr,favorite,pwcode,pwcodeas,mdate -->
+
+	<!-- 회원가입 -->
+	<insert id="insert">
+		insert into amember (mno,idmail,mpass,nickname,mname,birth,mgender,mtel,maddr,favorite,pwcode,pwcodeas)
+		 values(amember_seq.nextval,#{idmail},#{mpass},#{nickname},#{mname},#{birth},#{mgender},
+		 #{mtel},#{maddr},#{favorite},#{pwcode},#{pwcodeas})
+	</insert>
+	
+	<!-- 아이디 중복확인-->
+	<select id="idcheck" resultType="String">
+		select idmail
+		from amember
+		where idmail = #{idmail}
+	</select>
+	
+	<!-- 닉네임 중복확인 -->
+	<select id="nickcheck" resultType="String">
+		select nickname
+		from amember
+		where nickname = #{nickname}
+	</select>
+
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="String">
+		select idmail
+		from amember
+		where mname = #{mname} and birth = #{birth} and mtel = #{mtel}
+	</select>
+	
+	<!-- 로그인 확인-->
+	<select id="login" resultType="int">
+		select count(*)
+		from amember
+		where idmail = #{idmail} and mpass=#{mpass}
+	</select>
+	
+	<!-- 로그인 세션 (닉네임)가져오기 -->
+	<select id="loginsession" resultType="String">
+		select nickname
+		from amember
+		where idmail = #{idmail}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="selectpass" resultType="int">
+		select count(*)
+		from amember
+		where pwcode = #{pwcode} and pwcodeas = #{pwcodeas} and idmail = #{idmail}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatepass">
+		update amember
+		set mpass = #{mpass}
+		where idmail = #{idmail}
+	</update>
 </mapper>

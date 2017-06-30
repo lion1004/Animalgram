@@ -1,86 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog" style="margin-top: 100px">
+			<div class="modal-dialog">
 
-<!DOCTYPE html>
-<html lang="en">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 35px 50px;">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4>
+							<span class="glyphicon glyphicon-lock"></span> Login
+						</h4>
+					</div>
+					<div class="modal-body" style="padding: 40px 50px;">
+						<form role="form" name="login_form">
+							<div class="form-group">
+								<label for="usrname"><span
+									class="glyphicon glyphicon-user"></span> Username</label>
+									<input type="text" class="form-control" id="usrname" name="idmail"
+									placeholder="Enter email">
+							</div>
+							<div class="form-group">
+								<label for="psw"><span
+									class="glyphicon glyphicon-eye-open"></span> Password</label>
+									<input type="password" class="form-control" id="psw" name="pass"
+									placeholder="Enter password">
+							</div>
+							<button type="button" class="btn btn-success btn-block" id="loginB">
+								<span class="glyphicon glyphicon-off"></span> Login
+							</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger btn-default pull-left"
+							data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> Cancel
+						</button>
+						<p>
+							Not a member? <a href="member_join">Sign Up</a>
+						</p>
+						<p>
+							Forgot <a href="id">Id?  </a> Forgot<a href="pass">Password?</a>
+						</p>
+					</div>
+				</div>
 
-<head>
+			</div>
+		</div>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+		<!-- 로그인창 오픈 -->
+		<script type="text/javascript">
+		
+				
+			$(document).ready(function() {
+				
+				
+				$("#myBtn").click(function() {
+					$("#myModal").modal();
+				});
+				
+				
+				$("#loginB").click(function(){
+					
+					var idmail = $('#usrname').val();
+					var pass = $('#psw').val();
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="/resources/bootstrapPro/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a><br>
-                                <a href="">아이디 </a>/
-                                <a href="">비밀번호 찾기</a>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/resources/bootstrapPro/vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/resources/bootstrapPro/dist/js/sb-admin-2.js"></script>
-
-</body>
-
-</html>
+					$.ajax({
+						url : '/login',
+						type : 'post',
+						data : 'idmail='+idmail+'&pass='+pass,
+						success : function(data){
+							location.href="/member/main";
+						},
+						error : function(data){
+							alert("로그인 실패!!");
+							
+						}
+					});
+				})
+			});
+			
+			</script>

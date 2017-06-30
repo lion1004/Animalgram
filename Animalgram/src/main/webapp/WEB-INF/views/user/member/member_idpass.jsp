@@ -1,123 +1,148 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@include file="../base/main.jsp"%>
+<%@ include file="../login/login_confirm.jsp" %>
 
-<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+/* 아이디 찾기 */
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	function idfound() {
+		var name = document.id_found.mname.value;
+		var year = document.id_found.birth1.value;
+		var month = document.id_found.birth2.value;
+		var day = document.id_found.birth3.value;
+		var tel = document.id_found.mtel.value;
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+		if(name == ""){
+			alert('이름을 입력 하세요.')
+			document.id_found.mname.focus();
+		}else
+		if(name.match("[a-zA-Z][0-9]*")){
+			alert('이름은 한글만 입력 가능 합니다.')
+			document.id_found.mname.focus();
+		}else
+		if(year == "----"){
+			alert("년도를 선택하세요.")
+			document.id_found.birth1.focus();
+		}else
+		if(month == "--"){
+			alert("월을 선택하세요.")
+			document.id_found.birth2.focus();
+		}else
+		if(day == "--"){
+			alert("일을 선택하세요")
+			document.id_found.birth3.focus();
+		}else
+		if(tel == ""){
+			alert("번호를 입력하세요.")
+			document.id_found.mtel.focus();
+		}else
+		if(isNaN(tel)){
+			alert("번호는 숫자만 가능 합니다.")
+			document.id_found.mtel.focus();
+		}else{
+		
+			
+			var birth = year + "/" + month + "/" + day;
+		
+		$.ajax({
+			url : '/member/id',
+			type : 'post',
+			data : 'mname=' + name + '&birth=' + birth + '&mtel=' + tel,
+			success : function(data) {
+				
+				$('#id_get').html('<br> <font size = 3>아이디는 <b>[ ' + data + ' ]</b> 입니다.</font><br><br>'+
+					'<input type="button" id="myBtn" class="btn btn-warning" value="로그인 하기" style="width: 100px" display: inline;>&nbsp;' +
+					'<input type="button" class="btn btn-success" value="비밀번호 찾기" style="width: 130px;" display: inline;>')
+			
+			},
+			error : function(result){
+				$('#id_get').html('<font size = 3 color = red>존재하지 않은 회원정보 입니다.</font><br><br>'+
+						'<input type="button" class="btn btn-warning" value="회원가입 하기" id="confirm" style="width: 100px" display: inline;>');
+			}
+		});
+		$(document).ready(function(){
+			$('#confirm').click(function(){
+				location.href="/member/member_join";
+			});
+		});
+	}
+}
+</script>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
+<title>아이디 찾기</title>
 
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
+<article class="container">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h3>
+				아이디 찾기 <small>Animalgram</small>
+			</h3>
+		</div>
+		<form class="form-horizontal" name="id_found" id="join_form"
+			action="member_login" method="post">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="inputName">이름</label>
+				<div class="col-sm-6">
+					<input class="form-control" id="inputName" type="text" name="mname"
+						placeholder="이름" maxlength="5" style="width: 200px">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="inputName">생년월일</label>
+				<div class="col-sm-6">
+					<select name="birth1">
+						<option value="----">----
+							<c:forEach var="i" begin="1920" end="2017" step="1">
+								<option value="${i }">
+									<c:out value="${i }" />
+								</option>
+							</c:forEach>
+					</select>년 <select name="birth2">
+						<option value="--">--
+							<c:forEach var="i" begin="1" end="12" step="1">
+								<option value="${i }">
+									<c:out value="${i }" />
+								</option>
+							</c:forEach>
+					</select>월 <select name="birth3">
+						<option value="--">--
+							<c:forEach var="i" begin="1" end="31" step="1">
+								<option value="${i }">
+									<c:out value="${i }" />
+								</option>
+							</c:forEach>
+					</select>일
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="inputNumber">휴대폰번호</label>
+				<div class="col-sm-6">
+					<div class="input-group">
+						<input type="tel" class="form-control" id="inputNumber"
+							name="mtel" placeholder="- 없이 입력해 주세요" />
+					</div>
+				</div>
+			</div>
 
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+			<div class="form-group">
+				<div class="col-sm-12 text-center">
+					<button class="btn btn-primary" type="button" id="idbutton"
+						onclick="idfound()">
+						아이디 찾기<i class="fa fa-check spaceLeft"></i>
+					</button>
+					<button class="btn btn-danger" type="button">
+						취소<i class="fa fa-times spaceLeft"></i>
+					</button>
+					<br><br>
+					<div class="form-group">
+						<b id="id_get" style="color: black; font-size: 8pt;"></b>
+					</div>
+				</div>
+			</div>
+		</form>
+		<hr>
+	</div>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Forms
-                        </h1>
-              
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-6">
-
-                        <form role="form">
-
-                            <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                      <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+</article>

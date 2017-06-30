@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMember">
+
+<sql id="searchMember">
+   <if test="searchType != null">
+    <if test="searchType == 'job'.toString()">
+     where job like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'idmail'.toString()">
+     where idmail like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'mname'.toString()">
+     where mname like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'mno'.toString()">
+     where mno like '%'||#{keyword}||'%'
+    </if>
+   </if>
+  </sql>
+<!-- 회원관리 -->
+ <select id="listMember" resultType="member">
+  select * from amember
+  <include refid="searchMember"></include>
+  order by mno desc
+ </select>
+ <select id="memberCount" resultType="int">
+  select count(*) from amember
+  <include refid="searchMember"></include>
+ </select>
+ <select id="selectMember" resultType="member">
+  select * from amember
+  where mno=#{mno}
+ </select>
+ 
+ <!-- 회원 수정 -->
+ <update id="updateMember">
+  update amember
+  set idmail=#{idmail},mpass=#{mpass},nickname=#{nickname},
+  job=#{job},mtel=#{mtel},maddr=#{maddr},favorite=#{favorite}
+  where mno=#{mno}
+ </update>
+ 
+ <!-- 회원 삭제 -->
+ <delete id="deleteMember">
+  delete from amember
+   <where>
+        mno in
+        <foreach collection="list" item="item" index="index"  open="(" separator="," close=")">
+            #{item.value}
+        </foreach>
+    </where>
+ </delete>
+ 
+ <!-- 블랙리스트 관리 -->
+ <!-- 추가 -->
+ <insert id="addBlack">
+  insert into blacklist
+  (lno,mno,lcause) values
+  (blacklist_seq.nextval, #{mno}, #{lcause})
+ </insert>
+             
+ <select id="checkBlack" resultType="int">
+  select mno from amember natural join blacklist where mno = #{mno}
+ </select>
+ 
+ <select id="checkBlackList" resultType="blacklist">
+  select mno from amember natural join blacklist 
+  <where>
+        mno in
+        <foreach collection="list" item="item" index="index"  open="(" separator="," close=")">
+            #{item.value}
+        </foreach>
+    </where>
+ </select>
+ 
+ <sql id="searchBlack">
+   <if test="searchType != null">
+    <if test="searchType == 'lno'.toString()">
+     where lno like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'mno'.toString()">
+     where mno like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'lcause'.toString()">
+     where lcause like '%'||#{keyword}||'%'
+    </if>
+   </if>
+  </sql>
+  
+  <!-- 목록 -->
+ <select id="listBlack" resultType="blacklist">
+  select * from blacklist
+  <include refid="searchBlack"></include>
+  order by lno desc
+ </select>
+ <select id="blackCount" resultType="int">
+  select count(*) from blacklist
+  <include refid="searchBlack"></include>
+ </select>
+ 
+ <!-- 삭제 -->
+ <delete id="deleteBlack">
+  delete from blacklist
+  <where>
+        lno in
+        <foreach collection="list" item="item" index="index"  open="(" separator="," close=")">
+            #{item.value}
+        </foreach>
+    </where>
+ </delete>
+ 
+ <!-- 관리자 로그인 -->
+ <select id="adminLogin" resultType="member">
+  select * from amember
+  where idmail=#{idmail} and mpass=#{mpass} and job='admin'
+ </select>
+ 
+ <!-- 하루 가입자 수 -->
+ <select id="todayUser" resultType="int">
+  select count(mno) from amember
+  where to_char(mdate,'yy-mm-dd') = to_char(sysdate,'yy-mm-dd')
+ </select>
+ 
+</mapper>
