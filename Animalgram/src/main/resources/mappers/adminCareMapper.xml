@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminCare">
+ <sql id="search">
+   <if test="searchType != null">
+    <if test="searchType == 'cno'.toString()">
+     where cno like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'pno'.toString()">
+     where pno like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'ctype'.toString()">
+     where ctype like '%'||#{keyword}||'%'
+    </if>
+   </if>
+  </sql>
+  
+  <!-- 리스트 -->
+ <select id="listCare" resultType="com.animal.domain.CareVO">
+  select *
+  from care
+  <include refid="search"></include>
+  order by cno desc
+ </select>
+ 
+ <select id="careCount" resultType="int">
+  select count(cno)
+  from care
+  <include refid="search"></include>
+ </select>
+ 
+<delete id="deleteCare">
+  delete from care
+  <where>
+   cno in
+   <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item.value}
+   </foreach>
+  </where>
+ </delete>
+</mapper>

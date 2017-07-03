@@ -12,19 +12,30 @@ public class NoticeTextVO {
 	private String ntimage; // 게시글이미지
 	private Date ntdate; // 게시글 등록일자
 	private Date ntupdate; // 게시글 수정일자
+	
+	private String mname; //join용 mname
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
 
 	@Override
 	public String toString() {
-		return "NoticeText [antno=" + antno + ", mno=" + mno + ", nno=" + nno + ", ntno=" + ntno + ", ntitle=" + ntitle
-				+ ", ntcontent=" + ntcontent + ", ntimage=" + ntimage + ", ntdate=" + ntdate + ", ntupdate=" + ntupdate
-				+ "]";
+		return "NoticeTextVO [antno=" + antno + ", mno=" + mno + ", nno=" + nno + ", ntno=" + ntno + ", ntitle="
+				+ ntitle + ", ntcontent=" + ntcontent + ", ntimage=" + ntimage + ", ntdate=" + ntdate + ", ntupdate="
+				+ ntupdate + ", mname=" + mname + "]";
 	}
 
 	public NoticeTextVO() {
 	}
+	
 
 	public NoticeTextVO(int antno, int mno, int nno, int ntno, String ntitle, String ntcontent, String ntimage,
-			Date ntdate, Date ntupdate) {
+			Date ntdate, Date ntupdate, String mname) {
 		super();
 		this.antno = antno;
 		this.mno = mno;
@@ -35,6 +46,7 @@ public class NoticeTextVO {
 		this.ntimage = ntimage;
 		this.ntdate = ntdate;
 		this.ntupdate = ntupdate;
+		this.mname = mname;
 	}
 
 	public int getAntno() {

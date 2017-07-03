@@ -160,7 +160,28 @@
                            </ul>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-table fa-fw"></i> Tables</a>
+                            <a><i class="fa fa-table fa-fw"></i> 물품 관리
+                            <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="cus_list">주문제작 관리</a>
+                                </li>
+                                <li>
+                                    <a href="dona_list">나눔 관리</a>
+                                </li>
+                           </ul>
+                        </li>
+                       <li>
+                            <a><i class="fa fa-table fa-fw"></i> 반려동물 관련
+                            <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="care_list">훈련 관리</a>
+                                </li>
+                                <li>
+                                    <a href="shop_list">샵 관리</a>
+                                </li>
+                           </ul>
                         </li>
                         <li class="active">
                             <a href="/base/main">

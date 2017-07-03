@@ -19,7 +19,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="row" style="margin:0px 120px 0px 120px">
                        
                             <div class="input-group custom-search-form">
                                 <input type="text" name="keyword" class="form-control" placeholder="Search..."
@@ -57,8 +57,8 @@
                                         <th></th>
                                         <th style="text-align:center;">식별번호</th>
                                         <th style="text-align:center;">회원번호</th>
-                                        <th style="text-align:center">제재 사유</th>
-                                        <th style="text-align:center">등록일자</th>
+                                        <th>제재 사유</th>
+                                        <th>등록일자</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,12 +74,12 @@
                                         <td style="width:80px; text-align:center;">
                                            ${black.mno}
                                         </td>
-                                        <td width="100px" style="text-align:center">
+                                        <td>
                                         <a data-toggle="modal" data-target="#myModal${black.lno }" style="text-decoration: none;">
                                                                                                        사유 보기
                                         </a>
                                         </td>
-                                        <td width="120px" style="text-align:center">
+                                        <td>
                                         <fmt:formatDate value="${black.ldate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
                                         </td>
                                     </tr>

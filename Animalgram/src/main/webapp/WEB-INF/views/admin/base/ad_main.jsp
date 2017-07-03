@@ -90,7 +90,12 @@
         </div>
         <!-- /.container -->
     </footer>
-
+    <script type="text/javascript">
+    var msg = '${msg}';
+	 if(msg!=null && msg.trim().length > 1){
+		 alert(msg);
+	 } 
+    </script>
     <!-- jQuery -->
     <script src="/resources/bootstrapPro/js/jquery.js"></script>
 

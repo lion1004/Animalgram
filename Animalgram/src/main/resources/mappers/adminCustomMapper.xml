@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminCustom">
+ <sql id="search">
+   <if test="searchType != null">
+    <if test="searchType == 'cuno'.toString()">
+     where cuno like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'sno'.toString()">
+     where sno like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'ctitle'.toString()">
+     where ctitle like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'cprice'.toString()">
+     where cprice like '%'||#{keyword}||'%'
+    </if>
+   </if>
+  </sql>
+  
+  <!-- 리스트 -->
+ <select id="listCustom" resultType="com.animal.domain.CustomVO">
+  select *
+  from custom
+  <include refid="search"></include>
+  order by cuno desc
+ </select>
+ 
+ <select id="customCount" resultType="int">
+  select count(cuno)
+  from custom
+  <include refid="search"></include>
+ </select>
+ 
+<delete id="deleteCustom">
+  delete from custom
+  <where>
+   cuno in
+   <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+    #{item.value}
+   </foreach>
+  </where>
+ </delete>
+</mapper>

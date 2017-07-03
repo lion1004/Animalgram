@@ -21,17 +21,14 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		return dao.todayBoard();
 	}
 
-	@Override
 	public List<NoticeTextVO> listKnowhow(SearchCriteria cri) {
 		return dao.listKnowhow(cri);
 	}
 
-	@Override
 	public int knowhowCount(SearchCriteria cri) {
 		return dao.knowhowCount(cri);
 	}
 
-	@Override
 	public List<NoticeTextVO> listQuestion(SearchCriteria cri) {
 		return dao.listQuestion(cri);
 	}

@@ -1,44 +1,18 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
+<%@include file="../include/navbar.jsp" %>
+<div id="wrapper">
+        
+        <!-- Page Content -->
+        <div id="page-wrapper">
+             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Tables
+                                                           샵 관리
                         </h1>
                      
                     </div>
@@ -46,78 +20,195 @@
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-6">
-                        <h2>Bordered Table</h2>
+                       
+                            <div class="input-group custom-search-form">
+                                <input type="text" name="keyword" class="form-control" placeholder="Search..."
+                                style="width:160px; float:right;" id="keywordInput" value="${cri.keyword }"> 
+                                
+                                <select name="searchType" id="searchType"
+						class="form-control" style="width: 100px; float: right;">
+
+						<option value=""
+							<c:out value="${cri.searchType == null?'selected':''}"/>>
+							---</option>
+						<option value="shno"
+							<c:out value="${cri.searchType eq 'shno'?'selected':''}"/>>
+							샵 번호</option>
+						<option value="shtype"
+							<c:out value="${cri.searchType eq 'shtype'?'selected':''}"/>>
+							종류</option>
+						<option value="shname"
+							<c:out value="${cri.searchType eq 'shname'?'selected':''}"/>>
+							이름</option>
+						<option value="shaddr"
+							<c:out value="${cri.searchType eq 'shaddr'?'selected':''}"/>>
+							주소</option>
+					</select> 
+					        <span class="input-group-btn">
+                                    <button id="searchBtn" class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+   
+                        <br><br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Page</th>
-                                        <th>Visits</th>
-                                        <th>% New Visits</th>
-                                        <th>Revenue</th>
+                                        <th style="width:50px;"></th>
+                                        <th style="width:60px; text-align:center;">번호</th>
+                                        <th>종류</th>
+                                        <th>이름</th>
+                                        <th>주소</th>
+                                        <th>전화번호</th>
+                                        <th>운영시간</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                
+                                 <c:forEach items="${list }" var="shop">
                                     <tr>
-                                        <td>/index.html</td>
-                                        <td>1265</td>
-                                        <td>32.3%</td>
-                                        <td>$321.33</td>
+                                        <td align="center">
+                                          <input type="checkbox" value="${shop.shno}">
+                                        </td>
+                                        <td align="center">${shop.shno}</td>
+                                        <td>
+                                         ${shop.shtype }
+                                        </td>
+                                        <td>${shop.shname}</td>
+                                        <td>${shop.shaddr }</td>
+                                        <td>${shop.shtel}</td>
+                                        <td>${shop.shtime }</td>
                                     </tr>
-                                    <tr>
-                                        <td>/about.html</td>
-                                        <td>261</td>
-                                        <td>33.3%</td>
-                                        <td>$234.12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/sales.html</td>
-                                        <td>665</td>
-                                        <td>21.3%</td>
-                                        <td>$16.34</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog.html</td>
-                                        <td>9516</td>
-                                        <td>89.3%</td>
-                                        <td>$1644.43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/404.html</td>
-                                        <td>23</td>
-                                        <td>34.3%</td>
-                                        <td>$23.52</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/services.html</td>
-                                        <td>421</td>
-                                        <td>60.3%</td>
-                                        <td>$724.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog/post.html</td>
-                                        <td>1233</td>
-                                        <td>93.2%</td>
-                                        <td>$126.34</td>
-                                    </tr>
+                                 </c:forEach>
+                               
                                 </tbody>
                             </table>
+                             <div style="text-align:right;">
+                              <a id="delete" class="btn btn-warning">삭제</a>
+                             </div>
                         </div>
-                    </div>
-           
+                    
+					<div class="text-center">
+						<ul class="pagination">
 
+							<c:if test="${pageMaker.prev}">
+								<li><a
+									href="shop_list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+							</c:if>
+
+							<c:forEach begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage }" var="idx">
+								<li
+									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<a href="shop_list${pageMaker.makeSearch(idx)}">${idx}</a>
+								</li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li><a
+									href="shop_list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+							</c:if>
+
+						</ul>
+					</div>
             </div>
             <!-- /.container-fluid -->
+           </div>
+        
+        </div>
+        <!-- /#page-wrapper -->
+        </div>
+        
+    <div class="modal fade" id="myModal" role="dialog"
+     style="margin-top:100px;">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+         <div class="modal-body">
+			 
+		 </div>
+		 <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+         </div>
+	   </div> 
+      </div>
+     </div>
+   
+   <script type="text/javascript">
+    var msg = '${msg}';
+	 if(msg!=null && msg.trim().length > 1){
+		 alert(msg);
+	 } 
+	 
+     $(document).ready(function(){
+    	  var checked = $("input[type=checkbox]:checked").length;
+  			$("#delete").addClass("disabled");
+  			
+  			if(checked==0){
+    			$("#delete").addClass("disabled");
+    		}else if(checked>0){
+    			$("#delete").removeClass("disabled");
+    		}
+  			//새로고침,뒤로가기로 로딩 되었을 때 
+  			
+    	  $("input[type=checkbox]").on("click",function(){
+    		  checked =  $("input[type=checkbox]:checked").length;
+    		  
+    		if(checked==0){
+    			$("#delete").addClass("disabled");
+    		}else if(checked>0){
+    			$("#delete").removeClass("disabled");
+    		}
+    		
+    	  });
+        
+	 
+    	  $("#delete").on("click",function(){
+    		  
+    		  if( confirm("삭제하시겠습니까?") ){
+    		  
+        	  var param = "";
+              $("input[type=checkbox]:checked").each(function() {
+                if( param=="" )
+                  param = "shno="+$(this).val();
+                else param = param + "&shno="+$(this).val();
+              });
+                 
+              $.ajax({
+                url: '/admin/shop_delete',
+                type: 'post',
+                data: param,
+                success : function(data) {
+                  location.reload(true);
+                  alert(data);
+                },
+                error : function() { console.log('error');
+                }
+              }); //ajax
+    		  }
+        	 }); //delete
+        	 
+    	  $('#searchBtn').on(
+					"click",
+					function(event) {
 
+						self.location = "shop_list"
+								+ '${pageMaker.makeQuery(1)}'
+								+ "&searchType="
+								+ $("select[name=searchType] option:selected").val()
+				+"&keyword="+encodeURIComponent($('#keywordInput').val());
 
+					});
 
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+     });
+     </script>
+       </body>
+     </html>

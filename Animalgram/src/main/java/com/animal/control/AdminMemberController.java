@@ -29,8 +29,13 @@ public class AdminMemberController {
 	AdminMemberService service;
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login(){
-		return "admin/login/ad_login";
+	public String login(HttpSession session,RedirectAttributes rttr){
+		if(session.getAttribute("admin")==null){
+			return "admin/login/ad_login";
+		}else{
+			rttr.addFlashAttribute("msg","이미 로그인된 상태입니다");
+			return "redirect:/admin/main";
+		}
 	}
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
