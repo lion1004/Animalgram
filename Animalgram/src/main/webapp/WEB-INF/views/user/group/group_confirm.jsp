@@ -1,40 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../base/main.jsp"%>
-<head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
- 
- 
+
   	<script>
   		$(function() {
-  			$( "#calendar" ).datepicker();
+  			$( "#calendar" ).datepicker({   
+  				minDate: 1,
+  	          	maxDate: "+1M"
+  	          });
       		$( "#calendar" ).datepicker( "option", "dateFormat", "yy년 mm월 dd일" );
       		$( "#calendar" ).datepicker( "option", "showAnim", "show" );
   		 });
+  		
+  		
   	</script>
-
-</head>
-
-<body>
-
 
 
         <div id="page-wrapper">
@@ -55,7 +43,7 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form  action="/group/input" role="form" method="post">
+                        <form id="inputForm"  action="/group/input" method="post" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <label>소모임 제목</label>
@@ -84,8 +72,8 @@
       
                             <div class="form-group">
                                 <label>소모임 날짜</label>
-                                <input name="gdate" id="calendar" class="form-control">
-                                <p class="help-block">정확한 날짜를 선택해주세요.</p>
+                                <input readonly="readonly" name="gdate" id="calendar" class="form-control">
+                                <p class="help-block">날짜를 선택해주세요. 당일 모임은 불가능 합니다.</p>
                             </div>
                             <div class="form-group">
                                 <label>참여가능 반려동물</label>
@@ -97,7 +85,7 @@
                       		</div>
                             <div class="form-group">
                                 <label>소모임 사진</label>
-                                <input type="file" name="gimage">
+                                <input type="file" name="file" >
                             </div>
 
                             <button type="submit" class="btn btn-primary">✿개설하기✿</button>
@@ -124,5 +112,4 @@
         	</div>
     	</footer>
         <br>
-</body>
 

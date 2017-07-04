@@ -163,4 +163,5 @@ public class MemberVO {
 		this.mdate = mdate;
 	}
 
+
 }

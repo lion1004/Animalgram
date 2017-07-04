@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="../base/main.jsp"%>
 
-<head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,17 +9,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-  <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">함께 하는 소모임
+                    <small>Item Subheading</small>
+                </h1>
+            </div>
+        </div>
+  		<div class="container">
         <!-- Jumbotron Header -->
 		<div class="row">
             <div class="col-md-7">

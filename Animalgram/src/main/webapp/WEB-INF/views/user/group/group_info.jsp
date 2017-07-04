@@ -2,30 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="../base/main.jsp"%>
 
-<head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-</head>
-
-<body>
-
 
 
         <div id="page-wrapper">
@@ -80,6 +61,8 @@
                             </div>
                             <button type="submit" class="btn btn-primary">✿참여 하기✿</button>
  							<a href="/group/list" class="btn btn-default">✿목록으로 가기✿</a>
+ 							<a href="/group/modi?gno=${groupVO.gno}" class="btn btn-default">✿수정 하기✿</a>
+ 							<a href="/group/delete?gno=${groupVO.gno}" class="btn btn-default">✿삭제 하기✿</a>
             </div>
             <!-- /.container-fluid -->
 
@@ -100,5 +83,3 @@
         	</div>
     	</footer>
         <br>
-</body>
-
