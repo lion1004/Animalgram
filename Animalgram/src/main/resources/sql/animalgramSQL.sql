@@ -6,7 +6,6 @@ create table amember( --회원DB
    mno number primary key, --회원번호
    idmail varchar2(50) unique, --회원아이디(이메일)
    mpass varchar2(30) not null, --비밀번호
-   mhint varchar2(30) not null, --비밀힌트
    nickname varchar2(30) unique, --닉네임
    mname varchar2(30) not null, --이름
    birth varchar2(30) not null, --생년월일
@@ -15,6 +14,8 @@ create table amember( --회원DB
    mtel varchar2(30)not null, --전화번호
    maddr varchar2(100) not null, --사는지역
    favorite varchar2(50) not null, --관심분야
+   pwcode varchar2(100) not null,   -- 보안코드
+   pwcodeas varchar2(100) not null,   -- 보안코드 답변
    mdate date default sysdate --가입일자
    );
 
@@ -321,9 +322,14 @@ drop table care;
 create table care( --훈련정보DB
 	cno number primary key,
 	pno number references professional(pno),
+	ctitle varchar2(100) not null,
 	ctype varchar2(30) not null,
+	cdate varchar2(50) not null,
+	cstate varchar2(30) not null,
+	cimage varchar2(30) not null,
 	ccontent varchar2(1500) not null
 );
+
 
 drop sequence care_seq; --훈련번호 시퀀스
 create sequence care_seq
