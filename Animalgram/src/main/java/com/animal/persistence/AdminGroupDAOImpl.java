@@ -35,4 +35,12 @@ public class AdminGroupDAOImpl implements AdminGroupDAO{
 	public int deleteGroup(List<Integer> list) {
 		return session.delete("adminGroup.deleteGroup",list);
 	}
+
+	public GroupVO selectGroup(int gno) {
+		return session.selectOne("adminGroup.selectGroup",gno);
+	}
+
+	public int updateGroup(GroupVO vo) {
+		return session.update("adminGroup.updateGroup",vo);
+	}
 }

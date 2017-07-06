@@ -28,4 +28,12 @@ public class AdminCareServiceImpl implements AdminCareService {
 		return dao.deleteCare(list);
 	}
 
+	public CareVO selectCare(int cno) {
+		return dao.selectCare(cno);
+	}
+
+	public int updateCare(CareVO vo) {
+		return dao.updateCare(vo);
+	}
+
 }

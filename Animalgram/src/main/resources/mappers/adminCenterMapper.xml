@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminCenter">
+  <sql id="search">
+   <if test="searchType != null">
+    <if test="searchType == 'ctno'.toString()">
+     where ctno like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'mno'.toString()">
+     where mno like '%'||#{keyword}||'%'
+    </if>
+    <if test="searchType == 'cttitle'.toString()">
+     where cttitle like '%'||#{keyword}||'%'
+    </if>
+    
+   </if>
+  </sql>
+  
+  <!-- 리스트 -->
+ <select id="listCenter" resultType="com.animal.domain.CenterVO">
+  select *
+  from center
+  <include refid="search"></include>
+  order by ctno desc
+ </select>
+ 
+ <select id="centerCount" resultType="int">
+  select count(ctno)
+  from center
+  <include refid="search"></include>
+ </select>
+ 
+ <delete id="deleteCenter">
+  delete from center
+  where ctno=#{ctno}
+ </delete>
+ 
+ <!-- 한개 조회 -->
+ <select id="selectCenter" resultType="com.animal.domain.CenterVO">
+  select * from center
+  where ctno=#{ctno}
+ </select>
+ 
+ <!-- 답글 달기 -->
+ <insert id="addCenterReply">
+  insert into center_reply
+  (ctrno, ctno, ctrtitle, ctrcontent) values
+  (center_reply_seq.nextval,#{ctno},#{ctrtitle},#{ctrcontent})
+ </insert>
+ 
+ <!-- 답글 조회 -->
+ <select id="selectCenterReply" resultType="com.animal.domain.CenterReplyVO">
+  select * from center_reply
+  where ctno=#{ctno}
+ </select>
+ 
+ <!-- 답글 수정 -->
+ <update id="updateCenterReply">
+  update center_reply
+  set ctrtitle=#{ctrtitle}, ctrcontent=#{ctrcontent}
+  where ctno=#{ctno}
+ </update>
+ 
+ <!-- 답글 삭제 -->
+ <delete id="deleteCenterReply">
+  delete from center_reply
+  where ctno=#{ctno}
+ </delete>
+
+</mapper>

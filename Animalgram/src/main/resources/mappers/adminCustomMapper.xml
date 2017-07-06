@@ -32,6 +32,17 @@
   <include refid="search"></include>
  </select>
  
+ <select id="selectCustom" resultType="com.animal.domain.CustomVO">
+  select * from custom
+  where cuno=#{cuno}
+ </select>
+ 
+ <update id="updateCustom">
+  update custom
+  set ctitle=#{ctitle}, cinfo=#{cinfo}, cprice=#{cprice}
+  where cuno=#{cuno}
+ </update>
+ 
 <delete id="deleteCustom">
   delete from custom
   <where>

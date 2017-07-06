@@ -30,4 +30,14 @@ public class AdminShopDAOImpl implements AdminShopDAO{
 		return session.delete("adminShop.deleteShop",list);
 	}
 
+	@Override
+	public ShopVO selectShop(int shno) {
+		return session.selectOne("adminShop.selectShop",shno);
+	}
+
+	@Override
+	public int updateShop(ShopVO vo) {
+		return session.update("adminShop.updateShop",vo);
+	}
+
 }

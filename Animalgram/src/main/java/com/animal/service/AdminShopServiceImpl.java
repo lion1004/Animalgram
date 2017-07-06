@@ -28,4 +28,12 @@ public class AdminShopServiceImpl implements AdminShopService{
 		return dao.deleteShop(list);
 	}
 
+	public ShopVO selectShop(int shno) {
+		return dao.selectShop(shno);
+	}
+
+	public int updateShop(ShopVO vo) {
+		return dao.updateShop(vo);
+	}
+
 }

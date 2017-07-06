@@ -30,4 +30,12 @@ public class AdminCustomDAOImpl implements AdminCustomDAO {
 		return session.delete("adminCustom.deleteCustom",list);
 	}
 
+	public CustomVO selectCustom(int cuno) {
+		return session.selectOne("adminCustom.selectCustom",cuno);
+	}
+
+	public int updateCustom(CustomVO vo) {
+		return session.update("adminCustom.updateCustom",vo);
+	}
+
 }

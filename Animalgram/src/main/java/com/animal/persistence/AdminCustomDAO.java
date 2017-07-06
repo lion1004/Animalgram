@@ -11,4 +11,7 @@ public interface AdminCustomDAO {
 	public int customCount(SearchCriteria cri);
 	
 	public int deleteCustom(List<Integer> list);
+	
+	public CustomVO selectCustom(int cuno);
+	public int updateCustom(CustomVO vo);
 }

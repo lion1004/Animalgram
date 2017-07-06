@@ -28,4 +28,12 @@ public class AdminCustomServiceImpl implements AdminCustomService{
 		return dao.deleteCustom(list);
 	}
 
+	public CustomVO selectCustom(int cuno) {
+		return dao.selectCustom(cuno);
+	}
+
+	public int updateCustom(CustomVO vo) {
+		return dao.updateCustom(vo);
+	}
+
 }

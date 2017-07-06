@@ -29,6 +29,17 @@
   <include refid="search"></include>
  </select>
  
+ <select id="selectCare" resultType="com.animal.domain.CareVO">
+  select * from care
+  where cno=#{cno}
+ </select>
+ 
+ <update id="updateCare">
+  update care
+  set ctype=#{ctype}, ccontent=#{ccontent}
+  where cno=#{cno}
+ </update>
+ 
 <delete id="deleteCare">
   delete from care
   <where>

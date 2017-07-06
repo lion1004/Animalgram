@@ -1,86 +1,130 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@include file="../include/navbar.jsp" %>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="/resources/bootstrapPro/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a><br>
-                                <a href="">아이디 </a>/
-                                <a href="">비밀번호 찾기</a>
-                            </fieldset>
-                        </form>
+<div id="wrapper">
+<!-- Page Content -->
+        <div id="page-wrapper">
+             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                                                              샵 번호 ${shop.shno }번의 정보수정
+                        </h1>
                     </div>
                 </div>
-            </div>
+                <!-- /.row -->
+
+			<div class="row">
+				<form class="form-horizontal" method="POST">
+				  <input type='hidden' name='page' value="${cri.page}"> 
+        		  <input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+	   	 		  <input type='hidden' name='searchType' value="${cri.searchType}">
+	    		  <input type='hidden' name='keyword' value="${cri.keyword}">
+				
+					<div class="form-group">
+						<label class="col-sm-2" for="cno">샵 이름 :</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">${shop.shname }</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2" for="cno">샵 종류 :</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">${shop.shtype }</p>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2" for="shaddr">주소:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" placeholder="Address"
+								name="shaddr" style="width: 200px;" maxlength="33"
+								value="${shop.shaddr }">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2" for="shtel">전화번호:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" placeholder="Tel."
+								name="shtel" style="width: 200px;" maxlength="14"
+								value="${shop.shtel }">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2" for="shtime">운영시간:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" placeholder="Time"
+								name="shtime" style="width: 200px;" maxlength="16"
+								value="${shop.shtime }">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2" for="shsite">좌표:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" placeholder="Site"
+								name="shsite" style="width: 200px;" maxlength="30"
+								value="${shop.shsite }">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2" for="shparking">주차장유무:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" placeholder="Parking"
+								name="shparking" style="width: 150px;" maxlength="6"
+								value="${shop.shparking }">
+						</div>
+					</div>
+					
+					
+					<br>
+					<br>
+					<div class="form-group">
+						<div class="col-sm-offset-4">
+							<a class="btn btn-default">목록</a>
+							<a class="btn btn-primary">수정</a> 
+							<a class="btn btn-warning">초기화</a>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- /.container-fluid -->
+           </div>
+        
         </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/resources/bootstrapPro/vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/resources/bootstrapPro/dist/js/sb-admin-2.js"></script>
-
-</body>
-
-</html>
+        <!-- /#page-wrapper -->
+        </div>
+        <form name="role">
+        	
+	    </form>
+	    
+         <script type="text/javascript">
+        	  var msg = '${msg}';
+        	 if(msg!=null && msg.trim().length > 1){
+        		 alert(msg);
+        	 } 
+        	
+        $(document).ready(function(){
+        	
+        	$(".btn-default") //목록
+				.on("click",function() {
+					self.location = "/admin/shop_list?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+				});
+        	
+        	var form = $(".form-horizontal");
+        	$(".btn-primary").on("click",function(){ //수정
+        		form.submit();
+        	});
+        	
+        	$(".btn-warning").on("click",function(){
+        		location.reload(true);
+        	});
+        	
+        });
+          
+         </script>
+        </body>
+        </html>

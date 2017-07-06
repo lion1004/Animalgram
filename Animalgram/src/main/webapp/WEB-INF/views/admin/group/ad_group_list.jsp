@@ -61,9 +61,10 @@
                                         <th style="width:60px; text-align:center;">번호</th>
                                         <th>제목</th>
                                         <th>장소</th>
-                                        <th>작성일자</th>
                                         <th>모임일자</th>
+                                        <th>제한인원</th>
                                         <th>상태</th>
+                                        <th>작성일자</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,17 +80,26 @@
                                           </a>
                                         </td>
                                         <td>${group.gplace }</td>
+                                        <td>${group.gdate}</td>
+                                        <td>
+                                        <c:if test="${group.glimit == 99}">
+                                                                                                 제한없음
+                                        </c:if> 
+                                        <c:if test="${group.glimit < 99 }">
+                                        ${group.glimit }명
+                                        </c:if>
+							            </td>
+                                        <td>${group.gstate }</td>
                                         <td>
                                         <fmt:formatDate value="${group.gwdate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
                                         </td>
-                                        <td>${group.gdate}</td>
-                                        <td>${group.gstate }</td>
                                     </tr>
                                  </c:forEach>
                                
                                 </tbody>
                             </table>
                              <div style="text-align:right;">
+                              <a id="update" class="btn btn-info">수정</a>
                               <a id="delete" class="btn btn-warning">삭제</a>
                              </div>
                         </div>
@@ -99,20 +109,20 @@
 
 							<c:if test="${pageMaker.prev}">
 								<li><a
-									href="mem_list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+									href="gro_list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 							</c:if>
 
 							<c:forEach begin="${pageMaker.startPage }"
 								end="${pageMaker.endPage }" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="mem_list${pageMaker.makeSearch(idx)}">${idx}</a>
+									<a href="gro_list${pageMaker.makeSearch(idx)}">${idx}</a>
 								</li>
 							</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li><a
-									href="mem_list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+									href="gro_list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 							</c:if>
 
 						</ul>
@@ -124,11 +134,11 @@
         </div>
         <!-- /#page-wrapper -->
         </div>
+    	
         
     <div class="modal fade" id="myModal${person.gno }" role="dialog"
      style="margin-top:100px;">
     <div class="modal-dialog">
-    
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -146,34 +156,58 @@
      </div>
    
    <script type="text/javascript">
-    var msg = '${msg}';
+   var msg = '${msg}';
 	 if(msg!=null && msg.trim().length > 1){
 		 alert(msg);
 	 } 
 	 
-     $(document).ready(function(){
-    	  var checked = $("input[type=checkbox]:checked").length;
-  			$("#delete").addClass("disabled");
-  			
-  			if(checked==0){
-    			$("#delete").addClass("disabled");
-    		}else if(checked>0){
-    			$("#delete").removeClass("disabled");
-    		}
-  			//새로고침,뒤로가기로 로딩 되었을 때 
-  			
-    	  $("input[type=checkbox]").on("click",function(){
-    		  checked =  $("input[type=checkbox]:checked").length;
-    		  
-    		if(checked==0){
-    			$("#delete").addClass("disabled");
-    		}else if(checked>0){
-    			$("#delete").removeClass("disabled");
-    		}
-    		
-    	  });
-        
-	 
+	 $(document).ready(function(){
+ 	  var checked = $("input[type=checkbox]:checked").length;
+			$("#delete").addClass("disabled");
+			$("#update").addClass("disabled");
+			
+			if(checked==0){
+ 			$("#update").addClass("disabled");
+ 			$("#delete").addClass("disabled");
+ 		}else if(checked>1){
+ 		    $("#update").addClass("disabled");
+ 		}else if(checked>0){
+ 			$("#delete").removeClass("disabled");
+ 			$("#update").removeClass("disabled");
+ 		}else if(checked<2){
+ 		    $("#update").removeClass("disabled");
+ 	    } 
+			//새로고침,뒤로가기로 로딩 되었을 때 
+			
+ 	  $("input[type=checkbox]").on("click",function(){
+ 		  checked =  $("input[type=checkbox]:checked").length;
+ 		  
+ 		  if(checked==0){
+   			$("#update").addClass("disabled");
+   			$("#delete").addClass("disabled");
+   		}else if(checked>1){
+   		    $("#update").addClass("disabled");
+   		}else if(checked>0){
+   			$("#delete").removeClass("disabled");
+   			$("#update").removeClass("disabled");
+   		}else if(checked<2){
+   		    $("#update").removeClass("disabled");
+   	    } 
+ 		
+ 	  });
+			
+			
+ 	  $("#update").on("click",function(){
+     	  var gno = $("input[type=checkbox]:checked").val();
+     	  location.href 
+     	  = '/admin/gro_modify?gno='+gno+
+     			 '&page=${cri.page}'+
+     			 '&perPageNum=${cri.perPageNum}'+
+     			 '&searchType=${cri.searchType}'+
+     			 '&keyword=${cri.keyword}';
+     	 }); //update
+     
+      
     	  $("#delete").on("click",function(){
     		  
     		  if( confirm("삭제하시겠습니까?") ){

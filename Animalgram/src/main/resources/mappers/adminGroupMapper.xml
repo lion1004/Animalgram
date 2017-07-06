@@ -19,7 +19,7 @@
    </if>
   </sql>
 
- <select id="listGroup" resultType="groupVO">
+ <select id="listGroup" resultType="com.animal.domain.GroupVO">
   select * from agroup
   <include refid="search"></include>
   order by gno desc
@@ -40,4 +40,16 @@
    </foreach>
   </where>
  </delete>
+ 
+ <select id="selectGroup" resultType="com.animal.domain.GroupVO">
+  select * from agroup
+  where gno=#{gno}
+ </select>
+ 
+ <update id="updateGroup">
+  update agroup
+  set gtitle=#{gtitle}, gplace=#{gplace}, glimit=#{glimit},
+      gdate=#{gdate}, gtype=#{gtype}, gstate=#{gstate}
+  where gno=#{gno}
+ </update>
 </mapper>
