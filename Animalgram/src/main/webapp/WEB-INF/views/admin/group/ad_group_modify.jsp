@@ -140,7 +140,22 @@
         	
         	var form = $(".form-horizontal");
         	$(".btn-primary").on("click",function(){ //수정
+        		var gtitle = $("input[name=gtitle]").val(); 
+        	    var gplace = $("input[name=gplace]").val();
+        	    var gdate = $("input[name=gdate]").val();
+        	    
+        	    if(gtitle.trim().length ==0 || gtitle.trim() == ""){
+        	    	alert("제목을 입력하세요");
+        	    	return ;
+        	    }else if(gplace.trim().length ==0 || gplace.trim() == ""){
+        	    	alert("장소를 입력하세요");
+        	    	return ;
+        	    }else if(gdate.trim().length ==0 || gdate.trim() == ""){
+        	    	alert("날짜를 입력하세요");
+        	    	return ;
+        	    }else{
         		form.submit();
+        	    }
         	});
         	
         	$(".btn-warning").on("click",function(){

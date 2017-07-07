@@ -116,7 +116,31 @@
         	
         	var form = $(".form-horizontal");
         	$(".btn-primary").on("click",function(){ //수정
+        	    var shaddr = $("input[name=shaddr]").val();
+        	    var shtel = $("input[name=shtel]").val();
+        	    var shtime = $("input[name=shtime]").val();
+        	    var shsite = $("input[name=shsite]").val();
+        	    var shparking = $("input[name=shparking]").val();
+        	    
+        	    if(shaddr.trim().length==0 || shaddr.trim()==""){
+        	    	alert("주소를 입력하세요.");
+        	    	return ;
+        	    }else if(shtel.trim().length==0 || shtel.trim()==""){
+        	    	alert("전화번호를 입력하세요.");
+        	    	return ;
+        	    }else if(shtime.trim().length==0 || shtime.trim()==""){
+        	    	alert("운영시간을 입력하세요.");
+        	    	return ;
+        	    }else if(shsite.trim().length==0 || shsite.trim()==""){
+        	    	alert("좌표를 입력하세요.");
+        	    	return ;
+        	    }else if(shparking.trim().length==0 || shparking.trim()==""){
+        	    	alert("주차장 유무를 입력하세요.");
+        	    	return ;
+        	    }else{
         		form.submit();
+        	    }
+        	    	
         	});
         	
         	$(".btn-warning").on("click",function(){

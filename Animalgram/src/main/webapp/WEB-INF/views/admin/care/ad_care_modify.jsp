@@ -85,7 +85,19 @@
         	
         	var form = $(".form-horizontal");
         	$(".btn-primary").on("click",function(){ //수정
+        		
+                var ctype = $("input[name=ctype]").val();
+        	    var ccontent = $("textarea[name=ccontent]").val();
+        	    
+        	    if(ctype.trim().length == 0 || ctype.trim() == ""){
+        	    	alert("빈 값이 있어선 안됩니다.")
+        	    	return ;
+        	    }else if(ccontent.trim().length == 0 || ccontent.trim() == ""){
+        	    	alert("빈 값이 있어선 안됩니다.")
+        	    	return ;
+        	    }else{
         		form.submit();
+        	    }
         	});
         	
         	$(".btn-warning").on("click",function(){

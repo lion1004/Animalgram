@@ -46,7 +46,7 @@
 
 			  <div class="box-footer">
 			    <button type="button" class="btn btn-info" onclick="history.back(-1)">뒤로가기</button>
-			    <button type="submit" class="btn btn-primary">수정</button>
+			    <button type="button" class="btn btn-primary">수정</button>
 		     </div>
 			</form>
 		   </div>
@@ -65,6 +65,22 @@ var msg = '${msg}';
 if(msg!=null && msg.trim().length > 1){
 	 alert(msg);
 } 
+
+ $(document).ready(function(){
+	 
+	 $(".btn-primary").on("click",function(){
+	 var ctrtitle = $("input[name=ctrtitle]").val();
+	 var ctrcontent = $("textarea[name=ctrcontent]").val();
+		if(ctrtitle.trim().length == 0 || ctrtitle.trim() ==""){
+			alert("빈 값이 있어선 안됩니다.");
+		}else if(ctrcontent.trim().length == 0 || ctrcontent.trim() ==""){
+			alert("빈 값이 있어선 안됩니다.");
+		}else{
+			var form = $("#form1");
+			form.submit();
+		}
+	 });
+ });
 </script>
 	</body>
 </html>
