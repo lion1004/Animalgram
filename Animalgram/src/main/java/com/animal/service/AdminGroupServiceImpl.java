@@ -32,5 +32,13 @@ public class AdminGroupServiceImpl implements AdminGroupService{
 	public int deleteGroup(List<Integer> list) {
 		return dao.deleteGroup(list);
 	}
+
+	public GroupVO selectGroup(int gno) {
+		return dao.selectGroup(gno);
+	}
+
+	public int updateGroup(GroupVO vo) {
+		return dao.updateGroup(vo);
+	}
 	
 }

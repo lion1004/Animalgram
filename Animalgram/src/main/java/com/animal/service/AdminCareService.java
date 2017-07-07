@@ -9,7 +9,8 @@ public interface AdminCareService {
 	
 	public List<CareVO> listCare(SearchCriteria cri);
 	public int careCount(SearchCriteria cri);
-	
+	public CareVO selectCare(int cno);
+	public int updateCare(CareVO vo);
 	public int deleteCare(List<Integer> list);	
 	
 }

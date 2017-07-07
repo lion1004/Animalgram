@@ -12,5 +12,8 @@ public interface AdminGroupDAO {
 	public int groupCount(SearchCriteria cri);
 	public List<GroupPersonVO> listPerson(int gno);
 	
+	public GroupVO selectGroup(int gno);
+	public int updateGroup(GroupVO vo);
+	
 	public int deleteGroup(List<Integer> list);
 }

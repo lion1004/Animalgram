@@ -87,6 +87,7 @@
                                 </tbody>
                             </table>
                              <div style="text-align:right;">
+                              <a id="update" class="btn btn-info">수정</a>
                               <a id="delete" class="btn btn-warning">삭제</a>
                              </div>
                         </div>
@@ -148,27 +149,52 @@
 		 alert(msg);
 	 } 
 	 
-     $(document).ready(function(){
-    	  var checked = $("input[type=checkbox]:checked").length;
-  			$("#delete").addClass("disabled");
-  			
-  			if(checked==0){
-    			$("#delete").addClass("disabled");
-    		}else if(checked>0){
-    			$("#delete").removeClass("disabled");
-    		}
-  			//새로고침,뒤로가기로 로딩 되었을 때 
-  			
-    	  $("input[type=checkbox]").on("click",function(){
-    		  checked =  $("input[type=checkbox]:checked").length;
-    		  
-    		if(checked==0){
-    			$("#delete").addClass("disabled");
-    		}else if(checked>0){
-    			$("#delete").removeClass("disabled");
-    		}
-    		
-    	  });
+	 $(document).ready(function(){
+   	  var checked = $("input[type=checkbox]:checked").length;
+ 			$("#delete").addClass("disabled");
+ 			$("#update").addClass("disabled");
+ 			
+ 			if(checked==0){
+   			$("#update").addClass("disabled");
+   			$("#delete").addClass("disabled");
+   		}else if(checked>1){
+   		    $("#update").addClass("disabled");
+   		}else if(checked>0){
+   			$("#delete").removeClass("disabled");
+   			$("#update").removeClass("disabled");
+   		}else if(checked<2){
+   		    $("#update").removeClass("disabled");
+   	    } 
+ 			//새로고침,뒤로가기로 로딩 되었을 때 
+ 			
+   	  $("input[type=checkbox]").on("click",function(){
+   		  checked =  $("input[type=checkbox]:checked").length;
+   		  
+   		  if(checked==0){
+     			$("#update").addClass("disabled");
+     			$("#delete").addClass("disabled");
+     		}else if(checked>1){
+     		    $("#update").addClass("disabled");
+     		}else if(checked>0){
+     			$("#delete").removeClass("disabled");
+     			$("#update").removeClass("disabled");
+     		}else if(checked<2){
+     		    $("#update").removeClass("disabled");
+     	    } 
+   		
+   	  });
+ 			
+ 			
+   	  $("#update").on("click",function(){
+       	  var cuno = $("input[type=checkbox]:checked").val();
+       	  location.href 
+       	  = '/admin/cus_modify?cuno='+cuno+
+       			 '&page=${cri.page}'+
+       			 '&perPageNum=${cri.perPageNum}'+
+       			 '&searchType=${cri.searchType}'+
+       			 '&keyword=${cri.keyword}';
+       	 }); //update
+       
         
 	 
     	  $("#delete").on("click",function(){

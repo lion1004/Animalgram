@@ -30,4 +30,12 @@ public class AdminCareDAOImpl implements AdminCareDAO {
 		return session.delete("adminCare.deleteCare",list);
 	}
 
+	public CareVO selectCare(int cno) {
+		return session.selectOne("adminCare.selectCare",cno);
+	}
+
+	public int updateCare(CareVO vo) {
+		return session.update("adminCare.updateCare",vo);
+	}
+
 }

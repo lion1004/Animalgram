@@ -1,86 +1,108 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="/resources/bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a><br>
-                                <a href="">아이디 </a>/
-                                <a href="">비밀번호 찾기</a>
-                            </fieldset>
-                        </form>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@include file="../include/navbar.jsp" %>
+<style>
+  	 textarea { resize: none; }
+</style>
+<div id="wrapper">
+<!-- Page Content -->
+        <div id="page-wrapper">
+             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                                                              주문제작번호 ${custom.cuno }번의 정보수정
+                        </h1>
                     </div>
                 </div>
-            </div>
+                <!-- /.row -->
+
+			<div class="row">
+				<form class="form-horizontal" method="POST">
+				  <input type='hidden' name='page' value="${cri.page}"> 
+        		  <input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+	   	 		  <input type='hidden' name='searchType' value="${cri.searchType}">
+	    		  <input type='hidden' name='keyword' value="${cri.keyword}">
+				
+					<div class="form-group">
+						<label class="col-sm-2" for="cno">판매자 번호:</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">${custom.sno }</p>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2" for="ctitle">제목:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" placeholder="Title"
+								name="ctitle" style="width: 200px;" maxlength="10"
+								value="${custom.ctitle}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2" for="cinfo">정보:</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" placeholder="Content.....(500자 제한)"
+								name="cinfo" style="height:300px; width:400px;" maxlength="500"
+								>${custom.cinfo }</textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2" for="cprice">가격:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" placeholder="Price"
+								name="cprice" style="width: 200px;" maxlength="10"
+								value="${custom.cprice}">
+						</div>
+					</div>
+					<br>
+					<br>
+					<div class="form-group">
+						<div class="col-sm-offset-4">
+							<a class="btn btn-default">목록</a>
+							<a class="btn btn-primary">수정</a> 
+							<a class="btn btn-warning">초기화</a>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- /.container-fluid -->
+           </div>
+        
         </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrap/vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/resources/bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/resources/bootstrap/dist/js/sb-admin-2.js"></script>
-
-</body>
-
-</html>
+        <!-- /#page-wrapper -->
+        </div>
+        <form name="role">
+        	
+	    </form>
+	    
+         <script type="text/javascript">
+        	  var msg = '${msg}';
+        	 if(msg!=null && msg.trim().length > 1){
+        		 alert(msg);
+        	 } 
+        	
+        $(document).ready(function(){
+        	
+        	$(".btn-default") //목록
+				.on("click",function() {
+					self.location = "/admin/cus_list?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+				});
+        	
+        	var form = $(".form-horizontal");
+        	$(".btn-primary").on("click",function(){ //수정
+        		form.submit();
+        	});
+        	
+        	$(".btn-warning").on("click",function(){
+        		location.reload(true);
+        	});
+        	
+        });
+          
+         </script>
+        </body>
+        </html>

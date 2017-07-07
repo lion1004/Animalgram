@@ -71,22 +71,17 @@
 						<label class="col-sm-2" for="nickname">등급:</label>
 						<div class="col-sm-10">
 							<select class="form-control" style="width: 120px;" name="job">
-								<option
-									<c:out value="${amember.job eq 'user'? 'selected' : '' }"/>>일반
-									회원</option>
-								<option
-									<c:out value="${amember.job eq 'seller'? 'selected' : '' }"/>>판매자</option>
-								<option
-									<c:out value="${amember.job eq 'pro'? 'selected' : '' }"/>>전문가</option>
-								<option
-									<c:out value="${amember.job eq 'admin'? 'selected' : '' }"/>>관리자</option>
-							</select>
+								<option>user</option>
+								<option>seller</option>
+								<option>pro</option>
+								<option>admin</option>
+								</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2" for="mtel">전화번호:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" placeholder="Tel"
+							<input type="text" class="form-control" placeholder="Tel."
 								name="mtel" style="width: 200px;" maxlength="6"
 								value="${amember.mtel }">
 						</div>

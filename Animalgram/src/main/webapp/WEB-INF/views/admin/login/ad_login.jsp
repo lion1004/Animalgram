@@ -53,11 +53,7 @@
                                 <div class="form-group">
                                     <input class="form-control" maxlength="30" placeholder="Password" name="mpass" type="password">
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">자동 로그인
-                                    </label>
-                                </div>
+                                
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button class="btn btn-lg btn-success btn-block">로그인</button><br>
                      

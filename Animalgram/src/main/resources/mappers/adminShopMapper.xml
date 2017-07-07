@@ -33,6 +33,18 @@
   <include refid="search"></include>
  </select>
  
+ <select id="selectShop" resultType="com.animal.domain.ShopVO">
+  select * from shop
+  where shno=#{shno}
+ </select>
+ 
+ <update id="updateShop">
+  update shop
+  set shaddr=#{shaddr}, shtel=#{shtel},shtime=#{shtime},
+      shsite=#{shsite}, shparking=#{shparking}
+  where shno=#{shno}
+ </update>
+ 
 <delete id="deleteShop">
   delete from shop
   <where>

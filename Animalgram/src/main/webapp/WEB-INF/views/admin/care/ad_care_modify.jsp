@@ -1,123 +1,99 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@include file="../include/navbar.jsp" %>
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-
-
+<div id="wrapper">
+<!-- Page Content -->
         <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
+             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Forms
+                                                              훈련번호 ${care.cno }번의 정보수정
                         </h1>
-              
                     </div>
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
-                    <div class="col-lg-6">
+			<div class="row">
+				<form class="form-horizontal" method="POST">
+				  <input type='hidden' name='page' value="${cri.page}"> 
+        		  <input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+	   	 		  <input type='hidden' name='searchType' value="${cri.searchType}">
+	    		  <input type='hidden' name='keyword' value="${cri.keyword}">
+				
+					<div class="form-group">
+						<label class="col-sm-2" for="cno">전문가 번호:</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">${care.pno }</p>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2" for="ctype">훈련종류:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" placeholder="Type"
+								name="ctype" style="width: 200px;" maxlength="10"
+								value="${care.ctype }">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2" for="ccontent">훈련내용:</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" placeholder="Content.....(500자 제한)"
+								name="ccontent" style="height:300px; width:300px;" maxlength="500"
+								>${care.ccontent }</textarea>
+						</div>
+					</div>
+					
+					<br>
+					<br>
+					<div class="form-group">
+						<div class="col-sm-offset-4">
+							<a class="btn btn-default">목록</a>
+							<a class="btn btn-primary">수정</a> 
+							<a class="btn btn-warning">초기화</a>
+						</div>
+					</div>
+				</form>
+			</div>
 
-                        <form role="form">
-
-                            <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                      <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-            </div>
-            <!-- /.container-fluid -->
-
+			<!-- /.container-fluid -->
+           </div>
+        
         </div>
         <!-- /#page-wrapper -->
-
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+        </div>
+        <form name="role">
+        	
+	    </form>
+	    
+         <script type="text/javascript">
+        	  var msg = '${msg}';
+        	 if(msg!=null && msg.trim().length > 1){
+        		 alert(msg);
+        	 } 
+        	
+        $(document).ready(function(){
+        	
+        	$(".btn-default") //목록
+				.on("click",function() {
+					self.location = "/admin/care_list?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+				});
+        	
+        	var form = $(".form-horizontal");
+        	$(".btn-primary").on("click",function(){ //수정
+        		form.submit();
+        	});
+        	
+        	$(".btn-warning").on("click",function(){
+        		location.reload(true);
+        	});
+        	
+        });
+          
+         </script>
+        </body>
+        </html>
