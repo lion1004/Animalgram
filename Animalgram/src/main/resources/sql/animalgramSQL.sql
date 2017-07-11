@@ -17,7 +17,7 @@ create table amember( --회원DB
    pwcode varchar2(100) not null,   -- 보안코드
    pwcodeas varchar2(100) not null,   -- 보안코드 답변
    mdate date default sysdate --가입일자
-   );
+);
 
 
 drop sequence amember_seq; -- 회원 번호 시퀀스
@@ -325,7 +325,7 @@ create table care( --훈련정보DB
 	ctitle varchar2(100) not null,
 	ctype varchar2(30) not null,
 	cdate varchar2(50) not null,
-	cstate varchar2(30) not null,
+	cstate varchar2(30) default '예약가능',
 	cimage varchar2(30) not null,
 	ccontent varchar2(1500) not null
 );
@@ -347,7 +347,7 @@ create table care_ask( --훈련정보DB
 	mno number references amember(mno),
 	ano number references animal(ano),
 	cadate date default sysdate,
-	castate varchar2(30) not null
+	castate varchar2(30) default '예약'
 );
 
 drop sequence care_ask_seq; --훈련번호 시퀀스

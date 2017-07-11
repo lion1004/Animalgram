@@ -3,14 +3,18 @@
 <configuration>
 	<!-- MyBatis 환경설정 -->
 	<typeAliases>
+		<typeAlias type="com.animal.domain.CareVO" alias="careVO"/>
 		<typeAlias type="com.animal.domain.GroupVO" alias="groupVO"/>
 		<typeAlias type="com.animal.domain.GroupPersonVO" alias="grouppersonVO"/>
 		<typeAlias type="com.animal.domain.MemberVO" alias="member"/>
+		<typeAlias type="com.animal.domain.MemberVO" alias="memberVO"/>
 		<typeAlias type="com.animal.domain.BlacklistVO" alias="blacklist"/>
 		<typeAlias type="com.animal.domain.NoticeTextVO" alias="noticetext"/>
 		<typeAlias type="com.animal.domain.ReplyVO" alias="areply"/>
 		<typeAlias type="com.animal.domain.CenterVO" alias="center"/>
 		<typeAlias type="com.animal.domain.CenterReplyVO" alias="centerreply"/>
 		<typeAlias type="com.animal.domain.ShopVO" alias="shop"/>
+		<typeAlias type="com.animal.domain.ProfessionalVO" alias="professionalVO"/>
+		<typeAlias type="com.animal.domain.GroupPersonVO" alias="grouppersonVO"/>
 	</typeAliases>
 </configuration>

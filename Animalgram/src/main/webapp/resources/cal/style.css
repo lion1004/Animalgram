@@ -1,4 +1,4 @@
-body{ margin:55px; padding:25px;}
+body{ margin:5px; margin-top:5px; padding:5px;}
 ul , li , a {margin:0px; padding:0px; list-style:none; text-decoration:none; color:#000000}
 
 table {background:#ff8080; border:3px dotted #8080ff; float:left;}
@@ -15,7 +15,7 @@ table button {background:#8080ff; color:#ffffff; border:2px solid #ff0000; paddi
 #current_text {margin:0 20px}
 #information{
 	margin: 5px;
-	padding:15px;
+	padding:5px;
     float:left; 
     width:400px; 
     height:450px;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="group">
+	
 	<insert id="makeGroup" parameterType="groupVO">
 		insert into agroup (gno,gtitle,gplace,glimit,gtype,gdate,gimage) values (agroup_seq.nextval,#{gtitle},#{gplace},#{glimit},#{gtype},#{gdate},#{gimage})
 	</insert>
@@ -12,4 +13,16 @@
 	<select id="selectGroupAll" resultType="groupVO">
 		select * from agroup
 	</select>
+
+	<update id="updateGroup" parameterType="groupVO">
+		update agroup
+			set gtitle=#{gtitle},gplace=#{gplace},glimit=#{glimit},gtype=#{gtype},gstate=#{gstate},gdate=#{gdate}
+			where gno = #{gno}
+	</update>
+	<delete id="deleteGroupOne" parameterType="int">
+		delete from agroup  where gno = #{gno} 
+	</delete>
+	
 </mapper>
+
+

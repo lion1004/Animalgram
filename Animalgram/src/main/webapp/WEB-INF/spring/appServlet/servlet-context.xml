@@ -35,8 +35,14 @@
 	
 	<!-- 게시판 사진 업로드 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	<beans:property name="maxUploadSize" value="10485760"></beans:property>
-	</beans:bean>
+  		<beans:property name="defaultEncoding" value="UTF-8" />
+  		<beans:property name="maxUploadSize" value="10485760" />
+  	</beans:bean>
+	
+    <beans:bean id="uploadPath" class="java.lang.String">
+      <beans:constructor-arg value="O:/Kosta/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/Animalgram_local/resources/image/group"></beans:constructor-arg>
+    </beans:bean>
+	
 	
 	<context:component-scan base-package="com.animal.control" />
 	

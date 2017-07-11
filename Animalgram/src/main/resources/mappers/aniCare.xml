@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="care">
+
+	<insert id="insertCare" parameterType="careVO">
+		insert into care (cno,pno,ctitle,ctype,cdate,cstate,cimage,ccontent)
+			values (care_seq.nextval,#{pno},#{ctitle},#{ctype},#{cdate},#{cstate},#{cimage},#{ccontent})
+	</insert>
+
+	<select id="selectCalList" resultType="careVO">
+		select  ctitle,ctype,cdate,cno from care
+	</select>
+	<select id="selectCareInfoc" parameterType="int" resultType="careVO">
+		select cno,ctitle,ctype,cdate,cstate,cimage,ccontent
+		from care where cno = #{cno}
+	</select>
+	<select id="selectCareInfop" parameterType="int" resultType="professionalVO">
+		select ptype,pcareer
+		from professional where pno = (select pno from care where cno = #{cno})
+	</select>
+	<select id="selectCareInfom" parameterType="int" resultType="memberVO">
+		select nickname, mname, mtel
+		from amember where mno = (select mno from professional where pno = (select pno from care where cno = #{cno}))
+	</select>
+	<select id="selectProp" resultType="professionalVO">
+		select mno, pimage,ptype,pcareer
+		from professional
+	</select>
+	<select id="selectProm" resultType="memberVO">	
+		select mno, mname, mtel from amember
+		where mno in (select mno from professional)  
+	</select>
+	
 </mapper>
