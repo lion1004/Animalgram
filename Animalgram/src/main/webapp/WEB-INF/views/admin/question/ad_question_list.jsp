@@ -33,8 +33,8 @@
 						<option value="ntitle"
 							<c:out value="${cri.searchType eq ''?'selected':''}"/>>
 							제목</option>
-						<option value="mname"
-							<c:out value="${cri.searchType eq 'mname'?'selected':''}"/>>
+						<option value="nickname"
+							<c:out value="${cri.searchType eq 'nickname'?'selected':''}"/>>
 							작성자 이름</option>
 						<option value="antno"
 							<c:out value="${cri.searchType eq 'antno'?'selected':''}"/>>
@@ -71,19 +71,10 @@
                                         </td>
                                         <td>${question.antno}</td>
                                         <td>${question.ntno}</td>
-                                        <td>${question.mname }</td>
-                                        <td>
-                                          ${question.ntitle }
-                                        </td>
-                                        <td>
-                                        <fmt:formatDate value="${question.ntdate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
-                                          
-                                        </td>
-                                        <td>
-                                        
-                                        <fmt:formatDate value="${question.ntupdate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
-                                       
-                                        </td>
+                                        <td>${question.nickname }</td>
+                                        <td>${question.ntitle }</td>
+                                        <td>${question.ntdate}</td>
+                                        <td>${question.ntupdate}</td>
                                         
                                     </tr>
                                  </c:forEach>
