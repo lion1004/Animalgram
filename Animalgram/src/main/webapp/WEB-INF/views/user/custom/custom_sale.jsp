@@ -1,124 +1,188 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html lang="en">
+<%@include file="../base/main.jsp"%>
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<!-- Main content -->
+    <style type="text/css">
+    .popup {position: absolute;}
+    .back { background-color: gray; opacity:0.5; width: 100%; height: 300%; overflow:hidden;  z-index:1101;}
+    .front { 
+       z-index:1110; opacity:1; boarder:1px; margin: auto; 
+      }
+     .show{
+       position:relative;
+       max-width: 1200px; 
+       max-height: 800px; 
+       overflow: auto;       
+     } 
+  	
+    </style>
 
-<head>
+    <div class='popup back' style="display:none;"></div>
+    <div id="popup_front" class='popup front' style="display:none;">
+     <img id="popup_img">
+    </div>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<section class="content" style="width:1300px;">
+	<div class="row">
+		<!-- left column -->
+		<div class="col-md-12">
+			<!-- general form elements -->
+			<div class="box box-primary">
+				  <div class="col-lg-12">
+                    <h2 class="page-header">주문제작 상품정보 </h2>
+                  </div>
+				<!-- /.box-header -->
 
-    <title>Portfolio Item - Start Bootstrap Template</title>
+<!-- 				<form role="form" action="custom_result" method="post">
+ -->				<form role="form" method="post">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
+					<input type='hidden' name='cuno' value="${customVO.cuno}">
+				    <input type='hidden' name='page' value="${cri.page}">
+					<input	type='hidden' name='perPageNum' value="${cri.perPageNum}">
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
 
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/portfolio-item.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        <!-- Portfolio Item Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Portfolio Item
-                    <small>Item Subheading</small>
-                </h1>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Portfolio Item Row -->
-        <div class="row">
+				
+				
+				     <div class="row" style="margin-right: 100px;">
 
             <div class="col-md-8">
-                <img class="img-responsive" src="http://placehold.it/750x500" alt="">
+               <img src="/displayFile?fileName=${customVO.fullName }" width="500" height="250">
             </div>
 
-            <div class="col-md-4">
-                <h3>Project Description</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-                <h3>Project Details</h3>
-                <ul>
-                    <li>Lorem Ipsum</li>
-                    <li>Dolor Sit Amet</li>
-                    <li>Consectetur</li>
-                    <li>Adipiscing Elit</li>
-                </ul>
-            </div>
-
-        </div>
-        <!-- /.row -->
-
-        <!-- Related Projects Row -->
-        <div class="row">
-
-            <div class="col-lg-12">
-                <h3 class="page-header">Related Projects</h3>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
+			<label style="font-size: 30px;margin-right: 150px;">${customVO.cutitle}</label>
+			<br>
+			<br>
+            <p class="col-md-4">
+               <label>제작 물품 수량</label>
+                   <select class="form-control" id="bcount" name="bcount">
+                       <option value="choice">============선택===========</option>
+                       <option value="1">1</option>
+                       <option value="2">2</option>
+                       <option value="3">3</option>
+                 
+                    </select>
+            </p>
+            
+            <div>
+            	<button class="btn btn-primary" id='saleBtn' style="margin-left: 300px;">신청하기</button>
             </div>
 
         </div>
-        <!-- /.row -->
+				
+					<div class="form-group">
+					<hr>
+				
+                           <h3 class="page-header">상품 상세정보 </h3>
+           
+						<textarea class="form-group" name="cinfo" readonly align="center" style="resize: none; width: 1250px; height: 500px" >${customVO.cinfo}</textarea>
+					</div>
+	
+				</form>
 
-        <hr>
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
 
+ <div class="box-footer">
+
+   <button type="submit" class="btn btn-primary" id="goListBtn">목록리스트 이동</button>
+ </div>
+
+
+
+			</div>
+			<!-- /.box -->
+		</div>
+		<!--/.col (left) -->
+
+	</div>
+	<!-- /.row -->
+
+</section>
+<!-- /.content -->
+
+
+<script id="templateAttach" type="text/x-handlebars-template">
+
+<img src="{{imgsrc}}" alt="Attachment" style="width: 500px; height: 200px;">
+           
+</script>  
+
+
+
+<script id="template" type="text/x-handlebars-template">
+{{#each .}}
+<li class="replyLi" data-rno={{rno}}>
+<i class="fa fa-comments bg-blue"></i>
+ <div class="timeline-item" >
+  <span class="time">
+    <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
+  </span>
+  <h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
+  <div class="timeline-body">{{replytext}} </div>
+    <div class="timeline-footer">
+     <a class="btn btn-primary btn-xs" 
+	    data-toggle="modal" data-target="#modifyModal">Modify</a>
     </div>
-    <!-- /.container -->
+  </div>			
+</li>
+{{/each}}
+</script>
 
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
+<script>
+	Handlebars.registerHelper("prettifyDate", function(timeValue) {
+		var dateObj = new Date(timeValue);
+		var year = dateObj.getFullYear();
+		var month = dateObj.getMonth() + 1;
+		var date = dateObj.getDate();
+		return year + "/" + month + "/" + date;
+	});
+	
+</script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
 
-</body>
+<script>
+$(document).ready(function(){
+	
+	var formObj = $("form[role='form']");
+	
+	console.log(formObj);
+	
+	$("#saleBtn").click(function(){
+		if($("#bcount option:checked").val()=="choice"){
+			alert("수량을 선택하십시오.");
+			return false;
+		}
+		formObj.attr("method", "get");
+		formObj.attr("action", "/user/custom/custom_result");
+		formObj.submit();
+	});
 
-</html>
+
+	$("#goListBtn").on("click", function(){
+		formObj.attr("method", "get");
+		formObj.attr("action", "/user/custom/custom_list");
+		formObj.submit();
+	});
+	
+	var cuno = ${customVO.cuno};
+	var template = Handlebars.compile($("#templateAttach").html());
+	
+	$.getJSON("/user/custom/getAttach/"+cuno,function(list){
+		$(list).each(function(){
+		
+			var fileInfo = getFileInfo(this);
+			
+			var html = template(fileInfo);
+			
+			 $(".uploadedList").append(html);
+// 			alert('getattach조회확인');
+		});
+	});
+
+	
+});
+</script>
+

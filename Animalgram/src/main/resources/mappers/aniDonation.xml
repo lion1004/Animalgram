@@ -1,4 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="donation">
+ <insert id="create">
+     insert into donation (dno,mno,dtitle,dinfo,dimage)
+            values (donation_seq.nextval, 1, #{dtitle}, #{dinfo}, #{dimage})
+  </insert>
+  
+    <update id="update" parameterType="donation">
+     update donation
+         set dtitle=#{dtitle}, dinfo=#{dinfo}, dimage=#{dimage}
+     where dno=#{dno}
+  </update>
+  
+  <delete id="delete" >
+     delete from donation
+     where dno=#{dno}
+  </delete>
+  
+  <!-- 한 건의 게시물 읽기 -->
+  <select id="read" resultType="donation">
+<!-- 	select a.cuno,a.sno,a.cutitle,a.cinfo,a.cdate,c.mname, c.maddr, c.mtel,d.fullName from donation a, seller b, amember c, custom_attach d
+	where a.cuno = #{cuno}
+	and a.cuno = d.cuno(+)
+	and a.sno = b.sno
+	and b.mno = c.mno -->
+	select a.dno,a.mno,a.dtitle,a.dinfo,a.dadate,a.dimage,b.mname, b.maddr, b.mtel from donation a, amember b
+	where a.dno = #{dno}
+	and a.mno = b.mno
+	
+	
+  </select>
+  
+  <select id="cucount" resultType="int">
+  	select count(*) from donation
+  </select>
+  
+  <!-- 리스트 -->
+  <select id="listAll" resultType="donation">
+     
+      select cuno,sno,cutitle,cinfo,cdate
+      
+      from (cuno,sno,cutitle,cinfo,cdate, rownum rn
+      
+             from (select cuno,sno,cutitle,cinfo,cdate
+                   from donation  
+                   order by cuno desc
+                   )
+           )
+      where rn between  1 and 10             
+  </select>
+  
+  <select id="listPage" resultType="donation">
+     select cuno,sno,cutitle,cinfo,cdate
+                   from donation  
+                   order by cuno desc            
+  </select>
+  
+  <select id="countPaging" resultType="int">
+     select count(*) from donation
+  </select>
+  
+
+   <sql id="search">
+     <if test="searchType != null">                
+	     <if test="searchType == 't'.toString()"> 
+	       where title like '%'||#{keyword}||'%'
+	     </if>           
+	     <if test="searchType == 'c'.toString()">  
+	       where content like '%'||#{keyword}||'%'
+	     </if>           
+	     <if test="searchType == 'w'.toString()">
+	       where writer like '%'||#{keyword}||'%'
+	     </if>           
+     </if>  
+  </sql>
+  
+  
+  
+  <select id="listSearch" resultType="donation">
+<!--       select a.cuno,sno,cutitle,cinfo,a.cdate, b.fullname
+       from donation a, custom_attach b
+       where a.cuno = b.cuno(+)           
+      order by cuno desc -->
+	select dno,mno,dtitle,dinfo,dadate,dimage
+       from donation
+       order by dno desc
+
+  </select> 
+  
+  
+  <select id="listSearchCount" resultType="int">
+     select count(*) from donation
+     <include refid="search"></include>             
+  </select> 
+
 </mapper>

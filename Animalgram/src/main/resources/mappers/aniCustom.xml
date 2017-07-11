@@ -1,4 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="custom">
+  <!-- boardMapper.xml
+       DAO에서 호출할 sql문들을 정의.
+   -->
+  
+  <insert id="create" parameterType="custom">
+  	<selectKey resultType="int" keyProperty="cuno" order="BEFORE">
+        SELECT custom_seq.nextval AS cuno FROM dual        
+    </selectKey> 
+     insert into custom (cuno,sno,cutitle,cinfo)
+            values (#{cuno},1, #{cutitle}, #{cinfo})
+<!--             values (custom_seq.nextval,1, #{cutitle}, #{cinfo}) -->
+          <!--   values (#{cuno},1, #{cutitle}, #{cinfo},sysdate) -->
+<!--             values (tbl_board_seq.nextval, #{title}, #{content}, #{writer}) -->
+  </insert>
+  
+  <update id="update" parameterType="custom">
+     update custom
+         set cutitle=#{cutitle}, cinfo=#{cinfo}
+     where cuno=#{cuno}
+  </update>
+  
+  <delete id="delete"  >
+     delete from custom
+     where cuno=#{cuno}
+  </delete>
+  
+  <!-- 한 건의 게시물 읽기 -->
+  <select id="read" resultType="custom">
+<!--      select  cuno,sno,cutitle,cinfo,cdate -->
+<!--      from custom -->
+<!--      where cuno=#{cuno} -->
+
+ 	select a.cuno,a.sno,a.cutitle,a.cinfo,a.cdate,c.mname, c.maddr, c.mtel,d.fullName from custom a, seller b, amember c, custom_attach d
+	where a.cuno = #{cuno}
+	and a.cuno = d.cuno(+)
+	and a.sno = b.sno
+	and b.mno = c.mno 
+  </select>
+  
+  <select id="cucount" resultType="int">
+  	select count(*) from custom
+  </select>
+  
+  <!-- 리스트 -->
+  <select id="listAll" resultType="custom">
+     
+      select cuno,sno,cutitle,cinfo,cdate
+      
+      from (cuno,sno,cutitle,cinfo,cdate, rownum rn
+      
+             from (select cuno,sno,cutitle,cinfo,cdate
+                   from custom  
+                   order by cuno desc
+                   )
+           )
+      where rn between  1 and 10             
+  </select>
+  
+  <select id="listPage" resultType="custom">
+     select cuno,sno,cutitle,cinfo,cdate
+                   from custom  
+                   order by cuno desc            
+  </select>
+  
+  <select id="countPaging" resultType="int">
+     select count(*) from custom'
+  </select>
+  
+
+   <sql id="search">
+     <if test="searchType != null">                
+	     <if test="searchType == 't'.toString()"> 
+	       where title like '%'||#{keyword}||'%'
+	     </if>           
+	     <if test="searchType == 'c'.toString()">  
+	       where content like '%'||#{keyword}||'%'
+	     </if>           
+	     <if test="searchType == 'w'.toString()">
+	       where writer like '%'||#{keyword}||'%'
+	     </if>           
+     </if>  
+  </sql>
+  
+  
+  
+  <select id="listSearch" resultType="custom">
+<!--      select cuno,sno,cutitle,cinfo,cdate -->
+<!--      from custom       -->
+      select a.cuno,sno,cutitle,cinfo,a.cdate, b.fullname
+       from custom a, custom_attach b
+       where a.cuno = b.cuno(+)
+<!--       <include refid="search"></include>      -->
+           
+      order by cuno desc
+  </select> 
+  
+  
+  <select id="listSearchCount" resultType="int">
+     select count(*) from custom 
+     <include refid="search"></include>             
+  </select> 
+  
+  <!-- 첨부파일 -->
+  <insert id="addAttach" parameterType="customattach">
+  insert into custom_attach(cuno,fullName) 
+  values (#{cuno}, #{fullName})
+  </insert>
+  
+  <select id="getAttach" resultType="String">
+  	select fullName from custom_attach 
+  	where cuno = #{cuno}
+  	order by cdate
+  </select>
+  
+  <delete id="deleteAttach" parameterType="int">
+  	delete from custom_attach 
+  	where cuno = #{cuno}
+  </delete>
+  
+  <insert id="replaceAttach">
+  	insert into custom_attach(cuno,fullName)
+  	values (#{cuno},#{fullName})
+  </insert>
+  
 </mapper>
+
+
+
+

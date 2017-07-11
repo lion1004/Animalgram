@@ -1,4 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="bill">
+ 
+ <insert id="create" parameterType="bill">
+     insert into bill (bno, mno,cuno, bcount, bmemo, bdate)
+            values (bill_seq.nextval, 1, #{cuno}, #{bcount}, #{bmemo}, sysdate)
+  </insert>
+  
+   <select id="list" resultType="bill">
+   		select mno, bno, cutitle, bcount, bsellcount, dastate, bmemo, mname, maddr, mtel, bdate
+      	from bill natural join custom natural join seller natural join amember
+      	order by bno desc
+      <!-- select a.mno, a.bno, b.cutitle, d.mname, d.maddr, d.mtel, a.bmemo, to_char(a.bdate,'yyyy-mm-dd/hh:mi') bdate
+      from bill a, custom b, seller c, amember d
+      where 
+       a.mno = d.mno
+      and a.cuno = b.cuno
+      and b.sno = c.sno
+      and c.mno = d.mno
+      
+      order by bno desc -->
+  </select> 
+  
+   <select id="listSearchCount" resultType="int">
+     select count(*) from bill 
+         
+  </select>
+  
+   <update id="sellcount" parameterType="bill">
+    update bill
+    set 
+    <if test=" bsellcount == 0">
+    	bsellcount =  1 	
+    </if>
+    <if test=" bsellcount != 0">
+    	bsellcount = #{bsellcount} +1
+    </if>
+    WHERE cuno = #{cuno}
+  </update>
+  
+<!--   <update id="update" parameterType="bill">
+     update tbl_board
+         set title=#{title}, content=#{content}, writer=#{writer}
+     where bno=#{bno}
+  </update>
+  
+  <delete id="delete"  >
+     delete from tbl_board
+     where bno=#{bno}
+  </delete>
+  
+  한 건의 게시물 읽기
+  <select id="read" resultType="bill">
+     select  bno,title,content,writer,regdate,viewcnt
+     from tbl_board 
+     where bno=#{bno}
+  </select>
+  
+  리스트
+  <select id="listAll" resultType="bill">
+     select bno,title,content,writer,regdate,viewcnt 
+                   from tbl_board   
+                   order by bno desc
+      select bno,title,content,writer,regdate,viewcnt
+      from (select bno,title,content,writer,regdate,viewcnt , rownum rn
+             from (select bno,title,content,writer,regdate,viewcnt 
+                   from tbl_board   
+                   order by bno desc)
+            )
+      where rn between  1 and 10             
+  </select> -->
+  
+<!--   <select id="listPage" resultType="bill">
+     select bno,title,content,writer,regdate,viewcnt 
+                   from tbl_board   
+                   order by bno desc            
+  </select>
+  
+  <select id="countPaging" resultType="int">
+     select count(*) from tbl_board
+  </select>
+  
+  검색어 조회
+  <sql id="search">
+     <if test="searchType != null">                
+	     <if test="searchType == 't'.toString()"> 
+	       where title like '%'||#{keyword}||'%'
+	     </if>           
+	     <if test="searchType == 'c'.toString()">  
+	       where content like '%'||#{keyword}||'%'
+	     </if>           
+	     <if test="searchType == 'w'.toString()">
+	       where writer like '%'||#{keyword}||'%'
+	     </if>           
+     </if>  
+  </sql>
+
+  -->
+
 </mapper>

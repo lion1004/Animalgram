@@ -1,123 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@include file="../base/main.jsp"%>
 
-<head>
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<!-- left column -->
+		<div class="col-md-12">
+			<!-- general form elements -->
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">REGISTER BOARD</h3>
+				</div>
+				<!-- /.box-header -->
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Forms
-                        </h1>
-              
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-6">
-
-                        <form role="form">
-
-                            <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
+				<form role="form" method="post" action="/user/donation/donation_confirm" enctype="multipart/form-data">
+					<div class="box-body">
+						<div class="form-group">
+							<label for="exampleInputEmail1">상품명</label> <input type="text"
+								name='dtitle' class="form-control" placeholder="Enter Title">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">상품정보</label>
+							<textarea class="form-control" name="dinfo" rows="3"
+								placeholder="Enter ..."></textarea>
+						</div>
+						  <div class="form-group">
+                                <label>나눔상품 사진</label>
+                                <input type="file" name="file" >
                             </div>
+					
+					</div>
+					<!-- /.box-body -->
 
-                            <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                      <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
 
 
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
+			</div>
+			<!-- /.box -->
+		</div>
+		<!--/.col (left) -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

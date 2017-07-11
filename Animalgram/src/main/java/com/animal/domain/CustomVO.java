@@ -1,34 +1,39 @@
 package com.animal.domain;
 
-import java.sql.Date;
+import java.util.Arrays;
+import java.util.Date;
 
 public class CustomVO {
-	private int cuno; // 주문제작번호
-	private int sno; // 판매자DB(판매자번호)
-	private String ctitle; // 글제목
-	private int cprice; // 가격
-	private String cimage; // 주문제작물품이미지
-	private String cinfo; // 품목정보
-	private Date cdate; // 주문제작 게시글 올린 일자
-
-	@Override
-	public String toString() {
-		return "CustomVO [cuno=" + cuno + ", sno=" + sno + ", ctitle=" + ctitle + ", cprice=" + cprice + ", cimage="
-				+ cimage + ", cinfo=" + cinfo + ", cdate=" + cdate + "]";
+	
+	  private int cuno; 
+	  private int sno; 
+	  private String cutitle; 
+	  private String cinfo; 
+	  private Date cdate; 
+	  private String[] files;
+	  private String fullName;
+	  private String mname;
+	  private String maddr;
+	  private String mtel;
+	  private int bsellcount;
+	  
+	  public CustomVO() {
+		
 	}
 
-	public CustomVO() {
-	}
-
-	public CustomVO(int cuno, int sno, String ctitle, int cprice, String cimage, String cinfo, Date cdate) {
+	public CustomVO(int cuno, int sno, String cutitle, String cinfo, Date cdate, String[] files, String fullName,
+			String mname, String maddr, String mtel) {
 		super();
 		this.cuno = cuno;
 		this.sno = sno;
-		this.ctitle = ctitle;
-		this.cprice = cprice;
-		this.cimage = cimage;
+		this.cutitle = cutitle;
 		this.cinfo = cinfo;
 		this.cdate = cdate;
+		this.files = files;
+		this.fullName = fullName;
+		this.mname = mname;
+		this.maddr = maddr;
+		this.mtel = mtel;
 	}
 
 	public int getCuno() {
@@ -47,28 +52,12 @@ public class CustomVO {
 		this.sno = sno;
 	}
 
-	public String getCtitle() {
-		return ctitle;
+	public String getCutitle() {
+		return cutitle;
 	}
 
-	public void setCtitle(String ctitle) {
-		this.ctitle = ctitle;
-	}
-
-	public int getCprice() {
-		return cprice;
-	}
-
-	public void setCprice(int cprice) {
-		this.cprice = cprice;
-	}
-
-	public String getCimage() {
-		return cimage;
-	}
-
-	public void setCimage(String cimage) {
-		this.cimage = cimage;
+	public void setCutitle(String cutitle) {
+		this.cutitle = cutitle;
 	}
 
 	public String getCinfo() {
@@ -87,4 +76,61 @@ public class CustomVO {
 		this.cdate = cdate;
 	}
 
+	public String[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+	public String getMaddr() {
+		return maddr;
+	}
+
+	public void setMaddr(String maddr) {
+		this.maddr = maddr;
+	}
+
+	public String getMtel() {
+		return mtel;
+	}
+
+	public void setMtel(String mtel) {
+		this.mtel = mtel;
+	}
+
+	
+	public int getBsellcount() {
+		return bsellcount;
+	}
+
+	public void setBsellcount(int bsellcount) {
+		this.bsellcount = bsellcount;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomVO [cuno=" + cuno + ", sno=" + sno + ", cutitle=" + cutitle + ", cinfo=" + cinfo + ", cdate="
+				+ cdate + ", files=" + Arrays.toString(files) + ", fullName=" + fullName + ", mname=" + mname
+				+ ", maddr=" + maddr + ", mtel=" + mtel + ", bsellcount=" + bsellcount + "]";
+	}
+	
+   
 }

@@ -16,5 +16,10 @@
 		<typeAlias type="com.animal.domain.ShopVO" alias="shop"/>
 		<typeAlias type="com.animal.domain.ProfessionalVO" alias="professionalVO"/>
 		<typeAlias type="com.animal.domain.GroupPersonVO" alias="grouppersonVO"/>
+		<typeAlias type="com.animal.domain.CustomVO" alias="custom"/> 
+		<typeAlias type="com.animal.domain.CustomAttachVO" alias="customattach"/> 
+		<typeAlias type="com.animal.domain.BillVO" alias="bill"/> 
+		<typeAlias type="com.animal.domain.DonationVO" alias="donation"/> 
+		<typeAlias type="com.animal.domain.DonationAskVO" alias="donationask"/> 
 	</typeAliases>
 </configuration>

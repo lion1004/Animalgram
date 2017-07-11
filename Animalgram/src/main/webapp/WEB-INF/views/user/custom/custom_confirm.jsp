@@ -1,123 +1,170 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
+<%@include file="../base/main.jsp"%>
 
 
+<style>
+.fileDrop {
+  width: 80%;
+  height: 100px;
+  border: 1px dotted gray;
+  background-color: lightslategrey;
+  margin: auto;
+  
+}
+</style>
 
-        <div id="page-wrapper">
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<!-- left column -->
+		<div class="col-md-12">
+			<!-- general form elements -->
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title"></h3>
+				</div>
+				<!-- /.box-header -->
 
-            <div class="container-fluid">
+<form id='registerForm' role="form" method="post">
+<!--     <input type="hidden" name="cuno" value="1"> -->
+	<div class="box-body">
+		<div class="form-group">
+			<label for="exampleInputEmail1">주문제작 상품명</label>
+			 <input type="text" name="cutitle" class="form-control" placeholder="상품명을 입력 해주세요.">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword1">상품정보</label>
+			<textarea class="form-control" name="cinfo" rows="3"
+				placeholder="상품 정보를 입력 해주세요."></textarea>
+		</div>
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Forms
-                        </h1>
-              
-                    </div>
-                </div>
-                <!-- /.row -->
+		<div class="form-group">
+			<label for="exampleInputEmail1">상품 이미지 파일을 드래그 해주세요.</label>
+			<div class="fileDrop"></div>
+		</div>
+	</div>
+	<!-- /.box-body -->
 
-                <div class="row">
-                    <div class="col-lg-6">
+	<div class="box-footer">
+		<div>
+			<hr>
+		</div>
 
-                        <form role="form">
+		<ul class="mailbox-attachments clearfix uploadedList">
+		</ul>
 
-                            <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
+		<button type="submit" class="btn btn-primary">Submit</button>
 
-                            <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                      <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
+	</div>
+</form>
 
 
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
+			</div>
+			<!-- /.box -->
+		</div>
+		<!--/.col (left) -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 
-</body>
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-</html>
+<script id="template" type="text/x-handlebars-template">
+<li>
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	<small data-src="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></small>
+	</span>
+  </div>
+</li>                
+</script>    
+<!-- <a href="{{fullName}}"  -->
+<!--      class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a> -->
+<script>
+
+var template = Handlebars.compile($("#template").html());
+
+$(".fileDrop").on("dragenter dragover", function(event){
+	event.preventDefault();
+});
+
+
+$(".fileDrop").on("drop", function(event){
+	event.preventDefault();
+	
+	var files = event.originalEvent.dataTransfer.files;
+	
+	var file = files[0];
+
+	var formData = new FormData();
+	
+	formData.append("file", file);	
+	
+	
+	$.ajax({
+		  url: '/uploadAjax',
+		  data: formData,
+		  dataType:'text',
+		  processData: false,
+		  contentType: false,
+		  type: 'POST',
+		  success: function(data){
+			  
+			  var fileInfo = getFileInfo(data);
+			  
+			  var html = template(fileInfo);
+			  $(".uploadedList").append(html);
+		  }
+		});	
+});
+
+
+$("#registerForm").submit(function(event){
+//$(".uploadedList .delbtn").on("click",function(event){
+	event.preventDefault();<!-- event.preventDefault(): href 처리를 막아주고 단순 event만 진행되도록 해준다. -->
+	
+	var that = $(this);
+
+	var str ="";
+	$(".uploadedList .delbtn").each(function(index){
+// 		 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") +"'> ";
+		 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("data-src") +"'> ";
+	});
+	that.append(str);
+	if(str==""){alert('상품 이미지파일 등록해주세요.');
+	return;}
+	
+	that.get(0).submit();
+	
+});
+
+$(".uploadedList").on("click", "small", function(event){
+	
+	 var that = $(this);
+
+  $.ajax({
+	   url:"/deleteFile",
+	   type:"post",
+	   data: {fileName:$(this).attr("data-src")},
+	   dataType:"text",
+	   success:function(result){
+		   if(result == 'deleted'){
+
+			   that.parent("div").parent('li').remove();
+		   	
+		   }
+	   }
+  });
+});
+
+</script>
+

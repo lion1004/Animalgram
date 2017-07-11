@@ -1,123 +1,204 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
-<head>
+<%@include file="../base/main.jsp"%>
+<style>
+.fileDrop {
+  width: 80%;
+  height: 100px;
+  border: 1px dotted gray;
+  background-color: lightslategrey;
+  margin: auto;
+  
+}
+</style>
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<!-- left column -->
+		<div class="col-md-12">
+			<!-- general form elements -->
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">MODIFY BOARD</h3>
+				</div>
+				<!-- /.box-header -->
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<form role="form" action="modifyPage" method="post">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+	<input type='hidden' name='page' value="${cri.page}"> <input
+		type='hidden' name='perPageNum' value="${cri.perPageNum}">
+	<input type='hidden' name='searchType' value="${cri.searchType}">
+	<input type='hidden' name='keyword' value="${cri.keyword}">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
+					<div class="box-body">
 
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
+						<div class="form-group">
+							<label for="exampleInputEmail1">CUNO</label> <input type="text"
+								name='cuno' class="form-control" value="${customVO.cuno}"
+								readonly="readonly">
+					
+						</div>
 
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Title</label> <input type="text"
+								name='cutitle' class="form-control" value="${customVO.cutitle}">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">cinfo</label>
+							<textarea class="form-control" name="cinfo" rows="3">${customVO.cinfo}</textarea>
+						</div>
+					
+			
+						
+						<div class="form-group">
+							<label for="exampleInputEmail1">File DROP Here</label>
+							<div class="fileDrop"></div>
+						</div>
+						
+						<ul class="mailbox-attachments clearfix uploadedList"></ul>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Forms
-                        </h1>
-              
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-6">
-
-                        <form role="form">
-
-                            <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                      <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
+<!-- 첨부파일 X클릭시 삭제 -->
+<script id="templateAttach" type="text/x-handlebars-template">
+<li>
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	<small data-src="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></small>
+	</span>
+  </div>
+</li>                
+</script> 
+					</div>
+					<!-- /.box-body -->
+	</form>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-primary">SAVE</button>
+					<button type="submit" class="btn btn-warning">CANCEL</button>
+				</div>
+<script id="template" type="text/x-handlebars-template">
+<li>
+  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  <div class="mailbox-attachment-info">
+	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	<small data-src="{{fullName}}" 
+     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></small>
+	</span>
+  </div>
+</li>                
+</script>
+<script>
+$(document).ready(
+	function() {
+		var template = Handlebars.compile($("#template").html());
+		$(".fileDrop").on("dragenter dragover", function(event){
+			event.preventDefault();
+		});
 
 
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
+		$(".fileDrop").on("drop", function(event){
+			event.preventDefault();
+			
+			var files = event.originalEvent.dataTransfer.files;
+			
+			var file = files[0];
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
+			var formData = new FormData();
+			
+			formData.append("file", file);	
+			
+			
+			$.ajax({
+				  url: '/uploadAjax',
+				  data: formData,
+				  dataType:'text',
+				  processData: false,
+				  contentType: false,
+				  type: 'POST',
+				  success: function(data){
+					  
+					  var fileInfo = getFileInfo(data);
+					  
+					  var html = template(fileInfo);
+					//  alert('check:'+html)
+					  $(".uploadedList").append(html);
+				  }
+				});	
+		});
+		
+		var formObj = $("form[role='form']");
 
-</body>
+		console.log(formObj);
 
-</html>
+		$(".btn-warning")
+				.on("click",function() {
+					self.location = "/user/custom/seller_list?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+				});
+
+		$(".btn-primary").on("click",
+				function() {
+			var that = $("form[role='form']");
+			var str ="";
+			$(".uploadedList .delbtn").each(function(index){
+//		 		 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") +"'> ";
+				 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("data-src") +"'> ";
+			});
+			that.append(str);
+					formObj.submit();
+				});
+		
+		var cuno = ${customVO.cuno};
+		var template = Handlebars.compile($("#templateAttach").html());
+		$.getJSON("/user/custom/getAttach/"+cuno,function(list){
+			$(list).each(function(){
+			
+				var fileInfo = getFileInfo(this);
+				
+				var html = template(fileInfo);
+				
+				 $(".uploadedList").append(html);
+				console.log(fileInfo);
+			});
+		});
+		
+		
+		$(".uploadedList").on("click", "small", function(event){
+			
+			 var that = $(this);
+
+		  $.ajax({
+			   url:"/user/custom/removeFile",
+			   type:"post",
+			   data: {cuno: cuno, fileName:$(this).attr("data-src")},
+			   dataType:"text",
+			   success:function(result){
+				   if(result == 'deleted'){
+					 //  alert('삭제됩니다');
+					   that.parent("div").parent('li').remove();
+				   	 //  alert('삭제 됐나요?');
+				   }
+			   }
+		  });
+		});
+	});
+</script>
+
+
+
+
+			</div>
+			<!-- /.box -->
+		</div>
+		<!--/.col (left) -->
+
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

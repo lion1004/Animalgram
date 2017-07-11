@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="donationask">
+
+ <insert id="create" parameterType="donationask">
+     insert into donation_ask (dano, dno, mno, damemo)
+            values (donation_ask_seq.nextval, #{dno}, 1, #{damemo})
+  </insert>
+  
+   <select id="list" resultType="donationask">
+   		select c.mno, b.dano, b.damemo, b.dadate, c.mname, c.maddr, c.mtel, a.dtitle, b.dastate
+   		from donation a, donation_ask b, amember c
+   		where b.dno = a.dno
+   		and b.mno = c.mno
+   		and a.mno = c.mno
+   		order by dano desc
+   		 
+   		<!-- select mno, dano, damemo, dadate, mname, maddr, mtel, dtitle,dno
+      	from donation_ask a natural join amember b natural join donation c
+      	order by a.dano desc -->
+      <!-- select a.mno, a.bno, b.cutitle, d.mname, d.maddr, d.mtel, a.bmemo, to_char(a.bdate,'yyyy-mm-dd/hh:mi') bdate
+      from bill a, custom b, seller c, amember d
+      where 
+       a.mno = d.mno
+      and a.cuno = b.cuno
+      and b.sno = c.sno
+      and c.mno = d.mno
+      
+      order by bno desc -->
+  </select> 
+  
+   <select id="listSearchCount" resultType="int">
+     select count(*) from donation_ask
+         
+  </select>
+  
+    <update id="sellcount" parameterType="int">
+    update bill
+    set 
+    	bsellcount = nvl(#{bsellcount},0) + 1
+    WHERE cuno = #{cuno}
+  </update>
+  
+    <delete id="delete" >
+     delete from donation_ask
+     where dno=#{dno}
+  </delete>
+  
 </mapper>
