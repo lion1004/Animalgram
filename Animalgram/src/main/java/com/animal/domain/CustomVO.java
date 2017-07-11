@@ -7,6 +7,8 @@ public class CustomVO {
 	
 	  private int cuno; 
 	  private int sno; 
+	  private String ctitle;
+	private String cprice;
 	  private String cutitle; 
 	  private String cinfo; 
 	  private Date cdate; 
@@ -21,19 +23,12 @@ public class CustomVO {
 		
 	}
 
-	public CustomVO(int cuno, int sno, String cutitle, String cinfo, Date cdate, String[] files, String fullName,
-			String mname, String maddr, String mtel) {
-		super();
-		this.cuno = cuno;
-		this.sno = sno;
-		this.cutitle = cutitle;
-		this.cinfo = cinfo;
-		this.cdate = cdate;
-		this.files = files;
-		this.fullName = fullName;
-		this.mname = mname;
-		this.maddr = maddr;
-		this.mtel = mtel;
+	@Override
+	public String toString() {
+		return "CustomVO [cuno=" + cuno + ", sno=" + sno + ", ctitle=" + ctitle + ", cprice=" + cprice + ", cutitle="
+				+ cutitle + ", cinfo=" + cinfo + ", cdate=" + cdate + ", files=" + Arrays.toString(files)
+				+ ", fullName=" + fullName + ", mname=" + mname + ", maddr=" + maddr + ", mtel=" + mtel
+				+ ", bsellcount=" + bsellcount + "]";
 	}
 
 	public int getCuno() {
@@ -50,6 +45,22 @@ public class CustomVO {
 
 	public void setSno(int sno) {
 		this.sno = sno;
+	}
+
+	public String getCtitle() {
+		return ctitle;
+	}
+
+	public void setCtitle(String ctitle) {
+		this.ctitle = ctitle;
+	}
+
+	public String getCprice() {
+		return cprice;
+	}
+
+	public void setCprice(String cprice) {
+		this.cprice = cprice;
 	}
 
 	public String getCutitle() {
@@ -116,7 +127,6 @@ public class CustomVO {
 		this.mtel = mtel;
 	}
 
-	
 	public int getBsellcount() {
 		return bsellcount;
 	}
@@ -124,13 +134,6 @@ public class CustomVO {
 	public void setBsellcount(int bsellcount) {
 		this.bsellcount = bsellcount;
 	}
+	  
 
-	@Override
-	public String toString() {
-		return "CustomVO [cuno=" + cuno + ", sno=" + sno + ", cutitle=" + cutitle + ", cinfo=" + cinfo + ", cdate="
-				+ cdate + ", files=" + Arrays.toString(files) + ", fullName=" + fullName + ", mname=" + mname
-				+ ", maddr=" + maddr + ", mtel=" + mtel + ", bsellcount=" + bsellcount + "]";
-	}
-	
-   
 }

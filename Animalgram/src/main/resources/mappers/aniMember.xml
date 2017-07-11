@@ -58,4 +58,63 @@
 		set mpass = #{mpass}
 		where idmail = #{idmail}
 	</update>
+	
+	<!-- 회원정보 불러오기 -->
+	<select id="memberinfo" resultType="member">
+		select mno,idmail,mpass,nickname,mname,birth,mgender,job,mtel,maddr,favorite,pwcode,pwcodeas,to_char(mdate,'yy/mm/dd') mdate 
+		from amember 
+		where nickname = #{nickname}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="mupdate">
+		update amember 
+		set mpass=#{mpass}, maddr=#{maddr}, mtel=#{mtel}, favorite=#{favorite} 
+		where idmail = #{idmail}
+	</update>
+	
+	<!-- 펫 등록하기 -->
+	<insert id="petinsert">
+		insert into animal (ano,mno,aname,agender,aage,atype,aimage) 
+		values (animal_seq.nextval,(select mno from amember where nickname = #{nickname}),
+					#{aname},#{agender},#{aage},#{atype},#{aimage})
+	</insert>
+	
+	<!-- 펫 정보 불러오기 -->
+	<select id="petselect" resultType="animal">
+		select ano,nickname,aname,agender,aage,atype,aimage,adate
+		from animal natural join amember
+		where mno = (select mno from amember where nickname = #{nickname})
+	</select>
+	
+	<!-- 전문가 등록하기 -->
+	<insert id="proinsert">
+		insert into professional (pno,mno,ptype,ptypeno,pcareer,pimage)
+		 values (professional_seq.nextval,(select mno from amember where nickname=#{nickname}),
+		 	#{ptype},#{ptypeno},#{pcareer},#{pimage})
+	</insert>
+	
+	<!-- 전문가 등록_job 업데이트 -->
+	<update id="proinsert_up">
+		update amember
+		set job = #{job}
+		where nickname = #{nickname}
+	</update>
+	
+	<!-- 판매자 등록하기 -->
+	<insert id="sellinsert">
+		insert into seller (sno,mno,sname,stel,saddr) 
+		values (seller_seq.nextval,(select mno from amember where nickname=#{nickname}),
+							#{sname},#{stel},#{saddr})
+	</insert>
+	
+	<!-- 전문가 조회 -->
+	<select id="selectPro" resultType="String">
+		select job
+		from amember
+		where nickname=#{nickname}
+	</select>
+	
+	<!-- 판매자 조회 -->
+	
 </mapper>

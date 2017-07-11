@@ -3,26 +3,17 @@ package com.animal.domain;
 public class ProfessionalVO {
 	private int pno; // 전문가번호
 	private int mno; // 회원DB(회원번호)
+	private String nickname;
 	private String ptype; // 전문가 종류
 	private String ptypeno; // 전문가 등록번호
-	private int pcareer; // 전문가경력
-
+	private String pcareer; // 전문가경력
+	private String pimage;																																																																																																																																																																																																																																																					
+	private String date;
+	
 	@Override
 	public String toString() {
-		return "ProfessionalVO [pno=" + pno + ", mno=" + mno + ", ptype=" + ptype + ", ptypeno=" + ptypeno
-				+ ", pcareer=" + pcareer + "]";
-	}
-
-	public ProfessionalVO() {
-	}
-
-	public ProfessionalVO(int pno, int mno, String ptype, String ptypeno, int pcareer) {
-		super();
-		this.pno = pno;
-		this.mno = mno;
-		this.ptype = ptype;
-		this.ptypeno = ptypeno;
-		this.pcareer = pcareer;
+		return "ProfessionalVO [pno=" + pno + ", mno=" + mno + ", nickname=" + nickname + ", ptype=" + ptype
+				+ ", ptypeno=" + ptypeno + ", pcareer=" + pcareer + ", pimage=" + pimage + ", date=" + date + "]";
 	}
 
 	public int getPno() {
@@ -41,6 +32,14 @@ public class ProfessionalVO {
 		this.mno = mno;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public String getPtype() {
 		return ptype;
 	}
@@ -57,12 +56,28 @@ public class ProfessionalVO {
 		this.ptypeno = ptypeno;
 	}
 
-	public int getPcareer() {
+	public String getPcareer() {
 		return pcareer;
 	}
 
-	public void setPcareer(int pcareer) {
+	public void setPcareer(String pcareer) {
 		this.pcareer = pcareer;
+	}
+
+	public String getPimage() {
+		return pimage;
+	}
+
+	public void setPimage(String pimage) {
+		this.pimage = pimage;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 }

@@ -74,7 +74,7 @@
 							location.href="/member/main";
 						},
 						error : function(data){
-							alert("로그인 실패!!");
+							alert("등록되지 않은 회원입니다.");
 							
 						}
 					});

@@ -1,5 +1,7 @@
 package com.animal.control;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,12 +10,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.animal.domain.MemConfirmVO;
+import com.animal.service.AnimalService;
 import com.animal.service.MemberConfirmSer;
 
 @RestController
@@ -21,6 +25,8 @@ public class AnimalMemControllerR {
 
 	@Inject
 	MemberConfirmSer service;
+	@Inject
+	AnimalService aniservice;
 	
 	@RequestMapping("/aniidcheck")
 	public String idcheck(String id)throws Exception{
@@ -117,4 +123,50 @@ public class AnimalMemControllerR {
 			return entity;
 		}
 		
+	// 훈련 현황 삭제 (User용)
+		@RequestMapping(value="/care_delete/{cano}",method = RequestMethod.DELETE)
+		public ResponseEntity<String> delete_care_user(@PathVariable("cano") int cano)throws Exception{
+			ResponseEntity<String> entity = null;
+			
+			if(aniservice.careUserDel(cano)){
+				entity = new ResponseEntity<>(HttpStatus.OK);
+			}else{
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}
+		
+	// 훈련 요청 승인 (전문가)
+		@RequestMapping(value="/care_pro_update/{cano}",method=RequestMethod.PUT)
+		public ResponseEntity<String> careDelete(@PathVariable("cano") int cano)throws Exception{
+			ResponseEntity<String> entity = null;
+			if(aniservice.careProUp(cano)){
+				entity = new ResponseEntity<>(HttpStatus.OK);		
+			}else{		
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+				return entity;
+		}
+	// 훈련 현황 삭제
+		@RequestMapping(value="/care_pro_delete/{cno}",method=RequestMethod.DELETE)
+		public ResponseEntity<String> proDelete(@PathVariable("cno") int cno)throws Exception{
+			ResponseEntity<String> entity = null;
+			if(aniservice.careProdelete(cno) == 1){
+				entity = new ResponseEntity<>(HttpStatus.OK);
+			}else{
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}
+	// 주문 수령 승인
+		@RequestMapping(value="/bill_update/{bno}", method=RequestMethod.PUT)
+		public ResponseEntity<String> bill_update(@PathVariable("bno") int bno)throws Exception{
+			ResponseEntity<String> entity = null;
+			if(aniservice.bill_update(bno)){
+				entity = new ResponseEntity<>(HttpStatus.OK);
+			}else{
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			return entity;
+		}
 } // class

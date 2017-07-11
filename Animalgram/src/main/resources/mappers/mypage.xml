@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mypage">
+
+	<!-- 소모임 현황 -->
+ 	<select id="agroup" resultType="agroup">
+ 		select gno,gtitle,gplace,gtype,gstate from agroup natural join agroup_person
+ 		where mno = (select mno from amember where nickname =#{nickname})
+ 		order by gno desc
+ 	</select>
+ 	
+ 	<!-- 소모임 페이징 -->
+ 	<select id="agroup_count" resultType="int">
+ 		select count(*)
+ 		from agroup natural join agroup_person
+ 		where mno = (select mno from amember where nickname =#{nickname})
+ 	</select>
+ 	
+ 	<!-- 훈련현황_User용 -->
+ 	<select id="care" resultType="care">
+ 		select cno,cano,pno,ctype,ccontent,castate
+ 		from care natural join care_ask
+ 		where mno = (select mno from amember where nickname=#{nickname})
+ 		order by cano desc
+ 	</select>
+ 	
+ 	<!-- 훈련현황 삭제 -->
+ 	<delete id="care_user_delete">
+ 		delete from care_ask
+ 		where cano = #{cano}
+ 	</delete>
+ 	
+ 	<!-- 훈련 페이징 -->
+ 	<select id="care_count" resultType="int">
+ 		select count(*)
+ 		from care natural join care_ask
+ 		where mno = (select mno from amember where nickname=#{nickname})
+ 	</select>
+ 	
+ 	<!-- 훈련 요청 승인 -->
+ 	<update id="update_care">
+ 		update care_ask
+ 		set castate = '예약완료'
+ 		where cano = #{cano}
+ 	</update>
+ 	
+ 	<!-- 훈련 요청 현황 Pro용 -->
+ 	<select id="care_pro" resultType="carepro">
+ 		select cano,cno,ctype,ccontent,nickname,to_char(cadate,'yyyy"년"mm"월"dd"일"') cadate,castate
+ 		from care natural join care_ask natural join amember
+ 		where castate = '예약'
+ 		order by cano desc
+ 	</select>
+
+ 	<!-- 훈련 요청 현황 승인 Pro용 -->
+ 	<select id="care_pro_comit" resultType="carepro">
+ 		select cano,cno,ctype,ccontent,nickname,to_char(cadate,'yyyy"년"mm"월"dd"일"') cadate,castate
+ 		from care natural join care_ask natural join amember
+ 		where castate = '예약완료'
+ 	</select>
+ 	
+ 	<!-- 훈련 요청 현황 Pro용 페이징 -->
+ 	<select id="care_pro_count" resultType="int">
+ 		select count(*)
+ 		from care natural join care_ask natural join amember
+ 		where castate = '예약'
+ 	</select>
+
+ 	<!-- 훈련 요청 현황 승인 Pro용 페이징 -->
+ 	<select id="care_pro_count_cmit" resultType="int">
+ 		select count(*)
+ 		from care natural join care_ask natural join amember
+ 		where castate ='예약완료'
+ 	</select>	
+ 	
+ 	<!-- 등록된 훈련 Pro용 -->
+ 	<select id="care_pro_select" resultType="care_pro_select">
+ 		select cno,pno,ctype,ccontent
+ 		from care
+ 		order by cno desc
+ 	</select>
+ 	
+ 	<!-- 등록된 훈련 Pro용 페이징 -->
+ 	<select id="care_pro_select_count" resultType="int">
+ 		select count(*)
+ 		from care
+ 	</select>
+ 	
+ 	<!-- 등록된 훈련 삭제(전문가용) -->
+ 	<delete id="delete_care_pro">
+ 		delete from care
+ 		where cno = #{cno}
+ 	</delete>
+ 	
+ 	<!-- 등록된 판매 물품(판매자용) -->
+ 	<select id="custom_select" resultType="custom">
+ 		select cuno,sno,ctitle,cprice,cimage,cinfo,cdate
+ 		from custom
+ 		order by cuno desc
+ 	</select>
+
+ 	<!-- 판매자 물품 현황 페이징 -->
+ 	<select id="custom_page" resultType="int">
+ 		select count(*)
+ 		from custom
+	</select>
+	
+	<!-- 판매 요청 현황 -->
+	<select id="bill_select" resultType="bill">
+		select bno,mno,cuno,ctitle,bmeno,bcount,to_char(bdate,'yyyy-mm-dd') bdate,bstate
+		from bill natural join custom
+		where bstate = '상품준비중'
+		order by bno desc
+	</select>
+	
+	<!-- 판매 요청 현황 페이징-->
+	<select id="bill_count" resultType="int">
+		select count(*)
+		from bill natural join custom
+		where bstate = '상품준비중'
+	</select>
+	
+	<!-- 판매 요청 승인 -->
+	<update id="bill_update">
+		update bill
+		set bstate = '배송완료'
+		where bno = #{bno}
+	</update>
+	
+	<!-- 판매 요청 승인 조회-->
+	<select id="bill_comit_select" resultType="bill">
+		select bno,mno,cuno,ctitle,bmeno,bcount,to_char(bdate,'yyyy-mm-dd') bdate,bstate
+		from bill natural join custom
+		where bstate = '배송완료'
+	</select>
+	
+	<!-- 판매 요청 승인 페이징 -->
+	<select id="bill_comit_count" resultType="int">
+		select count(*)
+		from bill natural join custom
+		where bstate = '배송완료'
+	</select>
+	
+</mapper>

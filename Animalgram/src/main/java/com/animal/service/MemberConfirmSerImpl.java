@@ -41,20 +41,36 @@ public class MemberConfirmSerImpl implements MemberConfirmSer{
 	}
 
 	@Override
+	public boolean modify(MemConfirmVO vo) throws Exception {  // 회원정보수정
+		return dao.memUpdate(vo);
+	}
+
+	@Override
 	public String loginsession(String idmail) throws Exception {	// 세션유지
 		return dao.loginsession(idmail);
 	}
 
 	@Override
-	public int selectPass(Map<String, Object> map) throws Exception {
+	public int selectPass(Map<String, Object> map) throws Exception {	// 비밀번호 코드 조회
 		return dao.selectPass(map);
 	}
 
 	@Override
-	public boolean updatePass(Map<String, Object> map) throws Exception {
+	public boolean updatePass(Map<String, Object> map) throws Exception {	// 비밀번호 변경
 		if(dao.updatePass(map)){
 			return true;			
 		}else
 			return false;
 	}
+
+	@Override
+	public MemConfirmVO meminfo(String nickname) throws Exception {	// 회원 정보 조회
+		return dao.meminfo(nickname);
+	}
+
+	@Override
+	public String selectPro(String nickname) throws Exception {
+		return dao.selectPro(nickname);
+	}
+
 } // class

@@ -179,21 +179,18 @@
 						<li class="divider"></li>
 						<li><a href="#">View All</a></li>
 					</ul></li>
-				<c:if test="false">
+				<c:if test="${user != null}">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+						data-toggle="dropdown"><i class="fa fa-user"></i> ${user } <b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
-							<li><a href="#"><i class="fa fa-fw fa-envelope"></i>Inbox</a></li>
-							<li><a href="#"><i class="fa fa-fw fa-gear"></i>
-									Settings</a></li>
+							<li><a href="mypage"><i class="fa fa-fw fa-user"></i>MyPage</a></li>
 							<li class="divider"></li>
-							<li><a href="#"><i class="fa fa-fw fa-power-off"></i>
+							<li><a href="logout"><i class="fa fa-fw fa-power-off"></i>
 									LogOut</a></li>
 						</ul></li>
 				</c:if>
-				<c:if test="true">
+				<c:if test="${user == null }">
 					<li id="myBtn"><a> Login </a></li>
 				</c:if>
 
@@ -249,67 +246,6 @@
 			<!-- /.navbar-collapse -->
 		</nav>
 
-		<!-- /#wrapper -->
-
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog" style="margin-top: 100px">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header" style="padding: 35px 50px;">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4>
-							<span class="glyphicon glyphicon-lock"></span> Login
-						</h4>
-					</div>
-					<div class="modal-body" style="padding: 40px 50px;">
-						<form role="form">
-							<div class="form-group">
-								<label for="usrname"><span
-									class="glyphicon glyphicon-user"></span> Username</label> <input
-									type="text" class="form-control" id="usrname"
-									placeholder="Enter email">
-							</div>
-							<div class="form-group">
-								<label for="psw"><span
-									class="glyphicon glyphicon-eye-open"></span> Password</label> <input
-									type="text" class="form-control" id="psw"
-									placeholder="Enter password">
-							</div>
-							<div class="checkbox">
-								<label><input type="checkbox" value="" checked>Remember
-									me</label>
-							</div>
-							<button type="submit" class="btn btn-success btn-block">
-								<span class="glyphicon glyphicon-off"></span> Login
-							</button>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger btn-default pull-left"
-							data-dismiss="modal">
-							<span class="glyphicon glyphicon-remove"></span> Cancel
-						</button>
-						<p>
-							Not a member? <a href="#">Sign Up</a>
-						</p>
-						<p>
-							Forgot <a href="#">Password?</a>
-						</p>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-
-		<!-- 로그인창 오픈 -->
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#myBtn").click(function() {
-					$("#myModal").modal();
-				});
-			});
-		</script>
+		<!-- 로그인 모달창 -->
+		<%@ include file="../login/login_confirm.jsp" %>
 

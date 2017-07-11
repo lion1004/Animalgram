@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+v<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../base/main.jsp"%>
@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-</script>
+
 <script type="text/javascript">
 	/* 우편번호 */
 	function sample6_execDaumPostcode() {
@@ -295,18 +295,17 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label" for="inputName">주소</label>
-				<div class="col-sm-6">
-					<input type="text" name="addrno" id="sample6_postcode"
-						placeholder="우편번호"> <input class="btn btn-success"
-						type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+				<label class="col-sm-3 control-label">주소</label>
+				<div>
+					<input type="text" name="addrno" id="sample6_postcode" placeholder="우편번호"> 
+					<input class="btn btn-success" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="inputName"></label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="addr1"
-						id="sample6_address" placeholder="주소" st><br> <input
+						id="sample6_address" placeholder="주소"><br> <input
 						type="text" class="form-control" name="addr2"
 						id="sample6_address2" placeholder="상세주소">
 				</div>
@@ -324,10 +323,9 @@
 				<label class="col-sm-3 control-label" for="inputNumber">관심분야</label>
 				<div class="col-sm-6">
 					<div class="col-sm-6">
-						<input type="radio" name="favorite" value="dog" checked="checked">강아지<input
-							type="radio" name="favorite" value="cat">고양이 <input
-							type="radio" name="favorite" value="etc"><label
-							class="radio-inline">기타</label>
+						<input type="radio" name="favorite" value="dog" checked="checked">강아지
+						<input type="radio" name="favorite" value="cat">고양이 
+						<input type="radio" name="favorite" value="etc">기타
 					</div>
 				</div>
 			</div>
