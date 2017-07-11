@@ -1,35 +1,29 @@
 package com.animal.domain;
 
-import java.sql.Date;
-
 public class ReplyVO {
 	private int arno; // 전체 댓글 번호
-	private int mno; // 회원DB(회원번호)
+	private String nickname; // 회원DB(회원번호)
 	private int antno; // 게시글DB(전체 게시글 번호)
-	private int rno; // 각 게시글에 대한 댓글 번호
 	private String rcontent; // 댓글 내용
-	private Date rdate; // 댓글등록일자
-	private Date rupdate; // 댓글수정일자
+	private String rdate; // 댓글등록일자
+
+	public ReplyVO() {
+	
+	}
 
 	@Override
 	public String toString() {
-		return "ReplyVO [arno=" + arno + ", mno=" + mno + ", antno=" + antno + ", rno=" + rno + ", rcontent=" + rcontent
-				+ ", rdate=" + rdate + ", rupdate=" + rupdate + "]";
+		return "ReplyVO [arno=" + arno + ", nickname=" + nickname + ", antno=" + antno + ", rcontent=" + rcontent
+				+ ", rdate=" + rdate + "]";
 	}
 
-	public ReplyVO() {
-
-	}
-
-	public ReplyVO(int arno, int mno, int antno, int rno, String rcontent, Date rdate, Date rupdate) {
+	public ReplyVO(int arno, String nickname, int antno, String rcontent, String rdate) {
 		super();
 		this.arno = arno;
-		this.mno = mno;
+		this.nickname = nickname;
 		this.antno = antno;
-		this.rno = rno;
 		this.rcontent = rcontent;
 		this.rdate = rdate;
-		this.rupdate = rupdate;
 	}
 
 	public int getArno() {
@@ -40,12 +34,12 @@ public class ReplyVO {
 		this.arno = arno;
 	}
 
-	public int getMno() {
-		return mno;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getAntno() {
@@ -56,14 +50,6 @@ public class ReplyVO {
 		this.antno = antno;
 	}
 
-	public int getRno() {
-		return rno;
-	}
-
-	public void setRno(int rno) {
-		this.rno = rno;
-	}
-
 	public String getRcontent() {
 		return rcontent;
 	}
@@ -72,20 +58,11 @@ public class ReplyVO {
 		this.rcontent = rcontent;
 	}
 
-	public Date getRdate() {
+	public String getRdate() {
 		return rdate;
 	}
 
-	public void setRdate(Date rdate) {
+	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-
-	public Date getRupdate() {
-		return rupdate;
-	}
-
-	public void setRupdate(Date rupdate) {
-		this.rupdate = rupdate;
-	}
-
 }

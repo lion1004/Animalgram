@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="center">
+
+	<insert id="cinsert">
+		insert into center (ctno, mno, cttitle, ctcontent)
+		values (center_seq.nextval,(select mno from amember where nickname=#{nickname}),#{cttitle},#{ctcontent})
+	</insert>
+	
+	<select id="cread" resultType="center">
+		select ctno, mno, nickname, cttitle, ctcontent,ctstate
+		from center natural join amember 
+		where ctno=#{ctno}
+ 	</select>
+ 	
+	<select id="clist" resultType="center">
+		select ctno, nickname, cttitle, ctcontent, ctstate
+		from center natural join amember
+		order by ctno desc
+	</select>
+	
+	<select id="clistcount" resultType="int">
+		select count(*) from center natural join amember 
+	</select>
+	
+	<select id="creply" resultType="centerreply">
+		select * from center_reply
+		where ctno=#{ctno}
+	</select>
+	
+
 </mapper>

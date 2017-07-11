@@ -1,4 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="areply">
+
+	<!-- 댓글 등록 -->
+	<insert id="rinsert">
+		insert into areply (arno, mno, antno,rcontent)
+		values(areply_seq.nextval, (select mno from amember where nickname =#{nickname}), #{antno}, #{rcontent})
+	</insert>
+	
+	<!-- 댓글 수정 -->
+ 	<update id="rupdate">
+		update areply set rcontent=#{rcontent}, rdate=sysdate where arno=#{arno}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="rremove">
+		delete from areply where arno=#{arno}
+	</delete> 
+	
+	<!-- 댓글 하나 읽어오기 -->
+	<select id="rread" resultType="areply">
+		select arno, antno, nickname, rcontent, rdate
+		from areply natural join amember
+		where arno=#{arno}
+	</select>
+	
+	<!-- 댓글 목록 출력 -->
+	<select id="listareply" resultType="areply">
+	<include refid="pagingHeader"/>
+		select arno, antno, nickname, rcontent, rdate 
+		from areply r, amember m
+		where r.mno=m.mno and antno=#{antno} order by arno desc
+		<include refid="pagingFooter"/>
+	</select>
+	
+	<!-- 댓글 총갯수 출력(페이징) -->
+	<select id="rcount" resultType="int">
+		select count(*) from areply where antno=#{antno}
+	</select>
+		
+	<!-- 페이징 sql -->
+    <sql id="pagingHeader">
+        SELECT * FROM (
+            SELECT ROWNUM AS rn, A.* FROM (
+    </sql>
+    <sql id="pagingFooter">
+            ) A
+        ) WHERE rn BETWEEN #{start} AND #{end}
+    </sql>
 </mapper>

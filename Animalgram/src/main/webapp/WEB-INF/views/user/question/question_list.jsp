@@ -1,123 +1,134 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<head>
+<%@include file="../base/main.jsp"%>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="/resources/bootstrapPro/vendor/metisMenu/metisMenu.min.js"></script>
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+<!-- Custom Theme JavaScript -->
+<script src="/resources/bootstrapPro/dist/js/sb-admin-2.js"></script>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript">
+	//질문 답변 게시판 검색 버튼 유효성 검사
+	function question_search_check(){
+		if(document.question_search_form.keyword.value == ""){
+			alert('내용을 입력하세요.');
+			document.question_search_form.ntitle.focus();
+		}else{
+			document.question_search_form.submit();
+		}
+	}//question_search_check
+	
+	$(document).ready(function() {
+		
+		//질문답변 게시판 리스트 검색 버튼
+		$('#searchBtn').click(function(event) {
+			self.location = "qlist"
+			+ '${pageMaker.makeQuery(1)}'
+			+ "&searchType="
+			+ $("select option:selected").val()
+			+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
+		});
+		
+		//질문답변 게시판 리스트 이동 버튼
+		$("#listbutton ").click(function() {
+			self.location = "qlist"
+		});
+		
+		//질문답변 게시판 글쓰기 버튼
+		$('#newBtn').click(function(evt) {
+			self.location = "qinsert";
+		});
+	});//ready
+</script>
 
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Tables
-                        </h1>
-                     
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h2>Bordered Table</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Page</th>
-                                        <th>Visits</th>
-                                        <th>% New Visits</th>
-                                        <th>Revenue</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>/index.html</td>
-                                        <td>1265</td>
-                                        <td>32.3%</td>
-                                        <td>$321.33</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/about.html</td>
-                                        <td>261</td>
-                                        <td>33.3%</td>
-                                        <td>$234.12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/sales.html</td>
-                                        <td>665</td>
-                                        <td>21.3%</td>
-                                        <td>$16.34</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog.html</td>
-                                        <td>9516</td>
-                                        <td>89.3%</td>
-                                        <td>$1644.43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/404.html</td>
-                                        <td>23</td>
-                                        <td>34.3%</td>
-                                        <td>$23.52</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/services.html</td>
-                                        <td>421</td>
-                                        <td>60.3%</td>
-                                        <td>$724.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td>/blog/post.html</td>
-                                        <td>1233</td>
-                                        <td>93.2%</td>
-                                        <td>$126.34</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-           
-
-            </div>
-            <!-- /.container-fluid -->
-
-
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+	<div id= "wrapper">
+		<div id="page-wrapper">
+			<!-- 게시판 헤더 -->
+			<div class="container-fluid">
+				<h1 class="page-header">게시판</h1>
+			</div>
+			<div class="panel panel-default" style="width: 1000px; margin: 0 auto;">
+				<div class="panel-heading">
+					<h3 class="panel-title">질문답변 게시판</h3>
+				</div>
+				
+				<!-- 검색 기능 -->
+				<br>
+				<form name="question_search_form">
+					<div class='box-body'>
+						<select name="searchType" class="form-control" style="width: 100px; display: inline-block;">
+							<option value="n" <c:out value="${cri.searchType == null?'selected':''}"/>>
+								---
+							</option>
+							<option value="t" <c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+								제목
+							</option>
+							<option value="w" <c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
+								작성자
+							</option>
+						</select> 
+						<input type="text" class="form-control" name='keyword' id="keywordInput" value='${cri.keyword }' style="width: 200px; display: inline-block;">
+						<button type="button" class="btn btn-default" id='searchBtn' onclick="question_search_check()"><i class="fa fa-search"></i></button>
+					</div>
+				</form>
+				<br>
+				
+				<!-- 리스트 페이지 테이블 -->
+				<div class="panel-body">
+					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+						<thead>
+							<tr>
+								<th style="width: 60px">번호</th>
+								<th>제목</th>
+								<th style="width: 60px">작성자</th>
+								<th style="width: 160px">작성일자</th>
+								<th style="width: 60px">조회수</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list}" var="notice">
+									<tr>
+									<td>${notice.ntno}</td>
+									<td><a href='/aboard/qinfo${pageMaker.makeSearch(pageMaker.cri.page)}&nno=${notice.nno}&ntno=${notice.ntno}'>${notice.ntitle}</a></td>
+									<td>${notice.nickname}</td>
+									<td>${notice.ntdate}</td>
+									<td>${notice.ncount}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+						
+					<!-- 글쓰기, 리스트 버튼 -->
+					<c:if test="${noticetextVO.nickname == user}">
+						<button type="submit" class="btn btn-info" id='listbutton'>리스트</button>
+					</c:if>
+					<c:if test="${noticetextVO.nickname != user}">
+						<button type="submit" class="btn btn-primary" id='newBtn'>글쓰기</button>
+						<button type="submit" class="btn btn-info" id='listbutton'>리스트</button>
+					</c:if>
+				</div>
+					
+				<!-- 리스트 페이지 번호 -->
+				<div class="box-footer">
+					<div class="text-center">
+						<ul class="pagination">
+							<c:if test="${pageMaker.prev}">
+								<li><a href="qlist${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+							</c:if>
+							<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+								<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<a href="qlist${pageMaker.makeQuery(idx)}">${idx}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li><a href="qlist${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

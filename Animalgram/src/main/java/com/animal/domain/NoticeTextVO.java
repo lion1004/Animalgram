@@ -1,52 +1,25 @@
 package com.animal.domain;
 
-import java.sql.Date;
-
 public class NoticeTextVO {
 	private int antno; // 전체 게시글 번호
-	private int mno; // 회원DB(회원번호)
+	private String nickname;// 회원 닉네임
 	private int nno; // 게시판DB(게시판 번호)
 	private int ntno; // 각 게시판 당 게시글 번호
 	private String ntitle; // 게시글 제목
 	private String ntcontent; // 게시글 내용
-	private String ntimage; // 게시글이미지
-	private Date ntdate; // 게시글 등록일자
-	private Date ntupdate; // 게시글 수정일자
+	private String ntdate; // 게시글 등록일자
+	private String ntupdate;//게시글 수정일자
+	private int ncount;//조회수
 	
-	private String mname; //join용 mname
-
-	public String getMname() {
-		return mname;
-	}
-
-	public void setMname(String mname) {
-		this.mname = mname;
+	public NoticeTextVO() {
+	
 	}
 
 	@Override
 	public String toString() {
-		return "NoticeTextVO [antno=" + antno + ", mno=" + mno + ", nno=" + nno + ", ntno=" + ntno + ", ntitle="
-				+ ntitle + ", ntcontent=" + ntcontent + ", ntimage=" + ntimage + ", ntdate=" + ntdate + ", ntupdate="
-				+ ntupdate + ", mname=" + mname + "]";
-	}
-
-	public NoticeTextVO() {
-	}
-	
-
-	public NoticeTextVO(int antno, int mno, int nno, int ntno, String ntitle, String ntcontent, String ntimage,
-			Date ntdate, Date ntupdate, String mname) {
-		super();
-		this.antno = antno;
-		this.mno = mno;
-		this.nno = nno;
-		this.ntno = ntno;
-		this.ntitle = ntitle;
-		this.ntcontent = ntcontent;
-		this.ntimage = ntimage;
-		this.ntdate = ntdate;
-		this.ntupdate = ntupdate;
-		this.mname = mname;
+		return "NoticeTextVO [antno=" + antno + ", nickname=" + nickname + ", nno=" + nno + ", ntno=" + ntno
+				+ ", ntitle=" + ntitle + ", ntcontent=" + ntcontent + ", ntdate=" + ntdate + ", ntupdate=" + ntupdate
+				+ ", ncount=" + ncount + "]";
 	}
 
 	public int getAntno() {
@@ -57,12 +30,12 @@ public class NoticeTextVO {
 		this.antno = antno;
 	}
 
-	public int getMno() {
-		return mno;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getNno() {
@@ -97,28 +70,28 @@ public class NoticeTextVO {
 		this.ntcontent = ntcontent;
 	}
 
-	public String getNtimage() {
-		return ntimage;
-	}
-
-	public void setNtimage(String ntimage) {
-		this.ntimage = ntimage;
-	}
-
-	public Date getNtdate() {
+	public String getNtdate() {
 		return ntdate;
 	}
 
-	public void setNtdate(Date ntdate) {
+	public void setNtdate(String ntdate) {
 		this.ntdate = ntdate;
 	}
 
-	public Date getNtupdate() {
+	public String getNtupdate() {
 		return ntupdate;
 	}
 
-	public void setNtupdate(Date ntupdate) {
+	public void setNtupdate(String ntupdate) {
 		this.ntupdate = ntupdate;
 	}
 
+	public int getNcount() {
+		return ncount;
+	}
+
+	public void setNcount(int ncount) {
+		this.ncount = ncount;
+	}
+	
 }

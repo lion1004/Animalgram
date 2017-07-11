@@ -1,4 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="noticetext">
+<mapper namespace="notice">
+
+	<!-- 노하우 게시글 입력 -->
+	<insert id="kinsert">
+		insert into notice_text (antno, mno, nno, ntno, ntitle, ntcontent)
+		values (notice_text_seq.nextval,(select mno from amember where nickname = #{nickname}),1,knowhow_seq.nextval,#{ntitle},#{ntcontent})
+	</insert>
+	
+	<!-- 질문답변 게시글 입력 -->
+	<insert id="qinsert">
+		insert into notice_text (antno, mno, nno, ntno, ntitle, ntcontent)
+		values (notice_text_seq.nextval,(select mno from amember where nickname = #{nickname}),2,question_seq.nextval,#{ntitle},#{ntcontent})
+	</insert>
+
+	<!-- 게시글 수정 -->
+	<update id="nupdate">
+		update notice_text
+		set ntitle=#{ntitle}, ntcontent=#{ntcontent}, ntupdate=sysdate
+		where ntno=#{ntno} and nno=#{nno}
+	</update>
+
+	<!-- 게시글 조회수 -->
+	<update id="ncount">
+		update notice_text set ncount=ncount + 1 where
+		ntno=#{ntno} and nno=#{nno}
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="nremove">
+		delete from notice_text 
+		where ntno=#{ntno} and nno=#{nno}
+	</delete> 
+
+	<!-- 게시글 하나 읽어오기 -->
+	<select id="nread" resultType="NoticeText">
+		select antno, nno, ntno, ntitle, ntcontent, nickname, ncount, to_char(ntdate,'yy-mm-dd hh24:mi') ntdate, to_char(ntupdate,'yy-mm-dd hh24:mi') ntupdate
+		from notice_text natural join amember 
+		where ntno=#{ntno} and nno=#{nno}
+	</select>
+
+	<!-- 검색어 조회 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and ntitle like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and nickname like '%'||#{keyword}||'%'
+			</if>
+		</if>
+	</sql>
+
+	<!-- 노하우 게시판 리스트 출력 -->
+	<select id="klist" resultType="NoticeText">
+		select nno, ntno, ntitle, nickname, to_char(ntdate,'yy-mm-dd') ntdate,to_char(ntupdate,'yy-mm-dd hh24:mi') ntupdate , ncount 
+		from notice_text natural join amember 
+		where nno=1
+		<include refid="search"></include>
+		order by ntno desc
+	</select>
+	
+	<!-- 질문답변 게시판 리스트 출력 -->
+	<select id="qlist" resultType="NoticeText">
+		select nno, ntno, ntitle, nickname, to_char(ntdate,'yy-mm-dd') ntdate, to_char(ntupdate,'yy-mm-dd hh24:mi') ntupdate, ncount
+		from notice_text natural join amember 
+		where nno=2
+		<include refid="search"></include>
+		order by ntno desc
+	</select>
+	
+	<!-- 노하우 게시판 번호 출력 -->
+	<select id="klistcount" resultType="int">
+		select count(*) from notice_text natural join amember 
+		where nno=1
+		<include refid="search"></include>
+	</select>
+	<!-- 질문답변 게시판 번호 출력 -->
+	<select id="qlistcount" resultType="int">
+		select count(*) from notice_text natural join amember 
+		where nno=2
+		<include refid="search"></include>
+	</select>
 </mapper>

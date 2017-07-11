@@ -6,7 +6,10 @@
 		<typeAlias type="com.animal.domain.GroupVO" alias="groupVO"/>
 		<typeAlias type="com.animal.domain.GroupPersonVO" alias="grouppersonVO"/>
 		<typeAlias type="com.animal.domain.MemberVO" alias="member"/>
-  <typeAlias type="com.animal.domain.BlacklistVO" alias="blacklist"/>
-  <typeAlias type="com.animal.domain.NoticeTextVO" alias="noticetext"/>
+		<typeAlias type="com.animal.domain.BlacklistVO" alias="blacklist"/>
+		<typeAlias type="com.animal.domain.NoticeTextVO" alias="noticetext"/>
+		<typeAlias type="com.animal.domain.ReplyVO" alias="areply"/>
+		<typeAlias type="com.animal.domain.CenterVO" alias="center"/>
+		<typeAlias type="com.animal.domain.CenterReplyVO" alias="centerreply"/>
 	</typeAliases>
 </configuration>

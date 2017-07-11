@@ -1,123 +1,156 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@include file="../base/main.jsp"%>
 
-<head>
+<script type="text/javascript">
+	//댓글입력 함수
+	function areplybutton() {
+		var rcontent = $("#rcontent").val();
+		var antno = "${noticetextVO.antno}"
+			$.ajax({
+				type : "post",
+				url : "/areply/rinfo",
+				headers : {
+					"Content-Type" : "application/json"
+				},
+				dateType : "text",
+				data : JSON.stringify({antno : antno, rcontent : rcontent
+				}),
+				success : function() {
+					document.areply_confirm_form.rcontent.value = "";
+					listareplyRest("1");
+				}
+			});
+		}//areplybutton
+	
+	// 댓글 목록 출력 
+	function listareplyRest(num) {
+		$.ajax({
+			type : "get",
+			url : "/areply/all/${noticetextVO.antno}/"+num,
+			success : function(result) {
+				// responseText가 result에 저장됨.
+				$("#listareply").html(result);
+			}
+		});
+	}//listareplyRest
+	
+	//댓글수정 함수
+	 function showReplyModify(arno){
+		$.ajax({
+			type : "get",
+			url: "/areply/detail/"+arno,
+			success: function(result){
+				$(".updateareply"+arno).html(result);
+			}
+		})
+	}//showReplyModify
+	
+	//댓글수정 닫기 함수
+	function closedReply(arno){
+		$(".btnModify"+arno).attr("onclick","showReplyModify("+arno+")");
+		$(".btnModify"+arno).val("수정");
+		$(".updateareply"+arno).html("");
+	}//closedReply
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	$(document).ready(function() {
+		var formObj = $("form[role='form']");
+		//게시글 수정 버튼
+		$("#updatebutton").on("click", function() {
+			formObj.attr("action", "/aboard/qupdate");
+			formObj.attr("method", "get");
+			formObj.submit();
+		});
+		
+		//게시글 삭제 버튼
+		$("#deletebutton").on("click", function() {
+			formObj.attr("action", "/aboard/qremove");
+			formObj.submit();
+		});
+		
+		//리스트 이동 버튼
+		$("#listbutton ").on("click", function() {
+			formObj.attr("method", "get");
+			formObj.attr("action", "/aboard/qlist");
+			formObj.submit();
+		});
+		
+		//댓글입력
+		$("#areplybutton").click(function() {
+			if(document.areply_confirm_form.rcontent.value == ""){
+				alert("댓글을 입력해주세요")
+				document.areply_confirm_form.rcontent.focus();
+			}else{
+				areplybutton();
+			}
+		});
+		
+		//댓글목록
+		listareplyRest("1");
+	});//ready
+	
+</script>
 
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Forms
-                        </h1>
-              
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-6">
-
-                        <form role="form">
-
-                            <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                      <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+	<form role="form" action="qupdate" method="post">
+		<input type='hidden' name='page' value="${cri.page}"> 
+		<input type='hidden' name='perPageNum' value="${cri.perPageNum}"> 
+		<input type='hidden' name='searchType' value="${cri.searchType}"> 
+		<input type='hidden' name='keyword' value="${cri.keyword}"> 
+		<input type='hidden' name='antno' value="${noticetextVO.antno}" id="antno">
+		<input type='hidden' name='ntno' value="${noticetextVO.ntno}">
+		<input type='hidden' name='nno' value="${noticetextVO.nno}">
+	</form>
+	
+	<div id= "wrapper">
+		<div id="page-wrapper">
+			<!-- 게시판 헤더 -->
+			<div class="container-fluid">
+				<h1 class="page-header">게시판</h1>
+			</div>
+			<div class="panel panel-yellow" style="width: 1000px; margin: 0 auto;">
+				<div class="panel-heading">
+					<h3 class="panel-title">글 내용</h3>
+				</div>
+				<br>
+				<!-- 게시판 상세 내용 보기 -->
+				<div class="panel-body">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<label>제목</label> <input class="form-control" name="ntitle" value="${noticetextVO.ntitle}" readonly><br>
+							<label>작성자 <input class="form-control" name="nickname" id="nickname" value="${noticetextVO.nickname}" style="width: 100px;" readonly></label>&nbsp;
+							<label>작성일자 <input class="form-control" name="ntdate" value="${noticetextVO.ntdate}" style="width: 150px" readonly></label>&nbsp;
+							<label>조회수 <input class="form-control" name="ncount" value="${noticetextVO.ncount}" style="width: 100px" readonly></label>
+						</div>
+						<div class="form-group">
+							<label>내용</label>
+							<div class="form-control" id="ntcontent" style="overflow-y:scroll; width:970px; height:500px;">${noticetextVO.ntcontent}</div>
+						</div>
+						<div class="form-group">
+							<c:if test="${noticetextVO.nickname == user}">
+								<button type="submit" class="btn btn-success" id="updatebutton">수정</button>
+								<button type="submit" class="btn btn-danger" id="deletebutton">삭제</button>
+								<button type="submit" class="btn btn-info" id="listbutton">리스트</button>
+							</c:if>
+							<c:if test="${noticetextVO.nickname != user}">
+								<button type="submit" class="btn btn-info" id="listbutton">리스트</button>
+							</c:if>
+						</div>
+						
+					<!-- 댓글 작성 폼 -->
+					<form name="areply_confirm_form">
+						<div class="well" style="width: 970px">
+							<div class="form-group">
+								<label>댓글:</label>
+								<textarea class="form-control" rows="3" name="rcontent" id="rcontent" placeholder="댓글을 작성해주세요" style="resize: none"></textarea>
+							</div>
+							<div class="form-group">
+								<button type="button" class="btn btn-primary" id="areplybutton">댓글 작성</button>
+							</div>
+						</div>
+					</form>
+						<!-- 댓글 리스트 출력 -->
+						<div id="listareply"><hr></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

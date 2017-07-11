@@ -1,123 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@include file="../base/main.jsp"%>
 
-<head>
+<!-- include summernote css/js-->
+<link href="/resources/summernote/dist/summernote.css" rel="stylesheet">
+<script src="/resources/summernote/dist/summernote.js"></script>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<!-- summer note korean language pack -->
+<script src="/resources/summernote/dist/lang/summernote-ko-KR.js"></script>
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+<script type="text/javascript">
+	//질문답변 게시판 수정 창 유효성 검사
+	function question_modify_check(){
+		var ntcontent = $('.summernote').summernote('code');
+		$('#ntcontent').val(ntcontent);
+		
+		if(document.question_modify_form.ntitle.value == ""){
+			alert('제목을 입력하세요.');
+			document.question_modify_form.ntitle.focus();
+		}else if(ntcontent == ""){
+			alert('내용을 입력하세요.');
+		}else{
+			document.question_modify_form.submit();
+		}
+	}//question_modify_check
+	
+		//summernote
+		$(function() {
+			$('.summernote').summernote({
+				height : 350,
+				lang : 'ko-KR',
+				callbacks : {
+					onImageUpload : function(files, editor, welEditable) {
+						sendFile(files[0], editor, welEditable);
+					}
+				}
+			});
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
+			$('.summernote').summernote('code', '${noticetextVO.ntcontent}');
+		});
 
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Forms
-                        </h1>
-              
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-6">
-
-                        <form role="form">
-
-                            <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                      <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+		function sendFile(file, editor, welEditable) {
+			data = new FormData();
+			data.append("image", file);
+			$.ajax({
+				data : data,
+				type : "POST",
+				// 이미지 업로드하는 파일 path 
+				url : '/aboard/imageUpload',
+				cache : false,
+				contentType : false,
+				processData : false,
+				success : function(url) {
+					alert(url);
+					$(".summernote").summernote('insertImage', url);
+				}
+			});
+		}
+</script>
+	<div id= "wrapper">
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<h1 class="page-header">게시판</h1>
+			</div>
+			<div class="panel panel-yellow" style="width: 1000px; margin: 0 auto;">
+				<div class="panel-heading">
+					<h3 class="panel-title">글 수정</h3>
+				</div>
+				<br>
+				<div class="panel-body">
+					<div class="col-lg-12">
+						<form role="form" action="qupdate" method="post" name="question_modify_form">
+						<input type='hidden' name='ntno' value="${noticetextVO.ntno}"> 
+						<input type='hidden' name='nno' value="${noticetextVO.nno}"> 
+						<input type="hidden" id="ntcontent" name="ntcontent">
+							<div class="form-group">
+									<label>제목</label>
+										<input class="form-control" name="ntitle" value="${noticetextVO.ntitle}">
+							</div>
+							<div class="form-group">
+									<label>작성자 
+										<input class="form-control" name="nickname" value="${noticetextVO.nickname}" style="width: 100px" readonly></label>	
+							</div>
+							<div class="form-group">
+									<label>내용</label><input class="summernote">
+							</div>
+							<div class="form-group">
+								<button type="button" class="btn btn-success" onclick="question_modify_check()">수정</button>
+								<a href='/aboard/qinfo?ntno=${noticetextVO.ntno}&nno=${noticetextVO.nno}&page=${cri.page}&perPageNum=${cri.perPageNum}&searchType${cri.searchType}&keyword=${cri.keyword}'>
+									<button type="button" class="btn btn-danger">취소</button>
+								</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
