@@ -4,12 +4,23 @@ import java.util.List;
 
 import com.animal.domain.SearchCriteria;
 import com.animal.domain.ShopVO;
+import com.animal.domain.Criteria;
 
 public interface AdminShopService {
-	public List<ShopVO> listShop(SearchCriteria cri);
-	public int shopCount(SearchCriteria cri);
+	//브라우저 사용자 (고객)입장에서 메소드를 정의
+
 	
-	public ShopVO selectShop(int shno);
-	public int updateShop(ShopVO vo);
-	public int deleteShop(List<Integer> list);
+	public void insert(ShopVO vo)throws Exception;
+	public void modify(int shno,String shparking,String shsite,String shtime,
+			String shtel,String shaddr,String shname,String shtype)throws Exception;//수정)throws Exception;
+	public void remove(int shno)throws Exception;
+
+	public ShopVO read(int shno)throws Exception;
+	public List<ShopVO> listAll()throws Exception;
+	public List<ShopVO> listCriteria(Criteria cri)throws Exception;
+	public int listCountCriteria(Criteria cri)throws Exception;
+	
+	public int listSearchCount(SearchCriteria cri)throws Exception;
+	public List<ShopVO> listSearchCriteria(SearchCriteria cri) throws Exception;
+	
 }

@@ -11,5 +11,6 @@
 		<typeAlias type="com.animal.domain.ReplyVO" alias="areply"/>
 		<typeAlias type="com.animal.domain.CenterVO" alias="center"/>
 		<typeAlias type="com.animal.domain.CenterReplyVO" alias="centerreply"/>
+		<typeAlias type="com.animal.domain.ShopVO" alias="shop"/>
 	</typeAliases>
 </configuration>

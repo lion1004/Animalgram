@@ -70,6 +70,27 @@ public class PageMaker { //페이징에 관련된 속성 저장
 		return uriComponents.toUriString();
 	}
 	
+	public String modifymakeQuery(){
+		
+		UriComponents uriComponents=
+				UriComponentsBuilder.newInstance()
+				.queryParam("shno=")
+				.build();
+		
+		return uriComponents.toUriString();//"?page=1&perPageNum=5"
+	}//수정 페이지 쿼리문만드는
+	public String deletemakeQuery(){
+		
+		UriComponents uriComponents=
+				UriComponentsBuilder.newInstance()
+				.queryParam("shno=")
+				.build();
+		
+		return uriComponents.toUriString();//?shno=
+	}//삭제쿼리문만드는
+	
+	
+	
 	private String encoding(String keyword){
 		if(keyword == null || keyword.trim().length() == 0){
 			return "";

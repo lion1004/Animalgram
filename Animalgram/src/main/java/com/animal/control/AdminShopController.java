@@ -20,57 +20,98 @@ import com.animal.domain.SearchCriteria;
 import com.animal.domain.ShopVO;
 import com.animal.service.AdminShopService;
 
+
 @Controller
-@RequestMapping("/admin/*")
+@RequestMapping("/shop")
 public class AdminShopController {
 	
 	@Inject
-	AdminShopService service;
-	
-	@RequestMapping("/shop_list")
-	public String shopList(@ModelAttribute("cri") SearchCriteria cri,Model model,
-			RedirectAttributes rttr, HttpSession session){
+	private AdminShopService service;
+
+	//제휴매장추가페이지
+	@RequestMapping("/addshop")
+	public String addshopGET()throws Exception{
 		
-		model.addAttribute("list",service.listShop(cri));
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.shopCount(cri));
-		model.addAttribute("pageMaker",pageMaker);
-
+		return "admin/shop/ad_shop_add";
+	}
+	//제휴매장추가페이지(DB입력)
+	@RequestMapping(value="/addshop",method=RequestMethod.POST)
+	public String addshopPOST(ShopVO vo,RedirectAttributes attr)throws Exception{
+		service.insert(vo);//insert문 호출
+		
+		attr.addFlashAttribute("msg","SUCCESS"); //"msg"키값으로 "success"전달.
+		
+		
+		return "redirect:/shop/ad_list";//밑에밑에 ad_list메소드 호출
+	}
+	
+	
+	
+	
+	//제휴매장수정페이지
+	@RequestMapping("/modifyshop")
+	public String modifyshop(int shno,String shparking,String shsite,String shtime,
+			String shtel,String shaddr,String shname,String shtype, RedirectAttributes attr)throws Exception{//수정버튼클릭
+		
+		service.modify(shno,shparking,shsite,shtime
+				,shtel,shaddr,shname,shtype);
+		attr.addFlashAttribute("msg","SUCCESS");
+		
+		return "redirect:/shop/ad_list";
+	}
+	
+	
+	
+	//유저입장에서 전체리스트 불러오기
+	@RequestMapping(value="/list",method=RequestMethod.GET)
+	public String userlist(@ModelAttribute("cri") SearchCriteria cri,Model model)throws Exception{
+		
+		model.addAttribute("list",service.listSearchCriteria(cri));
+			PageMaker maker=new PageMaker();
+				maker.setCri(cri);
+				maker.setTotalCount(service.listSearchCount(cri));
+		        
+				model.addAttribute("pageMaker",maker);
+		return "user/shop/shop_list";
+	}//list
+	
+	//어드민입장에서 전체리스트 불러오기
+	@RequestMapping("/ad_list")
+	public String adminlist(@ModelAttribute("cri") SearchCriteria cri,Model model)throws Exception{
+		//List<ShopVO> list=service.listCriteria(cri);
+		
+		
+		//model.addAttribute("list",list);
+		model.addAttribute("list",service.listSearchCriteria(cri));
+		PageMaker maker=new PageMaker();
+			maker.setCri(cri);
+			maker.setTotalCount(service.listSearchCount(cri));
+	        
+			model.addAttribute("pageMaker",maker);
 		return "admin/shop/ad_shop_list";
-	}
+	}//list
 	
-	@RequestMapping("/shop_delete")
-	public @ResponseBody String customDelete(@RequestParam(value="shno", required=true)List<Integer>list){
-		if(service.deleteShop(list)>0){
-			return "삭제 성공";
-		}else{
-			return "삭제 실패";
-		}
-	}
-	
-	@RequestMapping(value="/shop_modify",method=RequestMethod.GET )
-	public String shopUpform(SearchCriteria cri,Model model,int shno){
-		model.addAttribute("cri",cri);
-		ShopVO vo = service.selectShop(shno);
-		model.addAttribute("shop",vo);
-		return "admin/shop/ad_shop_modify";
-	}
-	
-	@RequestMapping(value="/shop_modify",method=RequestMethod.POST)
-	public String shopUpdate(RedirectAttributes rttr,SearchCriteria cri,
-			ShopVO vo){
-		if(service.updateShop(vo)==1){
+	  //삭제처리
+    @RequestMapping("/deleteshop")
+    public String delete(int shno,RedirectAttributes attr)throws Exception{ //int shno, Model model
 
-			rttr.addAttribute("page",cri.getPage());
-			rttr.addAttribute("perPageNum",cri.getPerPageNum());
-			rttr.addAttribute("keyword",cri.getKeyword());
-			rttr.addAttribute("searchType",cri.getSearchType());
-			rttr.addFlashAttribute("msg",vo.getShno()+"번 샵 수정");
-			return "redirect:/admin/shop_list";
-		}else{
-			rttr.addFlashAttribute("msg","수정 실패");
-			return "redirect:/admin/shop_modify";
-		}
-	}
+    	
+    	service.remove(shno);
+    	attr.addFlashAttribute("msg","SUCCESS");
+    	
+    	
+    	
+    	
+       return "redirect:/shop/ad_list";//이동 JSP
+    }//delete
+    
+
+    
+  
+    
+    
+    
+    
+
+  
 }

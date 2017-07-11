@@ -377,26 +377,137 @@ create sequence blacklist_seq
 
 select * from blacklist;
 
-drop table shop;
-create table shop(--샵DB
-   shno number primary key, --샵번호
-   shtype varchar2(30) not null, --샵종류
-   shname varchar2(50) not null, --샵이름
-   shaddr varchar2(100) not null, --샵주소
-   shtel  varchar2(30) not null, --샵전화번호
-   shtime varchar2(50) not null, --샵운영시간
-   shsite varchar2(30) not null, --샵위치
-   shparking varchar2(20) not null --샵주차장유무
+--shop
+--sitehospital.sql
+
+
+drop table tbl_shop;
+--테이블삭제
+
+create table tbl_shop(--테이블생성
+ shno number primary key,          --병원번호
+ shtype varchar2(20) not null,     --병원타입
+ shname varchar2(40) not null,     --병원이름
+ shaddr varchar2(100) not null,    --병원주소
+ shtel varchar2(50) not null,      --병원전화번호
+ shtime varchar2(40) not null,     --병원영업시간
+ shsite varchar2(300) not null,    --병원 좌표
+ shparking varchar2(100) not null  --병원주차가능여부
 );
 
-drop sequence shop_seq; --샵 번호 시퀀스
-create sequence shop_seq
-   start with 1
-   increment by 1
-   nocycle
-   nocache;
+drop sequence shop_seq;--shno에 대한시퀀스삭제
+create sequence shop_seq--shno에 대한시퀀스생성 
+	start with 1
+	increment by 1
+	nocycle
+	nocache;
+	
+	
+	--SampleDATA--
+	
+	--서울--
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+  values (shop_seq.nextval,'애견미용','희망애견미용실','서울특별시 금천구 가산디지털1로 168','010-6818-4409','09:00~21:00','37.480056'||','||'126.882468','주차가능');
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+  values (shop_seq.nextval,'애견병원','사랑으로애견병원','서울특별시 영등포구 영중로 15','010-5252-6563','07:00~24:00','37.517152'||','||'126.904153','주차공간협소');
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+  values (shop_seq.nextval,'애견용품','내품에애견용품','서울특별시 강남구 역삼동 831-5','010-6785-4545','10:00~20:00','37.494635'||','||'127.030131','주차장공사중');
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견종합병원','아프지마애견병원','서울 서초구 이수역','010-3443-7656','9:30~20:30','37.484046'||','||'126.982225','주차장공사중');
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'종합동물병원','마음으로 종합병원','서울특별시 은평구 신사1동 23-4','010-3443-7656','9:30~20:30','37.598765'||','||'126.915167','주차장공사중');
+  
+  --경기--
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견용품','애견으로미용실','경기도 안양시 동안구 호계동','010-5959-5545','11:00~21:00','37.389652'||','||'126.951957','주차가능');
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견종합매장','우리애견미용실','경기도 수원시 수원역 2번출구','010-6757-1234','11:00~21:00','37.266441'||','||'127.002276','주차장공사중');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','깜찍한애견미용실','경기도 고양시 덕양구 원흥동 산5-1','010-2331-4542','09:00~19:00','37.653438'||','||'127.002276','주차장공사중');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견종합매장','아가종합매장','경기도 의정부시 금오동 469-3','010-6757-1234','11:00~21:00','37.750905'||','||'127.065856','주차장공사중');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','싱긋견미용실','경기도 수원시 수원역 2번출구','010-6757-1234','11:00~21:00','37.266441'||','||'127.002276','주차장공사중');
+  
 
-select * from shop;
+
+
+--강원도
+
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견병원','한아름애견병원','강원도 춘천시 효제길 33','010-7865-9812','09:30~22:00','37.871320'||','||'127.736922','주차공간협소');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','맛깔난애견미용실','강원도 홍천군 화촌면 구룡령로 1171-1','010-8967-4577','08:00~23:00','37.749958'||','||'128.056982','주차가능');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','화끈한 애견 미용일','강원도 홍천군 홍천읍 진리로 32','010-1211-7844','09:00~23:30','37.693339'||','||'127.889234','주차공간협소');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견병원','건강한애견병원','강원도 강릉시 교1동 1890-4 ','010-9099-9986','08:30~24:00','37.762364'||','||'128.876183','주차가능');
+
+
+--충청
+
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견병원','아프지마병원','충청남도 천안시 서북구 성정동 687-8','010-4625-1812','09:30~22:00','36.819335'||','||'127.141869','주차공간협소');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','이뻐저라얍애견미용실','충청남도 아산시 온양1동 85-34','010-8237-0017','08:00~20:00','36.782170'||','||'127.005171','주차가능');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','이머리야 애견 미용일','대전광역시 서구 도산로370번길 55','010-1231-7844','09:00~21:30','36.335492'||','||'127.395018','주차가능');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견용품','이것두좋아애견용품','대전광역시 중구 은행선화동 3-8','010-9009-1986','08:30~24:00','36.331829'||','||'127.425242','주차장공사중');
+
+--전라도
+
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견병원','전통한마음애견병원','전라북도 전주시 완산구 효자동3가 456-2','010-4025-1822','09:00~22:00','35.821234'||','||'127.104855','주차공간협소');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','이건어떄애견미용실','전라북도 전주시 완산구 효자1동 692-1','010-8217-2237','08:00~21:00','35.803623'||','||'127.135170','주차가능');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','예술이야애견미용실','광주광역시 북구 군왕로 27','010-1891-7800','09:00~21:30','35.164107'||','||'126.930590','주차가능');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견병원','광주애견병원','광주광역시 남구 월산동 33','010-9123-6712','08:30~23:30','35.147323'||','||'126.903211','주차장공사중');
+
+
+--경상도
+--부산
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견병원','사나이한마음애견병원','부산광역시 연제구 연산2동 1453-4','010-4023-1122','09:00~22:00','35.179085'||','||'129.077086','주차공간협소');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','마살아있네애견미용실','부산광역시 해운대구 반여동 1190-1','010-8222-2210','08:00~21:00','35.203426'||','||'129.115749','주차가능');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','이런것도애견미용실','부산광역시 동래구 명안로46번마길 39','010-1891-7811','09:00~21:30','35.201518'||','||'129.107008','주차가능');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견용품','이쁜가시나애견용품','부산광역시 동래구 충렬대로108번길 85-16','010-9123-9732','08:30~21:30','35.202487'||','||'129.074010','주차장공사중');
+
+--울산
+
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견병원','인누와애견병원','울산광역시 효문동 303 평창리비에르3차아파트','010-4023-1122','09:00~22:00','35.553783'||','||'129.354974','주차공간협소');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','너무이뻐꼬집을래미용실','울산광역시 북구 진장동 834','010-8222-2113','08:00~22:00','35.557783'||','||'129.359311','주차가능');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견미용','울산대표애견미용실','울산광역시 중구 도화골15길 29','010-1891-8876','09:00~20:30','35.563392'||','||'129.332399','주차가능');
+  
+insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+values (shop_seq.nextval,'애견용품','울산만큼이쁜애견미용실','울산광역시 중구 남외동 434-9','010-9123-9732','08:30~21:30','35.569222'||','||'129.341112','주차장공사중');
+
+select * from tbl_shop;
 
 drop table fastqa;
 create table fastqa(--FAQDB

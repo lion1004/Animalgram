@@ -1,57 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="adminShop">
- <sql id="search">
-   <if test="searchType != null">
-    <if test="searchType == 'shno'.toString()">
-     where shno like '%'||#{keyword}||'%'
-    </if>
-    <if test="searchType == 'shtype'.toString()">
-     where shtype like '%'||#{keyword}||'%'
-    </if>
-    <if test="searchType == 'shname'.toString()">
-     where shname like '%'||#{keyword}||'%'
-    </if>
-    <if test="searchType == 'shaddr'.toString()">
-     where shaddr like '%'||#{keyword}||'%'
-    </if>
-   </if>
-  </sql>
- 
-  
-  <!-- 리스트 -->
- <select id="listShop" resultType="com.animal.domain.ShopVO">
-  select *
-  from shop
-  <include refid="search"></include>
-  order by shno desc
- </select>
- 
- <select id="shopCount" resultType="int">
-  select count(shno)
-  from shop
-  <include refid="search"></include>
- </select>
- 
- <select id="selectShop" resultType="com.animal.domain.ShopVO">
-  select * from shop
-  where shno=#{shno}
- </select>
- 
- <update id="updateShop">
-  update shop
-  set shaddr=#{shaddr}, shtel=#{shtel},shtime=#{shtime},
-      shsite=#{shsite}, shparking=#{shparking}
-  where shno=#{shno}
- </update>
- 
-<delete id="deleteShop">
-  delete from shop
-  <where>
-   shno in
-   <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
-    #{item.value}
-   </foreach>
-  </where>
- </delete>
+<mapper namespace="shop">
+<!-- 추가 -->
+  <insert id="insert">
+     insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+  					values(shop_seq.nextval,#{shtype},#{shname},#{shaddr},#{shtel},#{shtime},#{shsite},#{shparking})
+  </insert>
+<!-- insert into tbl_shop (shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking)
+                    values(shop_seq.nextval,'애견미용','희망애견미용실','서울 가산구 가산동 가가가 산산산','010-6808-7430','09:00~21:00','37.478693'||'-'||'126.881585','주차가능'); 
+     insert into tbl_board (bno,title,content,writer)
+                    values (tbl_board_seq.nextval, #{title}, #{content}, #{writer})-->
+<!-- 수정-->
+  <update id="update" >
+	update tbl_shop set shtype=#{shtype},shname=#{shname},shaddr=#{shaddr},shtel=#{shtel},shtime=#{shtime},shsite=#{shsite},shparking=#{shparking} 
+	where shno=#{shno} 
+  </update>
+  <delete id="delete">
+  	delete from tbl_shop
+  	where shno=#{shno}
+  </delete>
+<!-- 한개 (전체)정보불러오기-->
+  <select id="select" resultType="shop">
+  	select * from tbl_shop
+  	where shno=#{shno}
+  </select>
+<!-- 전체정보불러오기-->
+  <select id="selectAll" resultType="shop">
+  	select * from tbl_shop
+  </select>
+<!-- Count -->
+  <select id="count" resultType="int">2
+       select count(*) 
+       from tbl_shop
+       
+   </select>
+   
+   
+   <!-- criteria 적용 (검색까진아닌)-->
+    <!-- 리스트 -->
+    <select id="listPage" resultType="shop">
+     select * from tbl_shop 
+                        
+  </select>
+  <!-- 게시글수파악  (컨트롤에서 pamaker쓸떄 부른다)-->
+   
+     <select id="countPaging" resultType="int">
+     select count(*) from tbl_shop
+     </select>
+     
+     <!-- 지역검색  -->
+	<sql id="search">
+		<if test="searchType != null">
+	 		<if test="searchType == 't'.toString()"> 
+				where shaddr like '%'||#{keyword}||'%'
+			</if>
+		</if>	
+	</sql>
+	<!-- 키워드가 포함되있는 주소 검색 -->
+	<select id="listSearch" resultType="shop">
+		select shno,shtype,shname,shaddr,shtel,shtime,shsite,shparking 
+		from tbl_shop
+		<include refid="search"></include>
+	</select>
+     
+     <!-- 서치값 수 -->
+    <select id="listSearchCount" resultType="int">
+    	select count(*) from tbl_shop
+    	<include refid="search"></include>
+    </select> 
+     
+     
+     
 </mapper>
