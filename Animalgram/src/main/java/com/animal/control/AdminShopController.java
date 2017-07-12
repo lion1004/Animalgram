@@ -49,18 +49,17 @@ public class AdminShopController {
 	
 	
 	//제휴매장수정페이지
-	@RequestMapping("/modifyshop")
-	public String modifyshop(int shno,String shparking,String shsite,String shtime,
-			String shtel,String shaddr,String shname,String shtype, RedirectAttributes attr)throws Exception{//수정버튼클릭
+	@RequestMapping(value="/modifyshop",method=RequestMethod.POST )
+	public String modifyshop(ShopVO vo,RedirectAttributes attr)throws Exception{//수정버튼클릭
 		
-		service.modify(shno,shparking,shsite,shtime
-				,shtel,shaddr,shname,shtype);
+		service.modify(vo);
 		attr.addFlashAttribute("msg","SUCCESS");
 		
 		return "redirect:/shop/ad_list";
+	
+	
+	
 	}
-	
-	
 	
 	//유저입장에서 전체리스트 불러오기
 	@RequestMapping(value="/list",method=RequestMethod.GET)

@@ -143,8 +143,8 @@ span:hover + p.arrow_box {
 									<th>매장 분류</th>
 									<th>주소</th>
 									<th >전화번호</th>
-									<th>상세보기(약도 및 영업시간 등등)</th>
-									<th>추가</th>
+									<th>상세보기<br>(약도 및 영업시간 등등)</th>
+									<th>수정</th>
 									<th>삭제버튼</th>
 								</tr>
 							</thead>
@@ -264,11 +264,100 @@ span:hover + p.arrow_box {
 											</div>
 										</div>
 									</div>
+									
 										
 						<!-- ★★★★★★★★★수정창★★★★★★★★ -->
 						
+						<script type="text/javascript">
+									   
+										/* 한글만 입력 유효성 */
+									    var korExp=/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]$/;
+									    /* 전화번호  입력 유효성 */
+									    var telExp = /^\d{1,3}-\d{3,4}-\d{4}$/;
+									    /* 운영시간  유효성 */
+										var timeExp =/^\d{1,2}:\d{1,2}~\d{1,2}:\d{1,2}$/;
+									    /* 주소 */
+									    var addrExp=/[ㄱ-ㅎ|가-힣|0-9]$/;
+
+
+										//유효성 체크 function
+									    function modifycheck() {
+											//편의를위해 치환.
+											alert('hello');
+									    	var m = document.modi;
+									    	
+									        if (m.shtype.value == "") {//매장타입 null값체크
+									           alert("매장타입을 입력하세요.");
+									            m.shtype.focus();
+									        } else if(!korExp.test(m.shtype.value)){//매장타입 한글체크
+									        	alert("매장타입엔 한글만 입력가능합니다.(2~15자리수)");
+									        	m.shtype.focus();
+									        }else if(m.shname.value==""){//매장이름 null값체크
+												alert("매장이름을 입력하세요.")        	
+									        	
+									        	m.mshname.focus();
+									        }else if(!korExp.test(m.shname.value)){//매장 타입 한글체크
+									        	alert("매장이름엔 한글만 입력가능합니다.(2~10자리수)");
+									        	m.mshtype.focus();
+									        }else if(m.shaddr.value==""){//주소 null체크
+												alert("주소를 입력하세요.");        	
+									           m.shaddr.focus();
+									        	
+									        }else if(!addrExp.test(m.shaddr.value)){ //주소 한글 체크
+									        	
+									        	alert("주소에는 한글과 숫자만 입력가능합니다.");
+									        	
+									           m.shaddr.focus();
+									        	
+									        }else if(m.shtel.value==""){	//전화번호 null값체크
+												alert("전화번호를 입력하세요.")        	
+									        	alert("ex)010-1234-1234")
+									           m.shtel.focus();
+									       
+									        }else if(!telExp.test(m.shtel.value)){//주소 양식및 숫자체크
+									        	
+												alert("양식에 맞게 전화번호를 입력하세요.")
+												alert("ex)02-1234-1234 , 010-1234-1234")
+												
+									           m.mshtel.focus();
+									        }else if(m.shtime.value==""){//운영시간 null값체크
+												alert("운영시간을  입력하세요.")        	
+									           m.shtime.focus();
+									        	
+									        }else if(!timeExp.test(m.shtime.value)){//운영시간 양식및 숫자체크
+									        	
+												alert("운영시간을 양식에 맞게 입력하세요.");
+									        	alert("ex) ex)09:00~22:00");
+									        	
+									           f.mshtime.focus();
+									        }else if(m.shsite.value==""){//좌표값 null체크및 양식및 예시
+												alert("위치정보를 ','포함하여 입력하세요.")  
+												alert("ex)35.899437,128.638331")
+									           m.shsite.focus();
+									        	
+									        	
+									        }else if(m.shparking.value==""){//주차정보null값체크
+									           alert("주차정보를 입력하세요.");
+									           
+									           m.mshparking.focus();
+									        } else if (!korExp.test(m.shparking.value)) {//주차정보양식 및 한글체크
+									           alert("주차정보에 한글만 입력하세요.");
+									           m.shparking.focus();
+
+									        } else
+									        	
+									           m.submit(); //다됬을시 sumit으로 올려버림.
+									   
+									     }
+									    
+										
+									
+									</script>
+					
 						
 													<!-- Modal 어두워지게하는 .. -->
+						<form name=modi method="POST" action="modifyshop">
+												
 										   <div class="modal fade" id="myModal2" role="dialog">
 												<div class="modal-dialog">
 
@@ -277,43 +366,49 @@ span:hover + p.arrow_box {
 														<div class="modal-header" style="padding: 35px 50px;">
 														<!-- 상단 클로즈버튼 -->
 															<button type="button" class="close" data-dismiss="modal">&times;</button>
-															<h4>천천히~위치확인하기 ⌒⌒</h4>
+															<h4>★제휴매장정보 수정창★</h4>
 														</div>
 														<div class="modal-body" style="padding: 40px 50px;"> 
 															<!--■■■■■■■■■■맵 !! -->
 						
 					<fieldset>
                       	<table>
+                      	<tr>
+              					
+              					<td>
+              					<input class="form-control" placeholder="ex)애견미용,동물병원" type=hidden name="shno" id="shno" size="20">
+              					</td>
+              			</tr>
                       	  <tr>
                       	        <td align="center">매장타입:</td>
-      							<td> <input class="form-control" placeholder="ex)애견미용,동물병원" type="text" id="mshtype" size="20"></td>
+      							<td> <input class="form-control" placeholder="ex)애견미용,동물병원" type="text" name="shtype" id="shtype" size="20"></td>
  						</tr>
 						<tr> 
 						<td align="center">제휴매장 이름: </td>
-						<td><input class="form-control" placeholder="ex)제휴매장 상호명" type="text" id="mshname" size="20">
+						<td><input class="form-control" placeholder="ex)제휴매장 상호명" type="text" name="shname" id="shname" size="20">
 								</td>
 						</tr>	
 						<tr>
                            	<td align="center">주소:</td>
                            	<td>
-           						<input class="form-control" placeholder="ex)서울 구로구 구로동" type="text" id="mshaddr" size="20">
+           						<input class="form-control" placeholder="ex)서울 구로구 구로동" name="shaddr"  type="text" id="shaddr" size="20">
            					</td>
                         </tr>
                         <tr>
                            		<td align="center">전화번호:</td>
                            		<td>
-           						<input class="form-control" placeholder="ex)010-6808-1234 '-'포함 " type="text" id="mshtel" size="20">
+           						<input class="form-control" placeholder="ex)010-6808-1234 '-'포함 " name="shtel" type="text" id="shtel" size="20">
            						</td>
                         </tr>
                            		<tr>
                            		<td align="center">운영시간:</td>
                            		<td>
-           						<input class="form-control" placeholder="ex)07:00~21:00 '~'포함 " type="text" id="mshtime" size="20"></td>
+           						<input class="form-control" placeholder="ex)07:00~21:00 '~'포함 " name="shtime" type="text" id="shtime" size="20"></td>
                         </tr>
                         <tr>
                            		<td align="center">위치정보:</td>
                            		<td>
-           						<input class="form-control" placeholder="35.899437-128.638331" type="text" id="mshsite" size="20">
+           						<input class="form-control" placeholder="35.899437-128.638331" name="shsite" type="text" id="shsite" size="20">
            						</td>
            						<td>
            						<b><a href="https://www.google.co.kr/maps/@37.529703,126.963843,14z" target="_blank">※좌표수정시, <br>※클릭하여 좌표 보기.</a></b>
@@ -322,23 +417,17 @@ span:hover + p.arrow_box {
                         <tr>
                            		<td align="center">주차유무:</td>
                            		<td>
-           						<input class="form-control" placeholder="ex)주차가능,주차공간협소" type="text" id="mshparking" size="20">
+           						<input class="form-control" placeholder="ex)주차가능,주차공간협소" type="text" name="shparking" id="shparking" size="20">
               					</td>
                         </tr>
-              			<tr>
-              					<td>
-              					</td>
-              					<td>
-              					<input class="form-control" placeholder="ex)애견미용,동물병원" type="hidden" id="mshno" size="20">
-              					</td>
-              			</tr>
+              			
                       </table>
                                
                                 
                                
                                 <!-- Change this to a button or input when using this as a form -->
                                 <!-- 수정버튼 -->
-                                <button type="submit" class="btn btn-lg btn-success btn-block" id="modify-btn-primary">수정</button><br>
+                                <button type="button" class="btn btn-lg btn-success btn-block" id="modify-btn-primary" onclick=modifycheck();>수정</button><br>
                                 <!-- 나가기버튼 -->
                                 <a href="index.html" class="btn btn-danger btn-default pull-right" data-dismiss="modal">나가기
 																<span class="glyphicon glyphicon-remove"></span></a>
@@ -354,8 +443,8 @@ span:hover + p.arrow_box {
 
 												</div>
 											</div>
-											
-						
+											</form>
+												
 						<!-- ★★★★★★★삭제버튼★★★★★★ -->
 												<!-- Modal 어두어지게하는..-->
 										   <div class="modal fade" id="myModal3" role="dialog">
@@ -509,14 +598,14 @@ span:hover + p.arrow_box {
 		 		
 		 	
 	   				/* 수정폼에 띄울 값들을 입력 */	   	   
-			      	  $("#mshtype").val(infoshtype+"");
-			      	  $("#mshname").val(infoshname+"");
-			      	  $('#mshaddr').val(infoshaddr+"");
-			      	  $("#mshtel").val(infoshtel+"");
-			      	  $("#mshtime").val(infoshtime+"");
-			      	  $("#mshsite").val(infoshsite+"");
-			      	  $("#mshparking").val(infoshparking+"");
-		 	      	  $("#mshno").val(infoshno+"");
+			      	  $("#shtype").val(infoshtype+"");
+			      	  $("#shname").val(infoshname+"");
+			      	  $('#shaddr').val(infoshaddr+"");
+			      	  $("#shtel").val(infoshtel+"");
+			      	  $("#shtime").val(infoshtime+"");
+			      	  $("#shsite").val(infoshsite+"");
+			      	  $("#shparking").val(infoshparking+"");
+		 	      	  $("#shno").val(infoshno+"");
 	      	 
 	      	  
 	      	  
@@ -530,29 +619,6 @@ span:hover + p.arrow_box {
 	      });
 	  });
 	 
-	  //수정창안에 수정버튼
-			 $(function(){
-			 		      $('#modify-btn-primary').on(
-						"click",
-						function(event) {	
-					/*쿼리문 만듬(주소를 형성함 ) 
-					ex) localhost/modifyshop?shno=1&shparking=주차공간&....&shtype=애견미용
-					*/					
-							self.location = "modifyshop"
-								+ '${pageMaker.modifymakeQuery()}'+encodeURIComponent($('#mshno').val())
-								+ "&shparking="+ encodeURIComponent($('#mshparking').val())
-								+ "&shsite="+ encodeURIComponent($('#mshsite').val())
-								+ "&shtime="+ encodeURIComponent($('#mshtime').val())
-								+ "&shtel=" +encodeURIComponent($('#mshtel').val())
-								+ "&shaddr="+ encodeURIComponent($('#mshaddr').val())
-								+ "&shname=" + encodeURIComponent($('#mshname').val())
-								+ "&shtype="+ encodeURIComponent($('#mshtype').val());
-								
-						});
-				});
-	
-	
-
 
 
 	 

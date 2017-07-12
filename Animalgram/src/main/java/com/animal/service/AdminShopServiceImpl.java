@@ -23,11 +23,10 @@ public class AdminShopServiceImpl implements AdminShopService{
 	}
 
 	@Override
-	public void modify(int shno,String shparking,String shsite,String shtime,
-			String shtel,String shaddr,String shname,String shtype) throws Exception {
+	public void modify(ShopVO vo) throws Exception {
 		
 		
-		dao.update(shno,shparking,shsite,shtime,shtel,shaddr,shname,shtype);
+		dao.update(vo);
 		
 	}
 	

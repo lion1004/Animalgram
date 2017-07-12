@@ -11,8 +11,7 @@ public interface AdminShopService {
 
 	
 	public void insert(ShopVO vo)throws Exception;
-	public void modify(int shno,String shparking,String shsite,String shtime,
-			String shtel,String shaddr,String shname,String shtype)throws Exception;//수정)throws Exception;
+	public void modify(ShopVO vo)throws Exception;//수정)throws Exception;
 	public void remove(int shno)throws Exception;
 
 	public ShopVO read(int shno)throws Exception;

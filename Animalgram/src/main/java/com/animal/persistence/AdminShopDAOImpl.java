@@ -70,22 +70,12 @@ package com.animal.persistence;
 		}
 
 		@Override
-		public void update(int shno,String shparking,String shsite,String shtime,
-				String shtel,String shaddr,String shname,String shtype) throws Exception {
-			Map<String,Object> map=new HashMap<>();
-			map.put("shno", shno);
-			map.put("shparking", shparking);
-			map.put("shsite", shsite);
-			map.put("shtime", shtime);
-			map.put("shtel", shtel);
-			map.put("shaddr", shaddr);
-			map.put("shname", shname);
-			map.put("shtype", shtype);
+		public void update(ShopVO vo) throws Exception {
 			
 			
 
 			
-			sqlSession.update("shop.update",map);
+			sqlSession.update("shop.update",vo);
 			
 		}
 
