@@ -110,9 +110,7 @@ span:hover + p.arrow_box {
 		<div class='box-body'>
 		<!-- 검색타입 select  -->
 		<select name="searchType">
-						<option value="n"
-							<c:out value="${cri.searchType == null?'selected':''}"/>>
-							---</option>
+					
 						<option value="t"
 							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
 							지역</option>
