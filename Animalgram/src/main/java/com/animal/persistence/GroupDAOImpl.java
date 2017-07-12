@@ -19,8 +19,6 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@Override
 	public void insert(GroupVO vo) {
-		vo.setGstate("모집");
-		vo.setGimage("/resources/image/group/petsleep.jpg");
 		session.insert("group.makeGroup",vo);
 	}
 
@@ -41,14 +39,12 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@Override
 	public void update(GroupVO vo) {
-		vo.setGstate("모집");
-		vo.setGimage("/resources/image/group/petsleep.jpg");
-		session.update("",vo.getGno());
+		session.update("group.updateGroup",vo);
 	}
 
 	@Override
 	public void delete(int gno) {
-		session.delete("",gno);
+		session.delete("group.deleteGroupOne",gno);
 	}
 	
 }

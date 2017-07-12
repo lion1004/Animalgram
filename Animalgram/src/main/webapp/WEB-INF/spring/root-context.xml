@@ -44,7 +44,6 @@
    <!-- 트랜젝션 매니저 설정 -->
    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
    <property name="dataSource" ref="dataSource"></property></bean>
-   <tx:annotation-driven/>
    
    <!-- DAO객체 등록 -->
    <context:component-scan base-package="com.animal.persistence"/>

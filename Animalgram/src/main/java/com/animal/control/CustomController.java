@@ -37,7 +37,7 @@ import com.animal.util.MediaUtils;
 public class CustomController {
    
 	private static final Logger logger = LoggerFactory.getLogger(CustomController.class);
-	@Resource(name = "loadPath")
+	@Resource(name = "uploadPath")
 	  private String uploadPath;
   
 	@Inject

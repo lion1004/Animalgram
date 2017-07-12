@@ -19,7 +19,7 @@ public class CareController {
 	@Inject
 	CareService service;
 	
-	@Resource
+	@Resource(name = "uploadPath")
 	String path;
 
 	

@@ -42,12 +42,7 @@
     <beans:bean id="uploadPath" class="java.lang.String">
       <beans:constructor-arg value="O:/Kosta/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/Animalgram_local/resources/image/group"></beans:constructor-arg>
     </beans:bean>
-	
-		<beans:bean id="loadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\eomsuyong\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp3\wtpwebapps\Animalgram_local\resources\bootstrapPro\img\custom"></beans:constructor-arg>
-<!-- 		<beans:constructor-arg value="C:\eomsuyong\workspace\Animalgram_local\src\main\webapp\resources\bootstrapPro\img\custom"></beans:constructor-arg> -->
-	</beans:bean>   
-	
+	   
 	<context:component-scan base-package="com.animal.control" />
 	
 	

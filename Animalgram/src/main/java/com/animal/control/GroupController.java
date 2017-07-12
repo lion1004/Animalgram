@@ -19,7 +19,7 @@ public class GroupController {
 	@Inject
 	GroupService service;
 
-	@Resource
+	@Resource(name = "uploadPath")
 	String path;
 
 	@RequestMapping("/list")

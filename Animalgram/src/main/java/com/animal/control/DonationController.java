@@ -34,7 +34,7 @@ public class DonationController {
 	@Inject
 	private DonationAskService askservice;
 
-	@Resource
+	@Resource(name = "uploadPath")
 	String path;
 	
 	@RequestMapping("/donation_seller_list")
