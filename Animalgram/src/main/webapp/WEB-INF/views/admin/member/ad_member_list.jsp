@@ -90,7 +90,7 @@
                                         </td>
                                         <td>${amember.idmail}</td>
                                         <td>${amember.mpass}</td>
-                                        <td><fmt:formatDate value="${amember.mdate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
+                                        <td>${amember.mdate }
                                         </td>
                                         <td <c:out value="${amember.listCheck == 'true'?'class=slash':''}"/>>${amember.job }</td>
                                     </tr>
