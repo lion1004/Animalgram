@@ -152,7 +152,7 @@ public class CustomController {
 
      logger.info(cri.toString());
      System.out.println("service.modify(vo) :"+ vo);
-     System.out.println("vo.getcInfo:"+vo.getCinfo());
+     System.out.println("vo.getcInfo:"+vo.getCuinfo());
      service.modify(vo);
 
      rttr.addAttribute("page", cri.getPage());
