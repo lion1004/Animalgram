@@ -91,9 +91,11 @@ create table bill( --주문서DB
    bcount number not null, --주문갯수
    bmemo varchar2(200) not null,--추가 메모
    bsellcount number default '0', -- 주문 누적수량 
+   bdeli varchar2(50) not null, --주문 물품 받을 주소
    bdate date default sysdate,--주문일자
    bstate varchar2(20) default '상품준비중'
 );
+
 
 drop sequence bill_seq; --주문서 번호 시퀀스
 create sequence bill_seq
@@ -128,8 +130,9 @@ create table donation( --나눔DB
    mno number references amember(mno),--회원DB(회원번호)
    dtitle varchar2(100) not null,--나눔제목
    dinfo varchar2(1500) not null,--나눔글 내용
-   dadate date default sysdate,--나눔물품등록일자
-   dimage varchar2(100) --나눔 상품 이미지
+   ddate date default sysdate,--나눔물품등록일자
+   dimage varchar2(100), --나눔 상품 이미지
+   dstate varchar2(50) default '진행중'
 );
 
 drop sequence donation_seq; --나눔 번호 시퀀스
@@ -149,14 +152,14 @@ create table donation_join( --나눔참여DB
 
 select * from donation_join;
 
-drop table donation_ask; --bill
+drop table donation_ask; 
 create table donation_ask( --나눔요청DB
    dano number primary key,--나눔신청서번호
    dno number references donation(dno),--나눔DB(나눔번호)
    mno number references amember(mno),--회원DB(회원번호)
    damemo varchar2(200) not null, --나눔신청서 메모
-   dadate date default sysdate--나눔신청일자
-   dastate varchar2(20) default '상품준비중'
+   dadate date default sysdate,--나눔신청일자
+   dastate varchar2(50) default '상품준비중' --이게 원래 dadeli였다.
 );
 
 drop sequence donation_ask_seq; --나눔신청서 번호 시퀀스

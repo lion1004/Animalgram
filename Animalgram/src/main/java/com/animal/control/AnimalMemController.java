@@ -92,7 +92,7 @@ public class AnimalMemController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
-		return "redirect:/member/main";
+		return "redirect:/group/list";
 	}
 
 	// 마이페이지 이동
@@ -126,6 +126,20 @@ public class AnimalMemController {
 		
 		cri.setPage(1);
 		
+		if(tab != null && tab.equals("customUser"))
+			// 판매 현황 출력
+			{
+				cri.setPage(selectedPage);
+			}
+			model.addAttribute("customUser", aniservice.customUser(cri));	
+			maker = new PageMaker();
+			maker.setCri(cri);
+			maker.setTotalCount(aniservice.customUCount(cri));
+			model.addAttribute("cusUser_maker", maker);
+			model.addAttribute("select10",cri.getPage());
+			
+			cri.setPage(1);
+		
 		 if(tab != null && tab.equals("training"))
 		// 훈련 현황 출력
 		{
@@ -140,6 +154,51 @@ public class AnimalMemController {
 		model.addAttribute("select2",cri.getPage());
 		
 		cri.setPage(1);
+		
+		if(tab != null && tab.equals("donation_now"))
+			// 나눔 현황 출력
+			{
+				 cri.setPage(selectedPage);
+		    }
+			 
+			model.addAttribute("donation_now",aniservice.donation_now(cri));		
+			maker = new PageMaker();
+			maker.setCri(cri);
+			maker.setTotalCount(aniservice.donation_now_count(cri));
+			model.addAttribute("donation_page",maker);
+			model.addAttribute("select11",cri.getPage());
+			
+			cri.setPage(1);
+		
+			if(tab != null && tab.equals("donation_check"))
+				// 나눔 현황 출력
+				{
+					 cri.setPage(selectedPage);
+			    }
+				 
+				model.addAttribute("donation_check",aniservice.donationCheck(cri));		
+				maker = new PageMaker();
+				maker.setCri(cri);
+				maker.setTotalCount(aniservice.donationCheckCount(cri));
+				model.addAttribute("donation_check_maker",maker);
+				model.addAttribute("select12",cri.getPage());
+				
+				cri.setPage(1);
+			
+			if(tab != null && tab.equals("donation_ok"))
+					// 나눔 현황 완료 출력
+					{
+						 cri.setPage(selectedPage);
+				    }
+					 
+					model.addAttribute("donation_ok",aniservice.donationCheckOk(cri));		
+					maker = new PageMaker();
+					maker.setCri(cri);
+					maker.setTotalCount(aniservice.donationCheckCountOK(cri));
+					model.addAttribute("donation_ok_maker",maker);
+					model.addAttribute("select13",cri.getPage());
+					
+					cri.setPage(1);
 		
 		if(tab != null && tab.equals("training_select_pro"))
 			// 훈련 현황 출력 (전문가용)

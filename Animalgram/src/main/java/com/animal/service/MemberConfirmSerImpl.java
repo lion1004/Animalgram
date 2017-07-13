@@ -1,5 +1,6 @@
 package com.animal.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -31,7 +32,7 @@ public class MemberConfirmSerImpl implements MemberConfirmSer{
 	}
 
 	@Override
-	public String foundId(MemConfirmVO vo) throws Exception {		// 아이디 찾기
+	public List<String> foundId(MemConfirmVO vo) throws Exception {		// 아이디 찾기
 		return dao.idFound(vo);
 	}
 

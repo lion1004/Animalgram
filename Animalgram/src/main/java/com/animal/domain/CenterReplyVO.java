@@ -6,13 +6,14 @@ public class CenterReplyVO {
 	private String ctrtitle; // °í°´¹®ÀÇ´äº±Á¦¸ñ
 	private String ctrcontent; // °í°´¹®ÀÇ´äº¯³»¿ë
 
+	public CenterReplyVO() {
+		
+	}
+	
 	@Override
 	public String toString() {
 		return "CenterReplyVO [ctrno=" + ctrno + ", ctno=" + ctno + ", ctrtitle=" + ctrtitle + ", ctrcontent="
 				+ ctrcontent + "]";
-	}
-
-	public CenterReplyVO() {
 	}
 
 	public CenterReplyVO(int ctrno, int ctno, String ctrtitle, String ctrcontent) {

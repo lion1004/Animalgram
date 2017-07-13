@@ -13,13 +13,15 @@ public class DonationVO {
 	private String mtel;
 	private Date dadate; // 나눔물품등록일자
 	private String dimage;
+	private String ddate;	// 나눔 등록
+	private String dstate;	// 나눔상태
+	
 
 	public DonationVO() {
 	}
 
-	
 	public DonationVO(int dno, int mno, String dtitle, String dinfo, String mname, String maddr, String mtel,
-			Date dadate) {
+			Date dadate, String dimage, String ddate, String dstate) {
 		super();
 		this.dno = dno;
 		this.mno = mno;
@@ -29,6 +31,9 @@ public class DonationVO {
 		this.maddr = maddr;
 		this.mtel = mtel;
 		this.dadate = dadate;
+		this.dimage = dimage;
+		this.ddate = ddate;
+		this.dstate = dstate;
 	}
 
 
@@ -104,12 +109,27 @@ public class DonationVO {
 		this.dimage = dimage;
 	}
 
+	public String getDdate() {
+		return ddate;
+	}
+
+	public void setDdate(String ddate) {
+		this.ddate = ddate;
+	}
+
+	public String getDstate() {
+		return dstate;
+	}
+
+	public void setDstate(String dstate) {
+		this.dstate = dstate;
+	}
 
 	@Override
 	public String toString() {
 		return "DonationVO [dno=" + dno + ", mno=" + mno + ", dtitle=" + dtitle + ", dinfo=" + dinfo + ", mname="
-				+ mname + ", maddr=" + maddr + ", mtel=" + mtel + ", dadate=" + dadate + ", dimage=" + dimage + "]";
+				+ mname + ", maddr=" + maddr + ", mtel=" + mtel + ", dadate=" + dadate + ", dimage=" + dimage
+				+ ", ddate=" + ddate + ", dstate=" + dstate + "]";
 	}
-
 
 }

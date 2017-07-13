@@ -34,6 +34,10 @@ public class AdminCenterDAOImpl implements AdminCenterDAO{
 	public int deleteCenter(int ctno) {
 		return session.delete("adminCenter.deleteCenter",ctno);
 	}
+	@Override
+	public int updateCtstate(CenterReplyVO vo) {
+		return session.update("adminCenter.updatectstate", vo);
+	}
 	
 	public List<CenterReplyVO>selectReply(int ctno) {
 		return session.selectList("adminCenter.selectCenterReply",ctno);
@@ -50,6 +54,7 @@ public class AdminCenterDAOImpl implements AdminCenterDAO{
 	public int deleteReply(int ctno) {
 		return session.delete("adminCenter.deleteCenterReply",ctno);
 	}
+
 
 
 }

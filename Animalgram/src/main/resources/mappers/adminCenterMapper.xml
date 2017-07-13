@@ -6,8 +6,8 @@
     <if test="searchType == 'ctno'.toString()">
      where ctno like '%'||#{keyword}||'%'
     </if>
-    <if test="searchType == 'mno'.toString()">
-     where mno like '%'||#{keyword}||'%'
+    <if test="searchType == 'nickname'.toString()">
+     where nickname like '%'||#{keyword}||'%'
     </if>
     <if test="searchType == 'cttitle'.toString()">
      where cttitle like '%'||#{keyword}||'%'
@@ -18,8 +18,8 @@
   
   <!-- 리스트 -->
  <select id="listCenter" resultType="com.animal.domain.CenterVO">
-  select *
-  from center
+  select ctno, nickname, cttitle,ctstate
+  from center natural join amember
   <include refid="search"></include>
   order by ctno desc
  </select>
@@ -37,7 +37,8 @@
  
  <!-- 한개 조회 -->
  <select id="selectCenter" resultType="com.animal.domain.CenterVO">
-  select * from center
+  select ctno, nickname, cttitle, ctcontent
+  from center natural join amember
   where ctno=#{ctno}
  </select>
  
@@ -47,6 +48,11 @@
   (ctrno, ctno, ctrtitle, ctrcontent) values
   (center_reply_seq.nextval,#{ctno},#{ctrtitle},#{ctrcontent})
  </insert>
+ 
+ <!-- 답글달면 상태 업데이트 -->
+  	<update id="updatectstate">
+ 		update center set ctstate='답변완료' where ctno=#{ctno}
+ 	</update>
  
  <!-- 답글 조회 -->
  <select id="selectCenterReply" resultType="com.animal.domain.CenterReplyVO">

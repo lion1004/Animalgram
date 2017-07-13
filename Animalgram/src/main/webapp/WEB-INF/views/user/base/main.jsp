@@ -184,9 +184,9 @@
 						data-toggle="dropdown"><i class="fa fa-user"></i> ${user } <b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="mypage"><i class="fa fa-fw fa-user"></i>MyPage</a></li>
+							<li><a href="/member/mypage"><i class="fa fa-fw fa-user"></i>MyPage</a></li>
 							<li class="divider"></li>
-							<li><a href="logout"><i class="fa fa-fw fa-power-off"></i>
+							<li><a href="/member/logout"><i class="fa fa-fw fa-power-off"></i>
 									LogOut</a></li>
 						</ul></li>
 				</c:if>

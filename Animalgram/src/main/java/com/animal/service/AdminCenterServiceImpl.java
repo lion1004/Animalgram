@@ -38,6 +38,7 @@ public class AdminCenterServiceImpl implements AdminCenterService{
 	}
 
 	public int insertReply(CenterReplyVO vo) {
+		dao.updateCtstate(vo);
 		return dao.insertReply(vo);
 	}
 

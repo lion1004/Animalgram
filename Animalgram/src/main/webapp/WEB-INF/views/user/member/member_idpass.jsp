@@ -5,8 +5,20 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
-/* 아이디 찾기 */
 
+	function moveToJoin(){
+		location.href="/member/member_join";
+	}
+
+	function moveToLogin(){
+		$("#myModal").modal();
+	}
+	
+	function moveToPass(){
+		location.href="/member/pass";
+	}
+
+/* 아이디 찾기 */
 	function idfound() {
 		var name = document.id_found.mname.value;
 		var year = document.id_found.birth1.value;
@@ -52,20 +64,20 @@
 			data : 'mname=' + name + '&birth=' + birth + '&mtel=' + tel,
 			success : function(data) {
 				
-				$('#id_get').html('<br> <font size = 3>아이디는 <b>[ ' + data + ' ]</b> 입니다.</font><br><br>'+
-					'<input type="button" id="myBtn" class="btn btn-warning" value="로그인 하기" style="width: 100px" display: inline;>&nbsp;' +
-					'<input type="button" class="btn btn-success" value="비밀번호 찾기" style="width: 130px;" display: inline;>')
+				ht = "";
+				
+				for(var i = 0; i < data.length; i++){
+					ht += "<li>"+data[i] + "</li><br>";
+				}
+				$('#id_get').html('<br> <font size = 3>아이디 조회 결과 입니다.<br><br> <b> ' + ht + ' </b></font><br><br>'+
+					'<input type="button" class="btn btn-warning" value="로그인 하기" onclick="moveToLogin()" style="width: 100px" display: inline;>&nbsp;' +
+					'<input type="button" class="btn btn-success" value="비밀번호 찾기" onclick="moveToPass()" style="width: 130px;" display: inline;>')
 			
 			},
 			error : function(result){
 				$('#id_get').html('<font size = 3 color = red>존재하지 않은 회원정보 입니다.</font><br><br>'+
-						'<input type="button" class="btn btn-warning" value="회원가입 하기" id="confirm" style="width: 100px" display: inline;>');
+						'<input type="button" class="btn btn-warning" value="회원가입 하기" onclick="moveToJoin()" style="width: 120px" display: inline;>');
 			}
-		});
-		$(document).ready(function(){
-			$('#confirm').click(function(){
-				location.href="/member/member_join";
-			});
 		});
 	}
 }
@@ -94,7 +106,7 @@
 				<div class="col-sm-6">
 					<select name="birth1">
 						<option value="----">----
-							<c:forEach var="i" begin="1920" end="2017" step="1">
+							<c:forEach var="i" begin="1960" end="2017" step="1">
 								<option value="${i }">
 									<c:out value="${i }" />
 								</option>

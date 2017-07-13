@@ -100,14 +100,6 @@
 		}
  	}
  	
-/*  	$(function(){
- 		alert('');
-		$('#confirm').click(function(){
-			alert('');
-			location.href = "/member/member_join";
-		});
- 	}); */
- 	
  	function join(){
  		location.href = "/member/member_join";
  	}

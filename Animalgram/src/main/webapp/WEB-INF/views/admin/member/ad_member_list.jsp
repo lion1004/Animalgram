@@ -163,6 +163,10 @@
 		   	   <td id="td2">${amember.mpass }</td>
 		   	 </tr>
 			 <tr>
+		       <td>비밀번호힌트</td>
+		   	   <td id="td11">${amember.mhint }</td>
+		   	 </tr>
+			 <tr>
 		       <td>닉네임</td>
 		   	   <td id="td3">${amember.nickname }</td>
 		   	 </tr>

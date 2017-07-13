@@ -9,11 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.animal.domain.AgroupVO;
 import com.animal.domain.AnimalVO;
+import com.animal.domain.BillUserVO;
 import com.animal.domain.BillVO;
 import com.animal.domain.CareProVO;
 import com.animal.domain.CareVO;
 import com.animal.domain.Criteria;
 import com.animal.domain.CustomVO;
+import com.animal.domain.DonationCheckVO;
+import com.animal.domain.DonationVO;
 import com.animal.domain.ProfessionalVO;
 import com.animal.domain.SellerVO;
 import com.animal.persistence.AnimalDAO;
@@ -55,6 +58,21 @@ public class AnimalServiceImpl implements AnimalService {
 		return dao.agroupCount(cri);
 	}
 
+	@Override
+	public List<BillUserVO> customUser(Criteria cri) throws Exception {	// 판매 현황
+		return dao.customUser(cri);
+	}
+
+	@Override
+	public int customUCount(Criteria cri) throws Exception {		// 판매 현황 페이징
+		return dao.customUcount(cri);
+	}
+
+	@Override
+	public boolean customUdel(int bno) throws Exception {		// 판매 현황 삭제
+		return dao.customUdel(bno);
+	}
+	
 	@Override
 	public List<CareVO> careList(Criteria cri) throws Exception {		// 훈련 현황
 		return dao.selectCare(cri);
@@ -110,6 +128,46 @@ public class AnimalServiceImpl implements AnimalService {
 		return dao.careProdelete(cno);
 	}
 
+	@Override
+	public List<DonationVO> donation_now(Criteria cri) throws Exception {	// 나눔 올린사람 현황
+		return dao.donation_now(cri);
+	}
+
+	@Override
+	public int donation_now_count(Criteria cri) throws Exception {			// 나눔 올린사람 현황 페이징
+		return dao.donation_now_page(cri);
+	}
+
+	@Override
+	public boolean donation_del(int dno) throws Exception {			// 나눔 등록 삭제
+		return dao.donation_del(dno);
+	}
+	
+	@Override
+	public List<DonationCheckVO> donationCheck(Criteria cri) throws Exception {		// 나눔 당첨자 조회
+		return dao.donationCheck(cri);
+	}
+
+	@Override
+	public boolean donationUp(int dano) throws Exception {		// 나눔 승인
+		return dao.donationUp(dano);
+	}
+	
+	@Override
+	public List<DonationCheckVO> donationCheckOk(Criteria cri) throws Exception {	// 나눔 현황 완료
+		return dao.donationCheckOk(cri);
+	}
+
+	@Override
+	public int donationCheckCountOK(Criteria cri) throws Exception {		// 나눔 현황 완료 페이징
+		return dao.donationCheckOkCount(cri);
+	}
+	
+	@Override
+	public int donationCheckCount(Criteria cri) throws Exception {		// 나눔 당첨자 페이징
+		return dao.donationCheckCount(cri);
+	}
+	
 	@Override
 	public List<CustomVO> customSelect(Criteria cri) throws Exception {		// 판매 현황 조회
 		return dao.customSel(cri);

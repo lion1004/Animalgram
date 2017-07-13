@@ -5,11 +5,14 @@ import java.util.Map;
 
 import com.animal.domain.AgroupVO;
 import com.animal.domain.AnimalVO;
+import com.animal.domain.BillUserVO;
 import com.animal.domain.BillVO;
 import com.animal.domain.CareProVO;
 import com.animal.domain.CareVO;
 import com.animal.domain.Criteria;
 import com.animal.domain.CustomVO;
+import com.animal.domain.DonationCheckVO;
+import com.animal.domain.DonationVO;
 import com.animal.domain.ProfessionalVO;
 import com.animal.domain.SellerVO;
 
@@ -30,12 +33,29 @@ public interface AnimalDAO {
 	public int careCount(Criteria cri)throws Exception;				// 훈련 현황 갯수(페이징)
 	public boolean caredelete(int cano)throws Exception;			// 훈련 삭제
 	
+	public List<BillUserVO> customUser(Criteria cri)throws Exception;	// 판매 현황 조회
+	public boolean customUdel(int bno)throws Exception;				// 판매현황 삭제
+	public int customUcount(Criteria cri)throws Exception;				// 판매 현황 조회 페이징
+	
+	public List<DonationVO> donation_now(Criteria cri)throws Exception;	// 나눔 현황 조회
+	public boolean donation_del(int dno)throws Exception;				// 나늠 등록 삭제
+	public int donation_now_page(Criteria cri)throws Exception;			// 나눔 현황 조회 패이징
+
+	public List<DonationCheckVO> donationCheck(Criteria cri)throws Exception;	// 나눔 당첨 조회
+	public int donationCheckCount(Criteria cri)throws Exception;			// 나눔 당첨 조회 페이징
+	
+	public boolean donationUp(int dano)throws Exception;			// 나눔 승인
+	
+	public List<DonationCheckVO> donationCheckOk(Criteria cri)throws Exception;	// 나눔 당첨 완료 조회
+	public int donationCheckOkCount(Criteria cri)throws Exception;			// 나눔 당첨 완료 조회 페이징	
+	
 	// 전문가
 	public List<CareProVO> carePro(Criteria cri)throws Exception;	// 훈련 요청 현황 전문가
 	public int careProCount(Criteria cri)throws Exception;			// 훈련 요청 현황 전문가 페이징 
 	
 	public List<CareProVO> careProComit(Criteria cri) throws Exception;		// 훈련 승인 전문가
 	public int careProCountComit(Criteria cri) throws Exception;			// 훈련 승인 전문가 페이징
+	
 	
 	public boolean careProUPdate(int cano)throws Exception;			// 훈련 요청 승인 전문가
 	
@@ -51,7 +71,7 @@ public interface AnimalDAO {
 	public List<BillVO> billSel(Criteria cri)throws Exception;			// 판매 요청 현황
 	public int billCount(Criteria cri)throws Exception;					// 판매 요청 현황 페이징
 	
-	public boolean bill_update(int bno)throws Exception;		// 판매 승인
+	public boolean bill_update(int bno)throws Exception;				// 판매 승인
 	
 	public List<BillVO> billComit(Criteria cri)throws Exception;		// 판매자 승인 현황
 	public int billComitCount(Criteria cri)throws Exception;			// 판매자 승인 페이징

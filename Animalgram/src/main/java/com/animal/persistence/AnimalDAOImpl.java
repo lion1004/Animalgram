@@ -11,11 +11,14 @@ import org.springframework.stereotype.Repository;
 
 import com.animal.domain.AgroupVO;
 import com.animal.domain.AnimalVO;
+import com.animal.domain.BillUserVO;
 import com.animal.domain.BillVO;
 import com.animal.domain.CareProVO;
 import com.animal.domain.CareVO;
 import com.animal.domain.Criteria;
 import com.animal.domain.CustomVO;
+import com.animal.domain.DonationCheckVO;
+import com.animal.domain.DonationVO;
 import com.animal.domain.ProfessionalVO;
 import com.animal.domain.SellerVO;
 
@@ -62,6 +65,18 @@ public class AnimalDAOImpl implements AnimalDAO {
 		return sql.selectOne("mypage.agroup_count",cri);
 	}
 
+	@Override
+	public List<BillUserVO> customUser(Criteria cri) throws Exception {	// 판매 현황
+		RowBounds bounds = new RowBounds(cri.getPageStart(),cri.getPerPageNum());
+		return sql.selectList("mypage.custom_user",cri,bounds);
+	}
+
+	@Override
+	public int customUcount(Criteria cri) throws Exception {			// 판매 현황 페이징
+		return sql.selectOne("mypage.custom_user_count",cri);
+	}
+
+	
 	@Override
 	public List<CareVO> selectCare(Criteria cri) throws Exception {		// 훈련 현황 조회
 		RowBounds bounds = new RowBounds(cri.getPageStart(),cri.getPerPageNum());
@@ -134,10 +149,72 @@ public class AnimalDAOImpl implements AnimalDAO {
 	}
 
 	@Override
+	public boolean customUdel(int bno) throws Exception {		// 판매 현황 삭제 (User)
+		if(sql.delete("mypage.cusUser_del",bno) == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	@Override
 	public int customCount(Criteria cri) throws Exception {				// 판매 물품 현황 조회 페이징
 		return sql.selectOne("mypage.custom_page",cri);
 	}
+	
+	@Override
+	public List<DonationVO> donation_now(Criteria cri) throws Exception {	// 나눔 등록자 현황 조회
+		RowBounds bounds = new RowBounds(cri.getPageStart(),cri.getPerPageNum());
+		return sql.selectList("mypage.donation_now",cri,bounds);
+	}
 
+	@Override
+	public int donation_now_page(Criteria cri) throws Exception {		// 나눔 등록자 현황 페이징
+		return sql.selectOne("mypage.donation_now_page",cri);
+	}
+
+
+	@Override
+	public boolean donation_del(int dno) throws Exception {		// 나눔 게시글 삭제
+		if(sql.delete("mypage.donation_nowdel",dno) == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public List<DonationCheckVO> donationCheck(Criteria cri) throws Exception {	// 나눔 당첨자 조회
+		RowBounds bounds = new RowBounds(cri.getPageStart(),cri.getPerPageNum());
+		return sql.selectList("mypage.donation_check",cri,bounds);
+	}
+
+	@Override
+	public int donationCheckCount(Criteria cri) throws Exception {		// 나눔 당첨자 조회 페이징
+		return sql.selectOne("mypage.donation_check_count",cri);
+	}
+
+	@Override
+	public boolean donationUp(int dano) throws Exception{			// 나눔 승인
+		
+		if(sql.update("mypage.donation_up",dano) == 1){
+			return true;
+		}else
+		return false;
+	}
+
+
+	@Override
+	public List<DonationCheckVO> donationCheckOk(Criteria cri) throws Exception {	// 나눔 당첨 완료 조회
+		RowBounds bounds = new RowBounds(cri.getPageStart(),cri.getPerPageNum());
+		return sql.selectList("mypage.donation_ok_check",cri,bounds);
+	}
+
+	@Override
+	public int donationCheckOkCount(Criteria cri) throws Exception {	// 나눔 당첨 완료 페이징
+		return sql.selectOne("mypage.donation_check_ok_count",cri);
+	}
+	
 	@Override
 	public List<BillVO> billSel(Criteria cri) throws Exception {		// 판매 요청
 		RowBounds bounds = new RowBounds(cri.getPageStart(),cri.getPerPageNum());
@@ -167,5 +244,4 @@ public class AnimalDAOImpl implements AnimalDAO {
 	public int billComitCount(Criteria cri) throws Exception {			// 판매 요청 승인 페이징
 		return sql.selectOne("mypage.bill_comit_count",cri);
 	}
-
 }

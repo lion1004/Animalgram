@@ -1,123 +1,99 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@include file="../base/main.jsp"%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var formObj = $("form[role='form']");
+		//리스트 이동 버튼
+		$("#listbutton").on("click", function() {
+			formObj.attr("method", "get");
+			formObj.attr("action", "/center/clist");
+			formObj.submit();
+		});
+	});//ready
+	
+</script>
 
-<head>
+	<form role="form" method="post">
+		<input type='hidden' name='ctno' value="${CenterVO.ctno}">
+		<input type='hidden' name='page' value="${cri.page}">
+		<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+	</form>
+	
+	<div id="wrapper">
+		<div id="page-wrapper">
+			<!-- 게시판 헤더 -->
+			<div class="container-fluid">
+				<h1 class="page-header">1:1문의</h1>
+			</div>
+			<div class="panel panel-yellow" style="width: 600px; margin: 0 auto;">
+				<div class="panel-heading">
+					<h3 class="panel-title">1:1문의 내용</h3>
+				</div>
+				<br>
+				<!-- 게시판 상세 내용 보기 -->
+				<div class="panel-body">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<label>제목</label> <input class="form-control" name="cttitle" value="${CenterVO.cttitle}" readonly><br>
+							<label>작성자 <input class="form-control" name="nickname" id="nickname" value="${CenterVO.nickname}" style="width: 100px;" readonly></label>&nbsp;
+							<label>상태<input class="form-control" name="ctstate" value="${CenterVO.ctstate}" style="width: 150px" readonly></label>&nbsp;
+						</div>
+						<div class="form-group">
+							<label>내용</label>
+							<textarea class="form-control" id="ctcontent">${CenterVO.ctcontent}</textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-info" id="listbutton">리스트</button>
+						</div>
+					</div>
+				</div>
+						<div class="time-label" id="repliesDiv"></div>
+			</div>
+		</div>
+	</div>
+	<script id="template" type="text/x-handlebars-template">
+	<div class="replyLi" data-ctno={{ctno}}>
+		<div class="timeline-item" >
+			<h4 class="timeline-header">
+	<i class="fa fa-comments bg-blue"></i> <strong>{{ctrtitle}}</strong></h4>
+		<p class="timeline-body">{{ctrcontent}} </p>
+			<div class="timeline-footer">
+			</div>
+		</div>
+	</div>
+	</script>
+	
+	<script type="text/javascript">
+	var printData = function(replyArr, target, templateObject) {
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+		var template = Handlebars.compile(templateObject.html());
+		var html = template(replyArr);
+		target.after(html);
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+	}
+	var ctno = '${CenterVO.ctno}';
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
+	function getPage(pageInfo) { //getPage('/replies/15/1') url
 
-    <!-- Custom CSS -->
-    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
+		$.ajax({
+			url : pageInfo,
+			cache : false,
+			success : function(data) {
 
-    <!-- Custom Fonts -->
-    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+				if (data[0] == null) {
+					return;
+				} else {
+					//답변이 1개 이상일 시 더 이상 못달게 함
+					$("#newReply").attr("disabled", "disabled");
+					printData(data[0], $("#repliesDiv"), $('#template'));
+				}
+			}
+		});
+	}
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	$(document).ready(function() {
+		getPage("/center/replies/all/${CenterVO.ctno}");
 
-</head>
-
-<body>
-
-
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Forms
-                        </h1>
-              
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-6">
-
-                        <form role="form">
-
-                            <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                      <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-
-    <!-- jQuery -->
-    <script src="/resources/bootstrapPro/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+	});
+</script>

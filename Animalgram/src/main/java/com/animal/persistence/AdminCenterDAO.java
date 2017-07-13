@@ -14,6 +14,8 @@ public interface AdminCenterDAO {
 	public CenterVO selectCenter(int ctno);
 	public int deleteCenter(int ctno);
 	
+	public int updateCtstate(CenterReplyVO vo);
+	
 	public List<CenterReplyVO> selectReply(int ctno);
 	
 	public int insertReply(CenterReplyVO vo);

@@ -4,21 +4,20 @@
 
 <script type="text/javascript">
 
-/*  $(function(){
-	$('.remove_sel').click(function(){
-	var cuno = $(this).attr('data_cuno');
-		alert($(this).attr('data_cuno'));
-	 alert('삭제하시겠습니까?');
+ $(function(){
+	$('.remove_cusUser').click(function(){
+	var bno = $(this).attr('data_bno');
+	 alert('주문취소 하시겠습니까?');
 	 $.ajax({
-		url :'/custom_delete/'+cuno,
+		url :'/custom_udel/'+bno,
 		type :'delete',
 		success : function(result){
 			alert('삭제 완료!')
-			location.href='/member/mypage';
+			window.location.reload();
 		}
 	});	// ajax
 	});	// click
-}); // ready */
+}); // ready
 </script>
 
 <div class="container">
@@ -27,13 +26,15 @@
                   <div class="table-responsive mailbox-messages">
                     <table class="table table-hover table-striped">
                       <tbody>
-                       <tr><th>물품 제목</th><th>가격</th><th>물품 정보</th><th>자세히 보기</th></tr>
-                        <c:forEach var="list" items="${custom_sel }">
+                       <tr><th>물품명</th><th>상세정보</th><th>수량</th><th>가격</th><th>진행 상태</th><th>주문 취소</th></tr>
+                        <c:forEach var="list" items="${customUser }">
                         <tr>
                           <td class="mailbox-subject">${list.cutitle }</td>
-                          <td class="mailbox-name">${list.cuprice }</td>
                           <td class="mailbox-name">${list.cuinfo }</td>
-                          <td class="mailbox-date"><input type="button" value="보러가기" class="remove_sel"  data_cuno="${list.cuno}"></td>
+                          <td class="mailbox-name">${list.bcount }</td>
+                          <td class="mailbox-name">${list.cuprice }</td>
+                          <td class="mailbox-name">${list.bstate}</td>
+                          <td class="mailbox-date"><input type="button" value="주문취소" class="remove_cusUser" data_bno="${list.bno}"></td>
                         </tr>
                           </c:forEach>
                       </tbody>
@@ -44,20 +45,20 @@
                 <div class="box-footer no-padding">
                   <div class="text-center">
                         <ul class="pagination">
-                           <c:if test="${custom_page.prev}">
+                           <c:if test="${cusUser_maker.prev}">
                               <li><a
-                                 href="mypage${custom_page.makeQuery(custom_page.startPage - 1) }">&laquo;</a></li>
+                                 href="mypage${cusUser_maker.makeQuery(cusUser_maker.startPage - 1) }">&laquo;</a></li>
                            </c:if>
-                           <c:forEach begin="${custom_page.startPage }"
-                              end="${custom_page.endPage }" var="idx">
+                           <c:forEach begin="${cusUser_maker.startPage }"
+                              end="${cusUser_maker.endPage }" var="idx">
                               <li
-                                 <c:out value="${select6 == idx?'class =active':''}"/>>
-                                 <a class="care_page" href="mypage${custom_page.makeQuery(idx)}&tab=custom_sel">${idx}</a>
+                                 <c:out value="${select10 == idx?'class =active':''}"/>>
+                                 <a class="care_page" href="mypage${cusUser_maker.makeQuery(idx)}&tab=customUser">${idx}</a>
                               </li>
                            </c:forEach>
-                           <c:if test="${custom_page.next && custom_page.endPage > 0}">
+                           <c:if test="${cusUser_maker.next && cusUser_maker.endPage > 0}">
                               <li><a
-                                 href="mypage${custom_page.makeQuery(custom_page.endPage +1) }">&raquo;</a></li>
+                                 href="mypage${cusUser_maker.makeQuery(cusUser_maker.endPage +1) }">&raquo;</a></li>
                            </c:if>
                         </ul>
                      </div>
