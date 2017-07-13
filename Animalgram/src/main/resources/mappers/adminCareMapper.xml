@@ -12,6 +12,9 @@
     <if test="searchType == 'ctype'.toString()">
      where ctype like '%'||#{keyword}||'%'
     </if>
+    <if test="searchType == 'ctitle'.toString()">
+     where ctitle like '%'||#{keyword}||'%'
+    </if>
    </if>
   </sql>
   
@@ -36,7 +39,8 @@
  
  <update id="updateCare">
   update care
-  set ctype=#{ctype}, ccontent=#{ccontent}
+  set ctype=#{ctype}, ctitle=#{ctitle}, ccontent=#{ccontent},
+  cdate=#{cdate},cstate=#{cstate}
   where cno=#{cno}
  </update>
  

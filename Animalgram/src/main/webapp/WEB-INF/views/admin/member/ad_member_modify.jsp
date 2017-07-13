@@ -63,10 +63,10 @@
 						<label class="col-sm-2" for="job">등급:</label>
 						<div class="col-sm-10">
 							<select class="form-control" style="width: 120px;" name="job">
-								<option>user</option>
-								<option>seller</option>
-								<option>pro</option>
-								<option>admin</option>
+								<option <c:out value="${amember.job eq 'user'?'selected':''}"/>>user</option>
+								<option <c:out value="${amember.job eq 'seller'?'selected':''}"/>>seller</option>
+								<option <c:out value="${amember.job eq 'pro'?'selected':''}"/>>pro</option>
+								<option <c:out value="${amember.job eq 'admin'?'selected':''}"/>>admin</option>
 								</select>
 						</div>
 					</div>
