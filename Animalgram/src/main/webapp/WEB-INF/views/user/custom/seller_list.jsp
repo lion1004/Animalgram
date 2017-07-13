@@ -8,9 +8,9 @@
 
 <!-- Main content -->
 <style>
-.cuinfo{
+.cinfo{
     white-space: nowrap; 
-    width: 30em; 
+    width: 45em; 
     overflow: hidden;
     text-overflow: ellipsis; 
     margin-top: 40px;
@@ -66,7 +66,6 @@ text-align: center;
 							<th style="width: 120px; text-align: center">주문제작 번호</th>
 							<th style="text-align: center">상품 이미지</th>
 							<th style="text-align: center">상품명</th>
-							<th style="text-align: center">상품 가격</th>
 							<th style="text-align: center">상품 정보</th>
 							<th style="text-align: center">주문일자</th>
 						
@@ -89,10 +88,9 @@ text-align: center;
 								<td><div class="cutitle" style="margin-top: 8px"><a
 									href='/user/custom/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&cuno=${customVO.cuno}'>
 										${customVO.cutitle} </a></div></td>
-										<td><div class="cuprice" style="margin-top: 8px">${customVO.cuprice} 원</div></td>
-							<td><div class="cuinfo" style="margin-top: 8px">${customVO.cuinfo}</div></td>
-								<td><div class="cudate" style="margin-top: 8px"><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${customVO.cudate}" /></div></td>
+							<td><div class="cinfo" style="margin-top: 8px">${customVO.cinfo}</div></td>
+								<td><div class="cdate" style="margin-top: 8px"><fmt:formatDate pattern="yyyy-MM-dd"
+										value="${customVO.cdate}" /></div></td>
 							<!-- 	<td><span class="badge bg-red"></span></td> -->
 							</tr>
 

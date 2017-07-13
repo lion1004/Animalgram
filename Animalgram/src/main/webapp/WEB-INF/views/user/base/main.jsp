@@ -17,13 +17,6 @@
 	<!-- Bootstrap Core CSS -->
 	<link href="/resources/bootstrapPro/css/bootstrap.min.css"
 		rel="stylesheet">
-		
-	 <!-- Theme style -->
-	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <link href="/resources/bootstrapPro/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-
-    <link href="/resources/bootstrapPro/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-	
 	
 	<!-- Custom CSS -->
 	<link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">

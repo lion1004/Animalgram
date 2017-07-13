@@ -19,7 +19,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="row" style="margin:0px 120px 0px 120px">
                        
                             <div class="input-group custom-search-form">
                                 <input type="text" name="keyword" class="form-control" placeholder="Search..."
@@ -40,9 +40,6 @@
 						<option value="ctype"
 							<c:out value="${cri.searchType eq 'ctype'?'selected':''}"/>>
 							훈련종류</option>
-						<option value="ctitle"
-							<c:out value="${cri.searchType eq 'ctitle'?'selected':''}"/>>
-							훈련제목</option>
 						
 					</select> 
 					        <span class="input-group-btn">
@@ -62,9 +59,6 @@
                                         <th style="width:90px; text-align:center;">훈련번호</th>
                                         <th style="width:100px; text-align:center;">전문가번호</th>
                                         <th>훈련종류</th>
-                                        <th style="width:300px">훈련제목</th>
-                                        <th>훈련상태</th>
-                                        <th>훈련날짜</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,9 +73,6 @@
                                           ${care.pno }
                                         </td>
                                         <td>${care.ctype }</td>
-                                        <td>${care.ctitle }</td>
-                                        <td>${care.cstate}</td>
-                                        <td>${care.cdate }</td>
                                     </tr>
                                  </c:forEach>
                                

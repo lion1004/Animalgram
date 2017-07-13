@@ -23,46 +23,45 @@ import com.animal.service.CenterService;
 @RequestMapping("/center")
 public class CenterController {
 
-	@Inject
-	private CenterService cservice;
+   @Inject
+   private CenterService cservice;
 
-	// 고객센터 게시글 입력창 오픈
-	@RequestMapping(value = "/cinsert", method = RequestMethod.GET)
-	public String centerinsertGET() throws Exception {
-		return "user/center/center_confirm";
-	}
+   // 고객센터 게시글 입력창 오픈
+   @RequestMapping(value = "/cinsert", method = RequestMethod.GET)
+   public String centerinsertGET() throws Exception {
+      return "user/center/center_confirm";
+   }
 
-	// 고객센터 게시글 입력
-	@RequestMapping(value = "/cinsert", method = RequestMethod.POST)
-	public String centerinsertPOST(CenterVO vo) throws Exception {
-		cservice.cinsert(vo);
-		return "redirect:/center/clist";
-	}
-	
-	@RequestMapping("/cinfo")
-	public String cread(int ctno,Model model,Criteria cri)throws Exception{
-		model.addAttribute("CenterVO",cservice.cread(ctno));
-		model.addAttribute("cri",cri);
-		return "/user/center/center_info";
-	}
-	
-	@RequestMapping(value="/clist",method=RequestMethod.GET)
-	public String clist(@ModelAttribute("cri") Criteria cri, Model model)throws Exception{
-		model.addAttribute("list", cservice.clist(cri));
-		PageMaker maker = new PageMaker();
-		maker.setCri(cri);
-		maker.setTotalCount(cservice.clistcount(cri));
-		model.addAttribute("pageMaker", maker);
-		return "user/center/center_list";
-	}
-	
-	//답변 호출
-		@RequestMapping(value="/replies/all/{ctno}", method=RequestMethod.GET)
-		@ResponseBody
-		public List<CenterReplyVO> list(@PathVariable("ctno")int ctno)throws Exception{
-			System.out.println("ctno 가꼬옴?"+ctno);
-			List<CenterReplyVO> list = cservice.creply(ctno);
-			System.out.println(list.get(0));
-			return list;
-		}
+   // 고객센터 게시글 입력
+   @RequestMapping(value = "/cinsert", method = RequestMethod.POST)
+   public String centerinsertPOST(CenterVO vo) throws Exception {
+      cservice.cinsert(vo);
+      return "redirect:/center/clist";
+   }
+   
+   @RequestMapping("/cinfo")
+   public String cread(int ctno,Model model,Criteria cri)throws Exception{
+      model.addAttribute("CenterVO",cservice.cread(ctno));
+      model.addAttribute("cri",cri);
+      return "/user/center/center_info";
+   }
+   
+   @RequestMapping(value="/clist",method=RequestMethod.GET)
+   public String clist(@ModelAttribute("cri") Criteria cri, Model model)throws Exception{
+      model.addAttribute("list", cservice.clist(cri));
+      PageMaker maker = new PageMaker();
+      maker.setCri(cri);
+      maker.setTotalCount(cservice.clistcount(cri));
+      model.addAttribute("pageMaker", maker);
+      return "user/center/center_list";
+   }
+   
+   //답변 호출
+      @RequestMapping(value="/replies/all/{ctno}", method=RequestMethod.GET)
+      @ResponseBody
+      public List<CenterReplyVO> list(@PathVariable("ctno")int ctno)throws Exception{
+         List<CenterReplyVO> list = cservice.creply(ctno);
+         System.out.println(list.get(0));
+         return list;
+      }
 }

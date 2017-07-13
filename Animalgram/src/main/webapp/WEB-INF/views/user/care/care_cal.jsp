@@ -382,7 +382,7 @@
 <div id="page-wrapper">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12" style="background: #ff8080;">
+			<div class="col-lg-12" style="background: #ff8080; margin-top: 50px">
 				<h1 class="page-header" style="color: #ffffff">
 					반려동물 행동화 훈련 신청 <small style="color: #222222">・゜゜・**・゜|*╹ω╹*|゜・**・゜゜・*</small>
 				</h1>

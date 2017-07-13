@@ -1,6 +1,5 @@
 package com.animal.persistence;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -32,8 +31,8 @@ public class MemConfirmDAOImpl implements MemConfirmDAO {
 	}
 
 	@Override
-	public List<String> idFound(MemConfirmVO vo) throws Exception {	// 아이디 찾기
-		return sql.selectList("member.findId",vo);
+	public String idFound(MemConfirmVO vo) throws Exception {	// 아이디 찾기
+		return sql.selectOne("member.findId",vo);
 	}
 
 	@Override

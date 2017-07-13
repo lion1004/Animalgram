@@ -43,7 +43,7 @@
 						<label class="col-sm-2">소모임 제목:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" placeholder="Title"
-								name="gtitle" style="width: 200px;" maxlength="33"
+								name="gtitle" style="width: 200px;" maxlength="10"
 								value="${group.gtitle}">
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 						<label class="col-sm-2">소모임 장소:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" placeholder="Place"
-								name="gplace" style="width: 200px;" maxlength="33"
+								name="gplace" style="width: 200px;" maxlength="10"
 								value="${group.gplace}">
 						</div>
 					</div>

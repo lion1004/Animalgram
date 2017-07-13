@@ -2,9 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../include/navbar.jsp" %>
-<style type="text/css">
- textarea { resize: none; }
-</style>
+
 <div id="wrapper">
 <!-- Page Content -->
         <div id="page-wrapper">
@@ -38,30 +36,6 @@
 							<input type="text" class="form-control" placeholder="Type"
 								name="ctype" style="width: 200px;" maxlength="10"
 								value="${care.ctype }">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2" for="ctitle">훈련제목:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" placeholder="Title"
-								name="ctitle" style="width: 240px;" maxlength="16"
-								value="${care.ctitle }">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2" for="cdate">훈련날짜:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" placeholder="Date"
-								name="cdate" style="width:160px;" maxlength="16"
-								value="${care.cdate }">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2" for="cstate">상태:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" placeholder="State"
-								name="cstate" style="width: 160px;" maxlength="10"
-								value="${care.cstate }">
 						</div>
 					</div>
 					<div class="form-group">

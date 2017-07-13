@@ -26,7 +26,7 @@
 				</div>
 				<!-- /.box-header -->
 
-<form name="modifyform" role="form" action="modifyPage" method="post">
+<form role="form" action="modifyPage" method="post">
 
 	<input type='hidden' name='page' value="${cri.page}"> 
 	<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
@@ -44,17 +44,11 @@
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">상품명</label> <input type="text"
-								name='cutitle' id='cutitle' class="form-control" value="${customVO.cutitle}">
-						</div>
-						
-						<div class="form-group">
-							<label for="exampleInputEmail1">상품가격</label> <input type="text"
-								name='cuprice' id="cuprice" class="form-control" value="${customVO.cuprice}">
-	
+								name='cutitle' class="form-control" value="${customVO.cutitle}">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">상품정보</label>
-							<textarea class="form-control" name="cuinfo" id="cuinfo" rows="3">${customVO.cuinfo}</textarea>
+							<textarea class="form-control" name="cinfo" rows="3">${customVO.cinfo}</textarea>
 						</div>
 					
 			
@@ -82,8 +76,8 @@
 					<!-- /.box-body -->
 	</form>
 				<div class="box-footer">
-					<button type="submit" class="btn btn-primary">저장</button>
-					<button type="submit" class="btn btn-warning">취소</button>
+					<button type="submit" class="btn btn-primary">SAVE</button>
+					<button type="submit" class="btn btn-warning">CANCEL</button>
 				</div>
 <script id="template" type="text/x-handlebars-template">
 <li>
@@ -147,26 +141,8 @@ $(document).ready(
 							+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
 				});
 
-		$(".btn-primary").on("click",function() {
-		
-			 if($("#cutitle").val()==""){
-				alert('주문제작 상품명을 입력하십시오.');
-				document.modifyform.cutitle.focus();
-				return;
-				}else if($("#cuprice").val()==""){
-					alert('상품 가격를 입력하십시오.');
-				document.modifyform.cuprice.focus();
-				return;
-				}else if (isNaN($("#cuprice").val() )) {
-						alert("상품가격은 숫자만 입력 가능합니다.")
-						document.modifyform.cuprice.focus();
-						return;
-				}else if($("#cuinfo").val()==""){
-					alert('상품 정보를 입력하십시오.');
-				document.modifyform.cuinfo.focus();
-				return;
-				}
-			
+		$(".btn-primary").on("click",
+				function() {
 			var that = $("form[role='form']");
 			var str ="";
 			$(".uploadedList .delbtn").each(function(index){
@@ -174,10 +150,9 @@ $(document).ready(
 				 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("data-src") +"'> ";
 			});
 			that.append(str);
-			if(str==""){alert('상품 이미지파일 등록해주세요.');
-			return;}
+			alert('str: '+str);
 					formObj.submit();
-			});
+				});
 		
 		var cuno = ${customVO.cuno};
 		var template = Handlebars.compile($("#templateAttach").html());
@@ -207,14 +182,16 @@ $(document).ready(
 				   if(result == 'deleted'){
 					   alert('삭제됩니다');
 					   that.parent("div").parent('li').remove();
-				   	
+				   	   alert('삭제 됐나요?');
 				   }
 			   }
 		  });
 		});
-		});
-
+	});
 </script>
+
+
+
 
 			</div>
 			<!-- /.box -->
@@ -224,5 +201,7 @@ $(document).ready(
 	</div>
 	<!-- /.row -->
 </section>
-
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 

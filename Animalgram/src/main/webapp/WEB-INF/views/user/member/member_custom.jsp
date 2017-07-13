@@ -30,9 +30,9 @@
                        <tr><th>물품 제목</th><th>가격</th><th>물품 정보</th><th>자세히 보기</th></tr>
                         <c:forEach var="list" items="${custom_sel }">
                         <tr>
-                          <td class="mailbox-subject">${list.cutitle }</td>
-                          <td class="mailbox-name">${list.cuprice }</td>
-                          <td class="mailbox-name">${list.cuinfo }</td>
+                          <td class="mailbox-subject">${list.ctitle }</td>
+                          <td class="mailbox-name">${list.cprice }</td>
+                          <td class="mailbox-name">${list.cinfo }</td>
                           <td class="mailbox-date"><input type="button" value="보러가기" class="remove_sel"  data_cuno="${list.cuno}"></td>
                         </tr>
                           </c:forEach>

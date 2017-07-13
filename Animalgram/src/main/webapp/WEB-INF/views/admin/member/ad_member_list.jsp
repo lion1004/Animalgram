@@ -90,7 +90,7 @@
                                         </td>
                                         <td>${amember.idmail}</td>
                                         <td>${amember.mpass}</td>
-                                        <td>${amember.mdate }
+                                        <td><fmt:formatDate value="${amember.mdate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
                                         </td>
                                         <td <c:out value="${amember.listCheck == 'true'?'class=slash':''}"/>>${amember.job }</td>
                                     </tr>
@@ -161,10 +161,6 @@
 			 <tr>
 		       <td>비밀번호</td>
 		   	   <td id="td2">${amember.mpass }</td>
-		   	 </tr>
-			 <tr>
-		       <td>비밀번호힌트</td>
-		   	   <td id="td11">${amember.mhint }</td>
 		   	 </tr>
 			 <tr>
 		       <td>닉네임</td>

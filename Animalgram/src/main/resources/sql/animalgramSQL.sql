@@ -53,9 +53,8 @@ create table custom( --주문제작 DB
    cuno number primary key, --주문제작번호j
    sno number references seller(sno),--판매자DB(판매자번호)
    cutitle varchar2(100) not null,--글제목
-   cuprice number not null,   -- 물품가격
-   cuinfo varchar2(1500) not null,--품목정보
-   cudate date default sysdate--주문제작 게시글 올린 일자
+   cinfo varchar2(1500) not null,--품목정보
+   cdate date default sysdate--주문제작 게시글 올린 일자
    ); 
    
 drop sequence custom_seq; -- 주문제작 번호 시퀀스
@@ -72,8 +71,9 @@ drop table custom_attach;
 create table custom_attach(
 	fullName	varchar2(150) primary key,
 	cuno		number not null references custom(cuno),
-	cudate date default sysdate
+	cdate date default sysdate
 );
+
 select * from CUSTOM_ATTACH;
 
 drop sequence custom_attach_seq;
@@ -90,6 +90,7 @@ create table bill( --주문서DB
    cuno number references custom(cuno),--주문제작DB(주문제작번호)
    bcount number not null, --주문갯수
    bmemo varchar2(200) not null,--추가 메모
+   bsellcount number default '0', -- 주문 누적수량 
    bdate date default sysdate,--주문일자
    bstate varchar2(20) default '상품준비중'
 );
@@ -127,9 +128,8 @@ create table donation( --나눔DB
    mno number references amember(mno),--회원DB(회원번호)
    dtitle varchar2(100) not null,--나눔제목
    dinfo varchar2(1500) not null,--나눔글 내용
-   ddate date default sysdate,--나눔물품등록일자
-   dimage varchar2(100), --나눔 상품 이미지
-   dstate varchar2(50) default '진행중'
+   dadate date default sysdate,--나눔물품등록일자
+   dimage varchar2(100) --나눔 상품 이미지
 );
 
 drop sequence donation_seq; --나눔 번호 시퀀스
@@ -155,8 +155,9 @@ create table donation_ask( --나눔요청DB
    dno number references donation(dno),--나눔DB(나눔번호)
    mno number references amember(mno),--회원DB(회원번호)
    damemo varchar2(200) not null, --나눔신청서 메모
-   dadate date default sysdate,--나눔신청일자
-   dastate varchar2(50) default '상품준비중' 
+   dadate date default sysdate--나눔신청일자
+   dastate varchar2(20) default '상품준비중'
+);
 
 drop sequence donation_ask_seq; --나눔신청서 번호 시퀀스
 create sequence donation_ask_seq
@@ -258,7 +259,7 @@ create table agroup(--소모임DB
    gtitle varchar2(100) not null, --소모임제목
    gplace varchar2(100) not null, --소모임장소
    glimit number not null, --소모임참가제한인원
-   gcount number default 1, --소모임참가제한인원
+   gcount number default 0, --소모임참가제한인원
    gtype  varchar2(30) not null, --소모임종류
    gstate varchar2(30) default '모집', --소모임진행상태
    gdate  varchar2(50) not null,--소모임글등록일자
@@ -317,6 +318,7 @@ drop table  professional;
 create table professional( --전문가DB
    pno number primary key, --전문가번호
    mno number references amember(mno), --회원DB(회원번호)
+   pimage varchar2(100) not null, --전문가 종류
    ptype varchar2(30) not null, --전문가 종류
    ptypeno varchar2(50) not null, --전문가 등록번호
    pcareer number not null --전문가경력
@@ -339,7 +341,7 @@ create table care( --훈련정보DB
 	ctype varchar2(30) not null,
 	cdate varchar2(50) not null,
 	cstate varchar2(30) default '예약가능',
-	cimage varchar2(30) not null,
+	cimage varchar2(100) not null,
 	ccontent varchar2(1500) not null
 );
 

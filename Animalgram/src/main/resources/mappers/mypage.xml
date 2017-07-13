@@ -37,82 +37,6 @@
  		where mno = (select mno from amember where nickname=#{nickname})
  	</select>
  	
- 	<!-- 판매현황 User용 -->
- 	<select id="custom_user" resultType="billuser">
- 		select bno,cutitle,cuinfo,bcount,cuprice,bstate
- 		from custom natural join bill
- 		where mno = (select mno from amember where nickname=#{nickname})
- 	</select>
- 	
- 	<!-- 판매현황 삭제 User용 -->
- 	<delete id="cusUser_del">
- 		delete from bill
- 		where bno = #{bno}
- 	</delete>
- 	
- 	<!-- 판매현황 페이징 -->
- 	<select id="custom_user_count" resultType="int">
- 		select count(*)
- 		from custom natural join bill
- 		where mno = (select mno from amember where nickname=#{nickname})
- 	</select>
- 	
- 	<!-- 나눔 현황 올린사람용 -->
- 	<select id="donation_now" resultType="donation">
- 		select dno,mno,dtitle,dinfo,to_char(ddate,'yyyy-mm-dd') ddate,dstate
- 		from donation
- 		where mno = (select mno from amember where nickname=#{nickname})
- 		order by dno desc
- 	</select>
- 	
- 	<!-- 나눔 현황 삭제 올린사람용 -->
- 	<delete id="donation_nowdel">
- 		delete from donation
- 		where dno = #{dno}
- 	</delete>
- 	
- 	<!-- 나눔 현황 올린사람 페이징 -->
- 	<select id="donation_now_page" resultType="int">
- 		select count(*)
- 		from donation
- 		where mno = (select mno from amember where nickname=#{nickname})
- 	</select>
- 	
- 	<!-- 나눔 현황 당첨자 (올린사람이 승인) -->
- 	<select id="donation_check" resultType="donationCheck">
- 		select dano,dtitle,dinfo,damemo,dastate,maddr
- 		from donation natural join donation_ask natural join amember
- 		where nickname = #{nickname} and dastate='상품준비중'
- 	</select>
- 	
- 	<!-- 나눔 승인 해주기 (올린사람) -->
- 	<update id="donation_up">
- 		update donation_ask
- 		set dastate = '배송완료'
- 		where dano = #{dano}
- 	</update>
- 	
- 	<!-- 나눔 현황 당첨자 (올린사람 승인) 페이징 -->
- 	<select id="donation_check_count" resultType="int">
- 		select count(*)
- 		from donation natural join donation_ask natural join amember
- 		where nickname = #{nickname} and dastate='상품준비중'
- 	</select>
-
- 	<!-- 나눔 현황 당첨자 (올린사람이 승인완료) -->
- 	<select id="donation_ok_check" resultType="donationCheck">
- 		select dano,dtitle,dinfo,damemo,dastate,maddr
- 		from donation natural join donation_ask natural join amember
- 		where nickname = #{nickname} and dastate='배송완료'
- 	</select>
- 	
- 	<!-- 나눔 현황 당첨자 (올린사람 승인완료) 페이징 -->
- 	<select id="donation_check_ok_count" resultType="int">
- 		select count(*)
- 		from donation natural join donation_ask natural join amember
- 		where nickname = #{nickname} and dastate='배송완료'
- 	</select>
- 	
  	<!-- 훈련 요청 승인 -->
  	<update id="update_care">
  		update care_ask
@@ -170,7 +94,7 @@
  	
  	<!-- 등록된 판매 물품(판매자용) -->
  	<select id="custom_select" resultType="custom">
- 		select cuno,sno,cutitle,cuprice,cuinfo,cudate
+ 		select cuno,sno,ctitle,cprice,cimage,cinfo,cdate
  		from custom
  		order by cuno desc
  	</select>
@@ -183,7 +107,7 @@
 	
 	<!-- 판매 요청 현황 -->
 	<select id="bill_select" resultType="bill">
-		select bno,mno,cuno,cutitle,bmemo,bcount,to_char(bdate,'yyyy-mm-dd') bdate,bstate
+		select bno,mno,cuno,ctitle,bmeno,bcount,to_char(bdate,'yyyy-mm-dd') bdate,bstate
 		from bill natural join custom
 		where bstate = '상품준비중'
 		order by bno desc
@@ -205,7 +129,7 @@
 	
 	<!-- 판매 요청 승인 조회-->
 	<select id="bill_comit_select" resultType="bill">
-		select bno,mno,cuno,cutitle,bmemo,bcount,to_char(bdate,'yyyy-mm-dd') bdate,bstate
+		select bno,mno,cuno,ctitle,bmeno,bcount,to_char(bdate,'yyyy-mm-dd') bdate,bstate
 		from bill natural join custom
 		where bstate = '배송완료'
 	</select>

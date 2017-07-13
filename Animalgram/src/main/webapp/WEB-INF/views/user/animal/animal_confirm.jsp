@@ -1,87 +1,123 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css"
-	href="/resources/bootstrapPro/css/petUp.css?ver=1.3">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
 
-<script type="text/javascript">
+<head>
 
-	function check1(){
-		alert('애완견 등록');
-		document.petform.submit();
-	}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	$(function() {
-		$('#animal_confirm').click(function() {
-			$('#squarespaceModal').modal();
-		});
-	});
-</script>
+    <title>SB Admin - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
 
 
-<!-- line modal -->
-<div class="modal fade" id="squarespaceModal" tabindex="-1"
-	role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">×</span><span class="sr-only">Close</span>
-				</button>
-				<h3 class="modal-title" id="lineModalLabel">나의 펫 등록</h3>
-			</div>
-				<form action="pet_insert" method="post" name="petform" enctype="multipart/form-data">
-			<div class="modal-body">
 
-				<!-- content goes here -->
-					<div class="form-group">
-					<input type="hidden" name="nickname" value="${user }">
-						<label for="exampleInputEmail1">나의 펫 이름</label> <input
-							type="text" class="form-control" id="petname" name="aname" placeholder="펫 이름">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">나의 펫 성별</label>
-						<label class="radio_text">
-						<input type="radio" name="agender"
-							value="hoge" checked>수컷
-						</label> <label class="radio_text">
-						 <input type="radio"
-							name="agender" value="hoge">암컷
-						</label>
-						<label class="radio_text">
-						 <input type="radio"
-							name="agender" value="hoge">중성화
-						</label>
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">나의 펫 나이</label> <input
-							type="text" class="form-control" id="petage"
-							name="aage" placeholder="나의 펫 나이">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">나의 펫 종</label> <input
-							type="text" class="form-control" id="pettype"
-							name="atype" placeholder="ex) 시츄,푸들">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputFile">File input</label> <input
-							type="file" name="image" id="petimage">
-						<p class="help-block">나의 펫 사진을 등록하세요.</p>
-					</div>
-			</div>
-			</form>
-			<div class="modal-footer">
-				<div class="btn-group btn-group-justified" role="group"
-					aria-label="group button">
-					<div class="btn-group" role="group">
-						<button type="button" id="savePet" onclick="check1()"
-							class="btn btn-default btn-hover-green">Save</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							role="button">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Forms
+                        </h1>
+              
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <form role="form">
+
+                            <div class="form-group">
+                                <label>Text Input</label>
+                                <input class="form-control">
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Text Input with Placeholder</label>
+                                <input class="form-control" placeholder="Enter text">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Static Control</label>
+                                <p class="form-control-static">email@example.com</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>File input</label>
+                                <input type="file">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Text area</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+
+                      <div class="form-group">
+                                <label>Selects</label>
+                                <select class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Multiple Selects</label>
+                                <select multiple class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-default">Submit Button</button>
+                            <button type="reset" class="btn btn-default">Reset Button</button>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+
+    <!-- jQuery -->
+    <script src="/resources/bootstrapPro/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

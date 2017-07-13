@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="careask">
+
+	<insert id="insertCarePerson" parameterType="careaskVO">
+		insert into care_ask (cano,mno,ano,cno) 
+			values (care_ask_seq.nextval,#{mno},#{ano},#{cno})	
+	</insert>
+	<delete id="deleteCarePerson" parameterType="int">
+		delete from care_ask where cano=#{cano}
+	</delete>
+	<select id="selectCareAll" resultType="careaskVO">
+		select * from care_ask
+	</select>
+	<select id="selectCareAsk" resultType="careaskVO" parameterType="int">
+		select * from care_ask where cno=#{cno}
+	</select>
+	<select id="selectPerson" resultType="careaskVO" parameterType="int">
+		select * from care_ask where mno=#{mno}
+	</select>
+	<select id="selectOne" resultType="careaskVO" parameterType="int">
+		select * from care_ask where cano=#{cano}
+	</select> 
+
 </mapper>

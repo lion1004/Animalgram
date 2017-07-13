@@ -3,55 +3,29 @@ package com.animal.domain;
 import java.sql.Date;
 
 public class MemberVO {
-	
-	private int mno;			// 회원번호
-	private String idmail;		// 회원아이디
-	private String mpass;		// 비밀번호
-	private String nickname;	// 닉네임
-	private String mname;		// 이름
-	private String birth;		// 생년월일
-	private String mgender;		// 성별
-	private String job;			// 직업
-	private String mtel;		// 전화번호
-	private String maddr;		// 주소
-	private String favorite;	// 관심분야 ( 고양이,강아지 )
-	private String pwcode;		// 보안코드
-	private String pwcodeas;	// 보안코드 답변
-	private String mdate;		// 가입일자
+	private int mno; // 회원번호
+	private String idmail; // 회원아이디(이메일)
+	private String mpass; // 비밀번호
+	private String mhint; // 비밀힌트
+	private String nickname; // 닉네임
+	private String mname; // 이름
+	private String birth; // 생년월일
+	private String mgender; // 성별
+	private String job; // 직업
+	private String mtel; // 전화번호
+	private String maddr; // 사는지역
+	private String favorite; // 관심분야
+	private Date mdate; // 가입일자
 	
 	private boolean listCheck = false; 
 	//관리자페이지 블랙리스트 체크용 
 
 	@Override
 	public String toString() {
-		return "MemberVO [mno=" + mno + ", idmail=" + idmail + ", mpass=" + mpass + ", nickname=" + nickname
-				+ ", mname=" + mname + ", birth=" + birth + ", mgender=" + mgender + ", job=" + job + ", mtel=" + mtel
-				+ ", maddr=" + maddr + ", favorite=" + favorite + ", pwcode=" + pwcode + ", pwcodeas=" + pwcodeas
-				+ ", mdate=" + mdate + ", listCheck=" + listCheck + "]";
-	}
-
-	public String getPwcode() {
-		return pwcode;
-	}
-
-	public String getMdate() {
-		return mdate;
-	}
-
-	public void setPwcode(String pwcode) {
-		this.pwcode = pwcode;
-	}
-
-	public String getPwcodeas() {
-		return pwcodeas;
-	}
-
-	public void setPwcodeas(String pwcodeas) {
-		this.pwcodeas = pwcodeas;
-	}
-
-	public void setMdate(String mdate) {
-		this.mdate = mdate;
+		return "MemberVO [mno=" + mno + ", idmail=" + idmail + ", mpass=" + mpass + ", mhint=" + mhint + ", nickname="
+				+ nickname + ", mname=" + mname + ", birth=" + birth + ", mgender=" + mgender + ", job=" + job
+				+ ", mtel=" + mtel + ", maddr=" + maddr + ", favorite=" + favorite + ", mdate=" + mdate + ", listCheck="
+				+ listCheck + "]";
 	}
 
 	public boolean isListCheck() {
@@ -65,14 +39,14 @@ public class MemberVO {
 	public MemberVO() {
 	}
 
-	
-	public MemberVO(int mno, String idmail, String mpass, String nickname, String mname, String birth, String mgender,
-			String job, String mtel, String maddr, String favorite, String pwcode, String pwcodeas, String mdate,
-			boolean listCheck) {
+
+	public MemberVO(int mno, String idmail, String mpass, String mhint, String nickname, String mname, String birth,
+			String mgender, String job, String mtel, String maddr, String favorite, Date mdate) {
 		super();
 		this.mno = mno;
 		this.idmail = idmail;
 		this.mpass = mpass;
+		this.mhint = mhint;
 		this.nickname = nickname;
 		this.mname = mname;
 		this.birth = birth;
@@ -81,10 +55,16 @@ public class MemberVO {
 		this.mtel = mtel;
 		this.maddr = maddr;
 		this.favorite = favorite;
-		this.pwcode = pwcode;
-		this.pwcodeas = pwcodeas;
 		this.mdate = mdate;
-		this.listCheck = listCheck;
+	}
+
+	
+	public String getMhint() {
+		return mhint;
+	}
+
+	public void setMhint(String mhint) {
+		this.mhint = mhint;
 	}
 
 	public int getMno() {
@@ -174,5 +154,14 @@ public class MemberVO {
 	public void setFavorite(String favorite) {
 		this.favorite = favorite;
 	}
+
+	public Date getMdate() {
+		return mdate;
+	}
+
+	public void setMdate(Date mdate) {
+		this.mdate = mdate;
+	}
+
 
 }

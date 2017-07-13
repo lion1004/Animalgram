@@ -3,7 +3,6 @@ package com.animal.control;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,21 +49,21 @@ public class AnimalMemControllerR {
 	
 	// 아이디 확인
 		@RequestMapping(value ="/member/id", method = RequestMethod.POST)
-		public ResponseEntity<List<String>> idfindCheck(@RequestParam(value="mname") String mname,@RequestParam(value="birth") String birth,
-										@RequestParam(value="mtel") String mtel,Model model)throws Exception{
+		public ResponseEntity<String> idfindCheck(@RequestParam(value="mname") String mname,@RequestParam(value="birth") String birth,
+										@RequestParam(value="mtel") String mtel)throws Exception{
 			
-			ResponseEntity<List<String>> entity = null;
+			ResponseEntity<String> entity = null;
 			MemConfirmVO vo = new MemConfirmVO();
 			vo.setMname(mname);
 			vo.setBirth(birth);
 			vo.setMtel(mtel);
 		
-			List<String> list = service.foundId(vo);
-			System.out.println(list);
-			if (list.size() != 0){
-				entity = new ResponseEntity<>(list,HttpStatus.OK);
+			String id = service.foundId(vo);
+	
+			if (id != null){
+				entity = new ResponseEntity<String>(id, HttpStatus.OK);
 			} else {
-				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+				entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 			}
 			return entity;
 		}
@@ -165,39 +163,6 @@ public class AnimalMemControllerR {
 		public ResponseEntity<String> bill_update(@PathVariable("bno") int bno)throws Exception{
 			ResponseEntity<String> entity = null;
 			if(aniservice.bill_update(bno)){
-				entity = new ResponseEntity<>(HttpStatus.OK);
-			}else{
-				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}
-			return entity;
-		}
-	// 장터 현황 삭제(User 용)
-		@RequestMapping(value="/custom_udel/{bno}",method=RequestMethod.DELETE)
-		public ResponseEntity<String> customUdel(@PathVariable("bno") int bno)throws Exception{
-			ResponseEntity<String> entity = null;
-			if(aniservice.customUdel(bno)){
-				entity = new ResponseEntity<>(HttpStatus.OK);
-			}else{
-				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}
-			return entity;
-		}
-	// 나눔 등록 삭제
-		@RequestMapping(value="/donation_del/{dno}",method = RequestMethod.DELETE)
-		public ResponseEntity<String> donationDel(@PathVariable("dno") int dno)throws Exception{
-			ResponseEntity<String> entity = null;
-			if(aniservice.donation_del(dno)){
-				entity = new ResponseEntity<>(HttpStatus.OK);
-			}else{
-				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}
-			return entity;
-		}
-	// 나눔 승인
-		@RequestMapping(value="/donation_up/{dano}",method=RequestMethod.PUT)
-		public ResponseEntity<String> donationUp(@PathVariable("dano") int dano)throws Exception{
-			ResponseEntity<String> entity = null;
-			if(aniservice.donationUp(dano)){
 				entity = new ResponseEntity<>(HttpStatus.OK);
 			}else{
 				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

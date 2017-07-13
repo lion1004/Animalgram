@@ -122,7 +122,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label>소모임 사진</label> <input type="file" name="file">
+						<label>소모임 사진</label> <input id="groupimage" type="file" name="file">
 						<p class="help-block">이미지 파일(.png .jpg .bmp .gif) 10MB 이하 파일만
 							업로드 가능합니다.</p>
 					</div>
@@ -156,6 +156,8 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#groupmake").click(function(){
+					var filefomat = $("#groupimage").val();
+					filefomat = filefomat.substring(filefomat.indexOf("."), filefomat.length);
 					if($("#grouptitle").val() == ""){
 						alert("소모임 제목을 입력하세요.");
 						$("#grouptitle").focus();	
@@ -165,13 +167,15 @@
 					}else if($("#calendar").val() == ""){
 						alert("소모임 날짜를 정해주세요.");
 						$("#calendar").focus();	
+					}else if($("#groupimage").val() == ""){
+						alert("소모임 이미지를 등록주세요.");
+						$("#groupimage").focus();	
+					}else if(!(filefomat == ".jpg"||filefomat == ".png"||filefomat == ".bmp"||filefomat == ".gif")){
+						alert("이미지 파일 확장자를 확인해 주세요.");
+						$("#groupimage").focus();	
 					}else{
 						$("#inputForm").submit();
 					}	
 				});
 			});
 		</script>
-
-
-
-

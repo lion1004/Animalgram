@@ -1,51 +1,123 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@include file="../base/main.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
 
-<script type="text/javascript">
-	//고객센터 글쓰기 창 유효성 검사
-	function center_confirm_check(){
-		if(document.center_confirm_form.cttitle.value == ""){
-			alert('제목을 입력하세요.')
-			document.center_confirm_form.cttitle.focus();
-		}else if(document.center_confirm_form.ctcontent.value == ""){
-			alert('내용을 입력하세요.')
-			document.center_confirm_form.ctcontent.focus();
-		}else{
-			document.center_confirm_form.submit();
-		}
-	}
-</script>
-<div id="wrapper">
-	<div id="page-wrapper">
-		<div class="container-fluid">
-			<h1 class="page-header">FAQ & 1:1문의</h1>
-			<%@include file="../center/center_faq_list.jsp"%>
-			<hr>
-		</div>
-			<div class="panel panel-yellow" style="width: 1000px; margin: 0 auto;">
-					<div class="panel-heading">
-						<h3 class="panel-title">1:1문의</h3>
-					</div>
-					<br>
-					<!-- 글쓰기 내용 입력 -->
-					<div class="panel-body">
-						<div class="col-lg-12">
-							<form role="form" method="post" name="center_confirm_form" action="/center/cinsert">
-								<input type="hidden" name="nickname" value="${user}">
-								<div class="form-group">
-									<label>제목</label> <input class="form-control" name="cttitle">
-								</div>
-								<div class="form-group" style="width: 650px" >
-									<label>내용</label> <textarea rows="10" cols="60" style="width: 650px" name="ctcontent" id="ctcontent"></textarea>
-								</div>
-							<div class="form-group">
-								<button type="button" class="btn btn-success" onclick="center_confirm_check()">등록</button>
-								<a href='/aboard/clist'><button type="button" class="btn btn-danger">취소</button></a>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/resources/bootstrapPro/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/resources/bootstrapPro/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Forms
+                        </h1>
+              
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <form role="form">
+
+                            <div class="form-group">
+                                <label>Text Input</label>
+                                <input class="form-control">
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Text Input with Placeholder</label>
+                                <input class="form-control" placeholder="Enter text">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Static Control</label>
+                                <p class="form-control-static">email@example.com</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>File input</label>
+                                <input type="file">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Text area</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+
+                      <div class="form-group">
+                                <label>Selects</label>
+                                <select class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Multiple Selects</label>
+                                <select multiple class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-default">Submit Button</button>
+                            <button type="reset" class="btn btn-default">Reset Button</button>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+
+    <!-- jQuery -->
+    <script src="/resources/bootstrapPro/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/resources/bootstrapPro/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.animal.domain.CareAskVO;
 import com.animal.domain.CareVO;
 import com.animal.domain.MemberVO;
 import com.animal.domain.ProfessionalVO;
@@ -65,5 +66,35 @@ public class CareServiceImpl implements CareService {
 	@Override
 	public void delete(int gno) {
 		dao.delete(gno);
+	}
+
+	@Override
+	public void insertCareAsk(CareAskVO vo) {
+		dao.insertCareAsk(vo);
+	}
+
+	@Override
+	public void deletePerGroup(int cano) {
+		dao.deletePerGroup(cano);
+	}
+
+	@Override
+	public CareAskVO selectPerGroOne(int cano) {
+		return dao.selectPerGroOne(cano);
+	}
+
+	@Override
+	public List<CareAskVO> selectCareAll() {
+		return dao.selectCareAll();
+	}
+
+	@Override
+	public List<CareAskVO> selectPerson(int mno) {
+		return dao.selectPerson(mno);
+	}
+
+	@Override
+	public List<CareAskVO> selectCareAsk(int cno) {
+		return dao.selectCareAsk(cno);
 	}
 }

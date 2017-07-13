@@ -51,12 +51,21 @@
 					</div>
 					<div class="form-group">
 						<label>참여자 정보</label> <select multiple class="form-control">
-							<%-- <c:forEach items="${personlist }" var="memberVO" varStatus="stat">
-										<option value="">${memberVO.nickname}(${memberVO.mname})</option>
-									</c:forEach> --%>
+							  <c:forEach items="${memanilist }" var="animalVO" varStatus="stat">
+										<option>(${animalVO.nickname})-${animalVO.aname}:${animalVO.aage},${animalVO.atype}</option>
+							  </c:forEach>
 						</select>
 					</div>
-					<button type="submit" class="btn btn-success">✿참여 하기✿</button>
+					<c:if test="${user != null }">
+						<c:set var="count" value="${groupVO.gcount}" />
+						<c:set var="limit" value="${groupVO.glimit}" />		
+						<c:if test="${count < limit}">
+								<a onclick="openpetlist(${groupVO.gno})" class="btn btn-primary">✿참여하기✿</a>
+						</c:if>
+						<c:if test="${count == limit}">
+								<a onclick="alert('인원이 가득찼습니다. 다른 소모임을 찾아보세요.')" class="btn btn-primary">✿참여하기✿</a>
+						</c:if>
+					</c:if>
 					<a href="/group/list" class="btn btn-danger">✿목록으로 가기✿</a> 
 					<%-- <a href="/group/modify?gno=${groupVO.gno}" class="btn btn-warning.disabled">✿수정 하기✿</a>
 					 <a href="/group/delete?gno=${groupVO.gno}" class="btn btn-warning.disabled">✿삭제 하기✿</a> --%>
@@ -80,3 +89,64 @@
 	</footer>
 	<br>
 </div>
+		<div class="modal fade" id="petModal" role="dialog" style="margin-top: 100px">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 35px 50px;">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4>
+							<span class="glyphicon glyphicon-lock"></span> 펫목록
+						</h4>
+					</div>
+					<div class="modal-body" style="padding: 40px 50px;">
+						<form role="form" name="pet_list">
+							<div class="form-group">				 
+								<label><span class="glyphicon glyphicon-user"></span> Pet list</label>
+								<br>
+								<select id="petlist" style="width: 500px;height:50px ">
+ 									<c:forEach items="${petlist }" var="animalVO" varStatus="stat">
+ 										<option value="${animalVO.ano },${animalVO.mno }">[ 펫이름 : ${animalVO.aname } ], [ 펫종류: ${animalVO.atype } ], [ 펫나이: ${animalVO.aage } ]</option>
+									</c:forEach>
+								</select>
+							</div>
+							<button type="button" data-dismiss="modal" class="btn btn-success btn-block" id="selectB">
+								<span class="glyphicon glyphicon"></span> ✿참가하기✿
+							</button>
+						</form>
+				 </div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+		
+				var gno;
+				var ano;
+				var mno
+				function openpetlist(group){
+					gno = group;
+					$("#petModal").modal();
+				}
+				
+				$(document).ready(function() {
+					
+					$("#selectB").click(function(){	
+						var number = $('#petlist').val();
+						ano = number.substring(0, number.indexOf(','));
+						mno = number.substring(number.indexOf(',')+1,number.length);
+						$.ajax({
+							url : '/group/group_join',
+							type : 'post',
+							data : 'gno='+gno+'&ano='+ano+'&mno='+mno,
+							success : function(data){
+								location.href="/group/list";
+							},
+							error : function(data){
+								alert("동일 반려동물 과 이미 참여한 소모임입니다.");
+								
+							}
+						});
+					})
+				});
+			</script>

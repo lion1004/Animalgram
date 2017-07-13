@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.animal.domain.CareAskVO;
 import com.animal.domain.CareVO;
 import com.animal.domain.MemberVO;
 import com.animal.domain.ProfessionalVO;
@@ -59,12 +60,38 @@ public class CareDAOImpl implements CareDAO {
 
 	@Override
 	public void update(CareVO vo) {
-		session.update("updateGroup", vo);
+		session.update("care.updateCare", vo);
 	}
 
 	@Override
 	public void delete(int gno) {
-		session.delete("deleteGroup", gno);
+		session.delete("care.deleteCare", gno);
 	}
+	
+	
+	
+	@Override
+	public void insertCareAsk(CareAskVO vo) {
+		session.insert("careask.insertCarePerson", vo);
+	}
+	@Override
+	public void deletePerGroup(int cano) {
+		session.delete("careask.deleteCarePerson",cano);
+	}
+	@Override
+	public List<CareAskVO> selectCareAll() {
+		return session.selectList("careask.selectCareAll");
+	}@Override
+	public CareAskVO selectPerGroOne(int cano) {
+		return session.selectOne("careask.selectOne", cano);
+	}@Override
+	public List<CareAskVO> selectPerson(int mno) {
+		return session.selectList("careask.selectPerson",mno);
+	}@Override
+	public List<CareAskVO> selectCareAsk(int cno) {
+		return session.selectList("careask.selectCareAsk", cno);
+	}
+	
+	
 
 }

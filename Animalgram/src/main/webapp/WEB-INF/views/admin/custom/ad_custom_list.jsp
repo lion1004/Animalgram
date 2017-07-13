@@ -37,11 +37,11 @@
 						<option value="sno"
 							<c:out value="${cri.searchType eq 'sno'?'selected':''}"/>>
 							판매자번호</option>
-						<option value="cutitle"
-							<c:out value="${cri.searchType eq 'cutitle'?'selected':''}"/>>
+						<option value="ctitle"
+							<c:out value="${cri.searchType eq 'ctitle'?'selected':''}"/>>
 							제목</option>
-						<option value="cuprice"
-							<c:out value="${cri.searchType eq 'cuprice'?'selected':''}"/>>
+						<option value="cprice"
+							<c:out value="${cri.searchType eq 'cprice'?'selected':''}"/>>
 							가격</option>
 					</select> 
 					        <span class="input-group-btn">
@@ -76,10 +76,10 @@
                                         <td align="center">
                                           ${custom.sno }
                                         </td>
-                                        <td>${custom.cutitle }</td>
-                                        <td>${custom.cuprice}</td>
+                                        <td>${custom.ctitle }</td>
+                                        <td>${custom.cprice}</td>
                                         <td>
-                                        ${custom.cudate}
+                                        <fmt:formatDate value="${custom.cdate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
                                         </td>
                                     </tr>
                                  </c:forEach>

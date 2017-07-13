@@ -6,7 +6,7 @@
 		<typeAlias type="com.animal.domain.CareVO" alias="careVO"/>
 		<typeAlias type="com.animal.domain.GroupVO" alias="groupVO"/>
 		<typeAlias type="com.animal.domain.GroupPersonVO" alias="grouppersonVO"/>
-		<typeAlias type="com.animal.domain.MemConfirmVO" alias="member"/>
+		<typeAlias type="com.animal.domain.MemberVO" alias="member"/>
 		<typeAlias type="com.animal.domain.MemberVO" alias="memberVO"/>
 		<typeAlias type="com.animal.domain.BlacklistVO" alias="blacklist"/>
 		<typeAlias type="com.animal.domain.NoticeTextVO" alias="noticetext"/>
@@ -19,15 +19,14 @@
 		<typeAlias type="com.animal.domain.CustomVO" alias="custom"/> 
 		<typeAlias type="com.animal.domain.CustomAttachVO" alias="customattach"/> 
 		<typeAlias type="com.animal.domain.BillVO" alias="bill"/> 
-		<typeAlias type="com.animal.domain.BillUserVO" alias="billuser"/>
 		<typeAlias type="com.animal.domain.DonationVO" alias="donation"/> 
-		<typeAlias type="com.animal.domain.DonationCheckVO" alias="donationCheck"/> 
 		<typeAlias type="com.animal.domain.DonationAskVO" alias="donationask"/>
 		<typeAlias type="com.animal.domain.AnimalVO" alias="animal"/>
+		<typeAlias type="com.animal.domain.AnimalVO" alias="animalVO"/>
 		<typeAlias type="com.animal.domain.AgroupVO" alias="agroup"/>
 		<typeAlias type="com.animal.domain.CareVO" alias="care"/>
+		<typeAlias type="com.animal.domain.CareAskVO" alias="careaskVO"/>
 		<typeAlias type="com.animal.domain.CareProVO" alias="carepro"/>
 		<typeAlias type="com.animal.domain.CareProSelVO" alias="care_pro_select"/>
-		<typeAlias type="com.animal.domain.NoticeBoardVO" alias="noticeboard"/>
 	</typeAliases>
 </configuration>

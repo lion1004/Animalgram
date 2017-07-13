@@ -155,6 +155,8 @@
 
 <script type="text/javascript">
 			$(document).ready(function() {
+				var filefomat = $("#careimage").val();
+				filefomat = filefomat.substring(filefomat.indexOf("."), filefomat.length);
 				$("#caremake").click(function(){
 					if($("#caretitle").val() == ""){
 						alert("훈련 제목을 입력하세요.");
@@ -164,6 +166,9 @@
 						$("#calendarcare").focus();	
 					}else if($("#careimage").val() == ""){
 						alert("훈련 이미지를 등록해주세요.");
+						$("#careimage").focus();
+					}else if(!(filefomat == ".jpg"||filefomat == ".png"||filefomat == ".bmp"||filefomat == ".gif")){
+						alert("이미지 파일 확장자를 확인해 주세요.");
 						$("#careimage").focus();	
 					}else if($("#carecontent").val() == ""){
 						alert("훈련 내용을 작성해주세요.");

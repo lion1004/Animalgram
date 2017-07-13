@@ -67,7 +67,16 @@
 					</div>
 					<div id="map"></div>
 					<br> <br>
-					<button type="submit" class="btn btn-success">훈련 신청</button>
+						<c:if test="${user != null }">
+						<c:set var="state" value="${careVO.cstate}" />		
+  						<c:if test="${state eq '예약가능'}">
+								<a onclick="openpetlist(${careVO.cno})" class="btn btn-primary">✿훈련신청하기✿</a>
+						</c:if>
+						
+						<c:if test="${state eq '예약완료'}">
+								<a onclick="alert('모집이 종료 되었습니다. 다른 훈련을 찾아보세요.')" class="btn btn-primary">✿훈련신청하기✿</a>
+						</c:if>
+					</c:if>
 					<button type="reset" class="btn btn-danger"
 						onclick="history.back()">훈련 일정으로</button>
 				</form>
@@ -112,3 +121,64 @@
 		<br>
 	</div>
 </div>
+		<div class="modal fade" id="petModal" role="dialog" style="margin-top: 100px">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 35px 50px;">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4>
+							<span class="glyphicon glyphicon-lock"></span> 펫목록
+						</h4>
+					</div>
+					<div class="modal-body" style="padding: 40px 50px;">
+						<form role="form" name="pet_list">
+							<div class="form-group">				 
+								<label><span class="glyphicon glyphicon-user"></span> Pet list</label>
+								<br>
+								<select id="petlist" style="width: 500px;height:50px ">
+ 									<c:forEach items="${petlist }" var="animalVO" varStatus="stat">
+ 										<option value="${animalVO.ano },${animalVO.mno }">[ 펫이름 : ${animalVO.aname } ], [ 펫종류: ${animalVO.atype } ], [ 펫나이: ${animalVO.aage } ]</option>
+									</c:forEach>
+								</select>
+							</div>
+							<button type="button" data-dismiss="modal" class="btn btn-success btn-block" id="selectA">
+								<span class="glyphicon glyphicon"></span> ✿참가하기✿
+							</button>
+						</form>
+				 </div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+		
+				var cno;
+				var ano;
+				var mno
+				function openpetlist(care){
+					cno = care;
+					$("#petModal").modal();
+				}
+				
+				$(document).ready(function() {
+					
+					$("#selectA").click(function(){	
+						var number = $('#petlist').val();
+						ano = number.substring(0, number.indexOf(','));
+						mno = number.substring(number.indexOf(',')+1,number.length);
+						$.ajax({
+							url : '/care/care_ask',
+							type : 'post',
+							data : 'cno='+cno+'&ano='+ano+'&mno='+mno,
+							success : function(data){
+								location.href="/care/cal";
+							},
+							error : function(data){
+								alert("신청 할 수 없는 훈련입니다.");
+								
+							}
+						});
+					})
+				});
+			</script>

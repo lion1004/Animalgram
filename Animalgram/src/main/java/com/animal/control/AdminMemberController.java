@@ -80,7 +80,7 @@ public class AdminMemberController {
 		List<MemberVO> memlist = service.listMember(cri);
 		for(int i = 0; i < memlist.size(); i++){
 			if(service.checkBlack(memlist.get(i).getMno())){
-				//memlist.get(i).setListCheck(true);
+				memlist.get(i).setListCheck(true);
 			}
 		}
 		model.addAttribute("list",memlist);

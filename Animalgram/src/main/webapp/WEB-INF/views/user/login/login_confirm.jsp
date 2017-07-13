@@ -37,10 +37,10 @@
 							<span class="glyphicon glyphicon-remove"></span> Cancel
 						</button>
 						<p>
-							Not a member? <a href="/member/member_join">Sign Up</a>
+							Not a member? <a href="member_join">Sign Up</a>
 						</p>
 						<p>
-							Forgot <a href="/member/id">Id?  </a> Forgot<a href="/member/pass">Password?</a>
+							Forgot <a href="id">Id?  </a> Forgot<a href="pass">Password?</a>
 						</p>
 					</div>
 				</div>
@@ -52,7 +52,10 @@
 		<!-- 로그인창 오픈 -->
 		<script type="text/javascript">
 		
-		$(document).ready(function() {
+				
+			$(document).ready(function() {
+				
+				
 				$("#myBtn").click(function() {
 					$("#myModal").modal();
 				});
@@ -68,7 +71,7 @@
 						type : 'post',
 						data : 'idmail='+idmail+'&pass='+pass,
 						success : function(data){
-							location.href="/group/list";
+							location.href="/member/main";
 						},
 						error : function(data){
 							alert("등록되지 않은 회원입니다.");
@@ -78,4 +81,4 @@
 				})
 			});
 			
-	</script>
+			</script>

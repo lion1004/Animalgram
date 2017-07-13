@@ -5,15 +5,6 @@
 <%@ page session="false"%>
 
    <%@include file="../base/main.jsp" %>
-<<style>
-.bmemo{
-    white-space: nowrap; 
-    width: 30em; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    margin-top: 40px;
-}
-</style>
 
 <!-- Main content -->
 <section class="content">
@@ -55,43 +46,43 @@
 				</div>
 			</div>
 
-<!-- width:100%; margin: auto; -->
+
 			<div class="box">
 				<div class="box-header with-border">
 					<h3 class="box-title">주문제작 신청자 리스트</h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered" style="border: 1px solid; 
-					 height: 50px;  text-align: center;">
+					width:100%; height: 50px; margin: auto; text-align: center;">
 						<tr style="height: 30px; margin: auto;">
-							<th style="text-align: center; ">회원번호</th>
-							<th style="text-align: center; ">주문서 번호</th>
-							<th style="text-align: center; ">주문 상품명</th>
-							<th style="text-align: center; ">상품수량</th>
-							<th style="text-align: center; ">받는사람</th>
-							<th style="text-align: center; ">배송주소</th>
-							<th style="text-align: center; ">전화번호</th>
-							<th style="text-align: center; ">배송메모</th>
-							<th style="text-align: center; ">주문일자</th> 
+							<th style="text-align: center; width: 50px;">회원번호</th>
+							<th style="text-align: center; width: 60px;">주문서 번호</th>
+							<th style="text-align: center; width: 140px;">주문 상품명</th>
+							<th style="text-align: center; width: 50px;">상품수량</th>
+							<th style="text-align: center; width: 80px;">받는사람</th>
+							<th style="text-align: center; width: 220px;">배송주소</th>
+							<th style="text-align: center; width: 100px;">전화번호</th>
+							<th style="text-align: center; width: 220px;">배송메모</th>
+							<th style="text-align: center; width: 80px;">주문일자</th>
 						</tr>
 
 						<c:forEach items="${list}" var="billVO" >
 
 							<tr>
 								
-								<td style="width: 4%; height: 100px;">${billVO.mno}</td>
-								<td style="width: 6%; height: 100px;">${billVO.bno}</td>
-								<td style="width: 15%; height: 100px;" char="cutitle">${billVO.cutitle}</td>
-								<td style="width: 4%; height: 100px;">${billVO.bcount}</td>
+								<td>${billVO.mno}</td>
+								<td>${billVO.bno}</td>
+								<td>${billVO.cutitle}</td>
+								<td>${billVO.bcount}</td>
 								<%-- <td><a
 									href='/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bno}'>
 										${boardVO.title} </a></td> --%>
 										
-								<td style="width: 5%; height: 100px;">${billVO.mname}</td>
-								<td style="width: 25%; height: 100px;" class="maddr">${billVO.maddr}</td>
-								<td style="width: 10%; height: 100px;">${billVO.mtel}</td>
-								<td style="width: 23%; height: 100px;" class="bmemo">${billVO.bmemo}</td>
-								<td style="width: 20%; height: 100px;"><fmt:formatDate pattern="yyyy-MM-dd"
+								<td>${billVO.mname}</td>
+								<td>${billVO.maddr}</td>
+								<td>${billVO.mtel}</td>
+								<td>${billVO.bmemo}</td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${billVO.bdate}" /></td>
 							</tr>
 

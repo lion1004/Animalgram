@@ -8,17 +8,6 @@
 
 <script type="text/javascript">
      $(function(){
-    	
-    	 $('#donation_now').click(function(){
-    		$('#donation_check').css('display','none');
-    		$('#donation_View').css('display','');
-    	 });
-    	 
-    	 $('#donation_ok').click(function(){
-     		$('#donation_View').css('display','none');
-    		 $('#donation_check').css('display','');
-    	 });
-    	 
     	if('${param.tab}' != ''){
     		//alert("enter: "+ $("a[href='#${param.tab}']").parent().html())
     	 $("a[data-toggle='tab']").parent().removeClass('active');
@@ -146,33 +135,16 @@
              <hr>
              <%@ include file="../member/member_agroup.jsp" %>
           	</div>
+            </c:if> 
+            
+            <c:if test="${job == 'user'}">
              <!-- 훈련 현황 User용-->
              <div class="tab-pane" id="training">
              <hr>
              <%@ include file="../member/member_care.jsp" %>
              </div>
-             <!-- 판매 현황 User용 -->
-			 <div class="tab-pane" id="market">
-             <hr>
-             <%@ include file="../member/member_customUser.jsp" %>
-          	</div>
-          	<!-- 나눔 현황 User용 -->
-          	<div class="tab-pane" id="donation">
-          	<hr>
-          	<div align="center">
-          	<a  id="donation_now" style="cursor: pointer;">나의 나눔 현황</a>&nbsp;&nbsp;&nbsp;&nbsp;
-          	<a id="donation_ok" style="cursor: pointer;" >나의 당첨 현황</a>
-          	</div>
-          	<hr>
-          	<div id="donation_View">
-          	<%@include file="../member/member_donation_now.jsp" %>
-          	</div>
-          	<div id="donation_check" style="display: none;">
-          	<%@include file="../member/member_donation_ok.jsp" %>
-          	</div>
-          	</div>
             </c:if>
-             
+            
               <c:if test="${job == 'pro'}">
              <!-- 훈련 현황  Pro용-->
              <div class="tab-pane" id="training_sel_pro">

@@ -9,16 +9,16 @@
   	<selectKey resultType="int" keyProperty="cuno" order="BEFORE">
         SELECT custom_seq.nextval AS cuno FROM dual        
     </selectKey> 
-     insert into custom (cuno,sno,cutitle,cuinfo,cuprice)
-            values (#{cuno},1, #{cutitle}, #{cuinfo}, #{cuprice})
-<!--             values (custom_seq.nextval,1, #{cutitle}, #{cuinfo}) -->
-          <!--   values (#{cuno},1, #{cutitle}, #{cuinfo},sysdate) -->
+     insert into custom (cuno,sno,cutitle,cinfo)
+            values (#{cuno},1, #{cutitle}, #{cinfo})
+<!--             values (custom_seq.nextval,1, #{cutitle}, #{cinfo}) -->
+          <!--   values (#{cuno},1, #{cutitle}, #{cinfo},sysdate) -->
 <!--             values (tbl_board_seq.nextval, #{title}, #{content}, #{writer}) -->
   </insert>
   
   <update id="update" parameterType="custom">
      update custom
-         set cutitle=#{cutitle}, cuinfo=#{cuinfo}, cuprice=#{cuprice}
+         set cutitle=#{cutitle}, cinfo=#{cinfo}
      where cuno=#{cuno}
   </update>
   
@@ -29,11 +29,11 @@
   
   <!-- 한 건의 게시물 읽기 -->
   <select id="read" resultType="custom">
-<!--      select  cuno,sno,cutitle,cuinfo,cudate -->
+<!--      select  cuno,sno,cutitle,cinfo,cdate -->
 <!--      from custom -->
 <!--      where cuno=#{cuno} -->
 
- 	select a.cuno,a.sno,a.cutitle,a.cuinfo,a.cudate,a.cuprice,c.mname, c.maddr, c.mtel,d.fullName from custom a, seller b, amember c, custom_attach d
+ 	select a.cuno,a.sno,a.cutitle,a.cinfo,a.cdate,c.mname, c.maddr, c.mtel,d.fullName from custom a, seller b, amember c, custom_attach d
 	where a.cuno = #{cuno}
 	and a.cuno = d.cuno(+)
 	and a.sno = b.sno
@@ -47,11 +47,11 @@
   <!-- 리스트 -->
   <select id="listAll" resultType="custom">
      
-      select cuno,sno,cutitle,cuinfo,cudate
+      select cuno,sno,cutitle,cinfo,cdate
       
-      from (cuno,sno,cutitle,cuinfo,cudate, rownum rn
+      from (cuno,sno,cutitle,cinfo,cdate, rownum rn
       
-             from (select cuno,sno,cutitle,cuinfo,cudate
+             from (select cuno,sno,cutitle,cinfo,cdate
                    from custom  
                    order by cuno desc
                    )
@@ -60,7 +60,7 @@
   </select>
   
   <select id="listPage" resultType="custom">
-     select cuno,sno,cutitle,cuinfo,cudate
+     select cuno,sno,cutitle,cinfo,cdate
                    from custom  
                    order by cuno desc            
   </select>
@@ -87,9 +87,9 @@
   
   
   <select id="listSearch" resultType="custom">
-<!--      select cuno,sno,cutitle,cuinfo,cudate -->
+<!--      select cuno,sno,cutitle,cinfo,cdate -->
 <!--      from custom       -->
-      select a.cuno,sno,cutitle,cuinfo,cuprice,a.cudate, b.fullname
+      select a.cuno,sno,cutitle,cinfo,a.cdate, b.fullname
        from custom a, custom_attach b
        where a.cuno = b.cuno(+)
 <!--       <include refid="search"></include>      -->
@@ -112,7 +112,7 @@
   <select id="getAttach" resultType="String">
   	select fullName from custom_attach 
   	where cuno = #{cuno}
-  	order by cudate
+  	order by cdate
   </select>
   
   <delete id="deleteAttach" parameterType="int">

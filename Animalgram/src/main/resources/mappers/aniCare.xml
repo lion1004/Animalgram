@@ -6,7 +6,13 @@
 		insert into care (cno,pno,ctitle,ctype,cdate,cstate,cimage,ccontent)
 			values (care_seq.nextval,#{pno},#{ctitle},#{ctype},#{cdate},#{cstate},#{cimage},#{ccontent})
 	</insert>
-
+	<update id="updateCare" parameterType="careVO">
+  		 update care set ctitle=#{ctitle},ctype=#{ctype}, cdate=#{cdate},cstate=#{cstate},cimage=#{cimage},ccontent=#{ccontent}
+ 		 where cno=#{cno}
+	</update>
+	<delete id="deleteCare" parameterType="int">
+		delete from care where cno = #{cno}
+	</delete>
 	<select id="selectCalList" resultType="careVO">
 		select  ctitle,ctype,cdate,cno from care
 	</select>

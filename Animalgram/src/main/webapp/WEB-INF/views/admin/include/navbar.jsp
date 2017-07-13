@@ -146,7 +146,7 @@
 					<li><a><i class="fa fa-table fa-fw"></i> 반려동물 <span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li><a href="care_list">훈련 관리</a></li>
-							<li><a href="/shop/ad_list">샵 관리</a></li>
+							<li><a href="shop_list">샵 관리</a></li>
 						</ul></li>
 					<li><a href="cen_list"><i class="fa fa-flag fa-fw"></i>고객센터 </a></li>
 					<li class="active"><a href="/base/main"> 

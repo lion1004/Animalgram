@@ -29,8 +29,8 @@
                        <tr><th>물품 제목</th><th>물품 정보</th><th>수량</th><th>주문 날짜</th><th>물품 현황</th><th>주문 확인</th></tr>
                         <c:forEach var="list" items="${bill_sel }">
                         <tr>
-                          <td class="mailbox-subject">${list.cutitle }</td>
-                          <td class="mailbox-name">${list.bmemo }</td>
+                          <td class="mailbox-subject">${list.ctitle }</td>
+                          <td class="mailbox-name">${list.bmeno }</td>
                           <td class="mailbox-name">${list.bcount }</td>
                           <td class="mailbox-name">${list.bdate }</td>
                           <td class="mailbox-name">${list.bstate }</td>
@@ -73,8 +73,8 @@
                        <tr><th>물품 제목</th><th>물품 정보</th><th>수량</th><th>주문 날짜</th><th>물품 현황</th></tr>
                         <c:forEach var="list" items="${bill_comit_sel }">
                         <tr>
-                          <td class="mailbox-subject">${list.cutitle }</td>
-                          <td class="mailbox-name">${list.bmemo }</td>
+                          <td class="mailbox-subject">${list.ctitle }</td>
+                          <td class="mailbox-name">${list.bmeno }</td>
                           <td class="mailbox-name">${list.bcount }</td>
                           <td class="mailbox-name">${list.bdate }</td>
                           <td class="mailbox-name">${list.bstate }</td>
