@@ -17,6 +17,13 @@
 	<!-- Bootstrap Core CSS -->
 	<link href="/resources/bootstrapPro/css/bootstrap.min.css"
 		rel="stylesheet">
+		
+	 <!-- Theme style -->
+	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/bootstrapPro/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/resources/bootstrapPro/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+	
 	
 	<!-- Custom CSS -->
 	<link href="/resources/bootstrapPro/css/sb-admin.css" rel="stylesheet">
@@ -184,9 +191,9 @@
 						data-toggle="dropdown"><i class="fa fa-user"></i> ${user } <b
 							class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="/member/mypage"><i class="fa fa-fw fa-user"></i>MyPage</a></li>
+							<li><a href="mypage"><i class="fa fa-fw fa-user"></i>MyPage</a></li>
 							<li class="divider"></li>
-							<li><a href="/member/logout"><i class="fa fa-fw fa-power-off"></i>
+							<li><a href="logout"><i class="fa fa-fw fa-power-off"></i>
 									LogOut</a></li>
 						</ul></li>
 				</c:if>

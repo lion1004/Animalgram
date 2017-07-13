@@ -15,6 +15,7 @@
 }
 </style>
 
+
 <!-- Main content -->
 <section class="content">
 	<div class="row">
@@ -27,7 +28,7 @@
 				</div>
 				<!-- /.box-header -->
 
-<form id='registerForm' role="form" method="post">
+<form id='registerForm' name="confirm" role="form" method="post">
 <!--     <input type="hidden" name="cuno" value="1"> -->
 	<div class="box-body">
 		<div class="form-group">
@@ -35,8 +36,12 @@
 			 <input type="text" name="cutitle" class="form-control" placeholder="상품명을 입력 해주세요.">
 		</div>
 		<div class="form-group">
+			<label for="exampleInputEmail1">상품 가격</label>
+			 <input type="text" name="cuprice" class="form-control" placeholder="상품가격을 입력 해주세요.">
+		</div>
+		<div class="form-group">
 			<label for="exampleInputPassword1">상품정보</label>
-			<textarea class="form-control" name="cinfo" rows="3"
+			<textarea class="form-control" name="cuinfo" rows="3"
 				placeholder="상품 정보를 입력 해주세요."></textarea>
 		</div>
 
@@ -55,7 +60,8 @@
 		<ul class="mailbox-attachments clearfix uploadedList">
 		</ul>
 
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-primary">등록하기</button>
+	<a href="/user/custom/custom_list"><button type="button" class="btn btn-danger">취소</button></a>
 
 	</div>
 </form>
@@ -132,17 +138,34 @@ $("#registerForm").submit(function(event){
 //$(".uploadedList .delbtn").on("click",function(event){
 	event.preventDefault();<!-- event.preventDefault(): href 처리를 막아주고 단순 event만 진행되도록 해준다. -->
 	
+	if(document.confirm.cutitle.value == ""){
+	alert('주문제작 상품명을 입력하십시오.');
+	document.confirm.cutitle.focus();
+	return;
+	}else if(document.confirm.cuprice.value == ""){
+		alert('상품 가격를 입력하십시오.');
+	document.confirm.cuprice.focus();
+	return;
+	}else if (isNaN(document.confirm.cuprice.value)) {
+			alert("상품가격은 숫자만 입력 가능합니다.")
+			document.confirm.cuprice.focus();
+			return;
+	}else if(document.confirm.cuinfo.value == ""){
+		alert('상품 정보를 입력하십시오.');
+		document.confirm.cinfo.focus();
+	return;
+	}
+	
 	var that = $(this);
-
 	var str ="";
-	$(".uploadedList .delbtn").each(function(index){
-// 		 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") +"'> ";
+ 	$(".uploadedList .delbtn").each(function(index){
 		 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("data-src") +"'> ";
-	});
+	}); 
+	
 	that.append(str);
+	
 	if(str==""){alert('상품 이미지파일 등록해주세요.');
 	return;}
-	
 	that.get(0).submit();
 	
 });

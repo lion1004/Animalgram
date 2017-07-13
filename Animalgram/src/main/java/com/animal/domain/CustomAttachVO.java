@@ -6,17 +6,17 @@ public class CustomAttachVO {
 
 	private String fullName;
 	private int cuno;
-	private Date cdate;
+	private Date cudate;
 	
 	public CustomAttachVO() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CustomAttachVO(String fullName, int cuno, Date cdate) {
+	public CustomAttachVO(String fullName, int cuno, Date cudate) {
 		super();
 		this.fullName = fullName;
 		this.cuno = cuno;
-		this.cdate = cdate;
+		this.cudate = cudate;
 	}
 	
 	public String getFullName() {
@@ -31,16 +31,16 @@ public class CustomAttachVO {
 	public void setCuno(int cuno) {
 		this.cuno = cuno;
 	}
-	public Date getCdate() {
-		return cdate;
+	public Date getCudate() {
+		return cudate;
 	}
-	public void setCdate(Date cdate) {
-		this.cdate = cdate;
+	public void setCudate(Date cudate) {
+		this.cudate = cudate;
 	}
 
 	@Override
 	public String toString() {
-		return "CustomAttachVO [fullName=" + fullName + ", cuno=" + cuno + ", cdate=" + cdate + "]";
+		return "CustomAttachVO [fullName=" + fullName + ", cuno=" + cuno + ", cudate=" + cudate + "]";
 	}
 	
 }

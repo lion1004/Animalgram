@@ -37,7 +37,7 @@ import com.animal.util.MediaUtils;
 public class CustomController {
    
 	private static final Logger logger = LoggerFactory.getLogger(CustomController.class);
-	@Resource(name = "uploadPath")
+	@Resource(name = "loadPath")
 	  private String uploadPath;
   
 	@Inject
@@ -174,7 +174,6 @@ public class CustomController {
    
    @RequestMapping(value="/custom_confirm", method= RequestMethod.POST)//입력처리
    public String register(CustomVO vo,CustomAttachVO avo, RedirectAttributes attr)throws Exception{	   
-	   
 	   service.regist(vo,avo);
 	   System.out.println("customcontroller-vo :"+vo);
 	   System.out.println("customcontroller-avo :"+avo);

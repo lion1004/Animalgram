@@ -23,7 +23,8 @@
                         <h3 class="page-header">요청 상품 정보</h3>
               		<div>
               			<img src="/displayFile?fileName=${customVO.fullName}" width="200" height="100">
-              			<label style="font-size: 30px;margin-right: 150px;" >${customVO.cutitle}</label>
+              			<label style="font-size: 40px;margin-right: 150px;" >상품명 :${customVO.cutitle}</label><br>
+              			<label style="font-size: 20px;margin-left: 250px;" >상품 금액 :${customVO.cuprice} 원</label>
               		
               		</div>
               		
@@ -41,31 +42,32 @@
 
                             <div class="form-group">
                                 <label>받으시는 분</label>
-                                <input class="form-control" name="mname" value="${customVO.mname}">
+                                <input class="form-control" id="mname" name="mname" value="${customVO.mname}">
                             </div>
                             
                             <div class="form-group">
                                 <label>주문 수량</label>
-                                <input class="form-control" name="bcount" value="${bcount }" readonly>
+                                <input class="form-control" id="bcount" name="bcount" value="${bcount }" readonly>
                             </div>
 
                             <div class="form-group">
                                 <label>주소</label>
-                                <input class="form-control" name="bdeli" placeholder="Enter text"  value="${customVO.maddr}">
+                                <input class="form-control" id="bdeli" name="bdeli" placeholder="Enter text"  value="${customVO.maddr}">
                             </div>
                             
               
                             
                             <div class="form-group">
                                 <label>전화번호</label>
-                                <input  class="form-control" name="mtel" placeholder="Enter text" value="${customVO.mtel}">
+                                <input  class="form-control" id="mtel" name="mtel" placeholder="Enter text" value="${customVO.mtel}">
                             </div>
 
                             <div class="form-group">
                                 <label>배송 메시지(택배기사님에게..)</label>
-                                <textarea class="form-control" name="bmemo" rows="3"></textarea>
+                                <textarea class="form-control" id="bmemo" name="bmemo" rows="3"></textarea>
                             </div>
-
+					</div>
+					</div>
 					</form>
                    <button type="submit" class="btn btn-primary" id="resultBtn">주문</button>
                    <button type="reset" class="btn btn-primary" id="cancelBtn">취소</button>
@@ -74,6 +76,7 @@
             <!-- /.container-fluid -->
 
         </div>
+     
         <!-- /#page-wrapper -->
 
 <script type="text/javascript">
@@ -84,11 +87,29 @@ $(document).ready(function(){
 	console.log(formObj);
 	
 	$("#resultBtn").click(function(){
-			alert("주문이 완료 되었습니다.");
+		
 	
-		formObj.attr("method", "POST");
-		formObj.attr("action", "/user/custom/billask");
-		formObj.submit();
+	 	 if($("#mname").val() == ""){
+			alert('받으시는 분의 성함을 입력하십시오.');
+			$("#mname").focus();
+			}else if($("#bdeli").val() == ""){
+				alert('주소를 입력하십시오.');
+				$("#bdeli").focus();
+			}else if($("#mtel").val() == ""){
+				alert('전화번호를 입력하십시오.');
+				$("#mtel").focus();
+			}else if($("#bmemo").val() == ""){
+				alert('배송 메시지를 입력하십시오.');
+				$("#bmemo").focus();
+			}else{
+				
+			alert("주문이 완료 되었습니다.");
+			formObj.attr("method", "POST");
+			formObj.attr("action", "/user/custom/billask");
+			formObj.submit();
+			}
+	
+	
 	});
 	
 	

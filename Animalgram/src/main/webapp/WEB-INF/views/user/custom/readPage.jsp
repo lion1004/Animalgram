@@ -53,11 +53,15 @@
 							readonly="readonly">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">상품정보</label>
-						<textarea class="form-control" name="cinfo" rows="3"
-							readonly="readonly">${customVO.cinfo}</textarea>
+						<label for="exampleInputEmail1">상품 가격</label> <input type="text"
+							name='cuprice' class="form-control" value="${customVO.cuprice}"
+							readonly="readonly">
 					</div>
-					
+					<div class="form-group">
+						<label for="exampleInputPassword1">상품정보</label>
+						<textarea class="form-control" name="cuinfo" rows="3"
+							readonly="readonly">${customVO.cuinfo}</textarea>
+					</div>
 				</div>
 				<!-- /.box-body -->
 				

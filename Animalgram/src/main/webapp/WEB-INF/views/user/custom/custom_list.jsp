@@ -113,10 +113,10 @@
                 </div><br>
                                 <div class="row">
 
-                  <!--   <div class="col-sm-? col-lg-4 col-md-너비"> -->
-                    
-	<c:forEach items="${list}" var="customVO">
-<div class="col-sm-4 col-lg-4 col-md-4">
+			<form name="listform" id="listform">
+			                    
+					<c:forEach items="${list}" var="customVO">
+					<div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                           <div class="caption" >
                           
@@ -128,21 +128,17 @@
                                 	<a href='/user/custom/custom_sale${pageMaker.makeSearch(pageMaker.cri.page) }&cuno=${customVO.cuno}' style="font-size: 18px;">${customVO.cutitle}</a>
             <%-- 확률 쓸거 <a href='/user/custom/custom_sale${pageMaker.makeSearch(pageMaker.cri.page) }&cuno=${customVO.cuno}' id="random" onclick="chance(${customVO.cuno})">${customVO.cutitle}</a> --%>
                                 </h4>
-                         		<div>주문 누적수량 : ${customVO.bsellcount }</div> 
+                                
+                         		<div><p name="cuprice" id="cuprice">상품가격 : ${customVO.cuprice } 원</p></div> 
+                            
+                            
+                            
                             </div>
-                    <!--         <div class="ratings">
-                                <p class="pull-right">12 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>별표 -->
+               
                         </div><!-- thumbnail -->
-</div><!-- 기본틀 전체 -->
-           </c:forEach>
+						</div><!-- 기본틀 전체 -->
+         			  </c:forEach>
+                   </form>
                                     
                 </div><!-- class:row -->
             </div><!-- 슬라이드까지 포함 전체 -->
@@ -151,34 +147,6 @@
     <!-- /.container -->
 		
 	</div>			
-				
-		 	<%-- 	<div class="box-body">
-					<table class="table table-bordered">
-						<tr>
-							<th style="width: 10px">CUNO</th>
-							<th>TITLE</th>
-						
-						</tr>
-
-						<c:forEach items="${list}" var="customVO">
-
-							<tr>
-								<div><td>${customVO.cuno}</td></div>
-								<td>${customVO.cuno}</td>
-								<td><a
-									href='/user/custom/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&cuno=${customVO.cuno}'>
-										${customVO.cutitle} </a></td>
-								<td>${customVO.cinfo}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-										value="${customVO.cdate}" /></td>
-								<td><span class="badge bg-red"></span></td>
-							</tr>
-
-						</c:forEach>
-
-					</table>
-				</div>  --%>
-				<!-- /.box-body -->
 
 
 				<div class="box-footer">
@@ -225,16 +193,6 @@
 		var a = Math.floor(Math.random()*50)+1;
 		alert("random value :"+a);		
 	}
-/* $(document).ready(function(){
-	
-	$('#random').click(function(){
-	var a = Math.floor(Math.random()*50) + 1;
-	alert("random value :"+a);
-	});
-	
-	$('.carousel-indicators').find('li').css('background', '#ccc');
-	
-}); */
 
 </script>
 

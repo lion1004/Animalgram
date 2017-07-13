@@ -8,7 +8,7 @@
   </insert>
   
    <select id="list" resultType="bill">
-   		select mno, bno, cutitle, bcount, bsellcount, dastate, bmemo, mname, maddr, mtel, bdate
+   		select mno, bno, cutitle, bcount, bstate, bmemo, mname, maddr, mtel, bdate
       	from bill natural join custom natural join seller natural join amember
       	order by bno desc
       <!-- select a.mno, a.bno, b.cutitle, d.mname, d.maddr, d.mtel, a.bmemo, to_char(a.bdate,'yyyy-mm-dd/hh:mi') bdate

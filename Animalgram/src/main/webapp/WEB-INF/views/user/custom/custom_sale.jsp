@@ -53,7 +53,8 @@
                <img src="/displayFile?fileName=${customVO.fullName }" width="500" height="250">
             </div>
 
-			<label style="font-size: 30px;margin-right: 150px;">${customVO.cutitle}</label>
+			<label style="font-size: 40px;margin-right: 0px; ">상품명 : ${customVO.cutitle}</label>
+			<label style="font-size: 20px;margin-right: 50px; ">상품가격 : ${customVO.cuprice} 원</label>
 			<br>
 			<br>
             <p class="col-md-4">
@@ -78,7 +79,7 @@
 				
                            <h3 class="page-header">상품 상세정보 </h3>
            
-						<textarea class="form-group" name="cinfo" readonly align="center" style="resize: none; width: 1250px; height: 500px" >${customVO.cinfo}</textarea>
+						<textarea class="form-group" name="cuinfo" readonly align="center" style="resize: none; width: 1250px; height: 500px" >${customVO.cuinfo}</textarea>
 					</div>
 	
 				</form>
