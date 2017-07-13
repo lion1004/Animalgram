@@ -19,7 +19,7 @@
    </if>
   </sql>
 <!-- 회원관리 -->
- <select id="listMember" resultType="member">
+ <select id="listMember" resultType="memberVO">
   select * from amember
   <include refid="searchMember"></include>
   order by mno desc
@@ -28,7 +28,7 @@
   select count(*) from amember
   <include refid="searchMember"></include>
  </select>
- <select id="selectMember" resultType="member">
+ <select id="selectMember" resultType="memberVO">
   select * from amember
   where mno=#{mno}
  </select>
@@ -111,7 +111,7 @@
  </delete>
  
  <!-- 관리자 로그인 -->
- <select id="adminLogin" resultType="member">
+ <select id="adminLogin" resultType="memberVO">
   select * from amember
   where idmail=#{idmail} and mpass=#{mpass} and job='admin'
  </select>
