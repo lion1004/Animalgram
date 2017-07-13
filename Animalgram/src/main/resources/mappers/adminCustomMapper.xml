@@ -9,11 +9,11 @@
     <if test="searchType == 'sno'.toString()">
      where sno like '%'||#{keyword}||'%'
     </if>
-    <if test="searchType == 'ctitle'.toString()">
-     where ctitle like '%'||#{keyword}||'%'
+    <if test="searchType == 'cutitle'.toString()">
+     where cutitle like '%'||#{keyword}||'%'
     </if>
-    <if test="searchType == 'cprice'.toString()">
-     where cprice like '%'||#{keyword}||'%'
+    <if test="searchType == 'cuprice'.toString()">
+     where cuprice like '%'||#{keyword}||'%'
     </if>
    </if>
   </sql>
@@ -39,7 +39,7 @@
  
  <update id="updateCustom">
   update custom
-  set ctitle=#{ctitle}, cinfo=#{cinfo}, cprice=#{cprice}
+  set cutitle=#{cutitle}, cuinfo=#{cuinfo}, cuprice=#{cuprice}
   where cuno=#{cuno}
  </update>
  

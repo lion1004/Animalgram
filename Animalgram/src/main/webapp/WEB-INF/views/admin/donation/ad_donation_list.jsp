@@ -61,7 +61,7 @@
                                         <th style="width:80px; text-align:center;">나눔번호</th>
                                         <th style="width:80px;">회원번호</th>
                                         <th>제목</th>
-                                        <th>갯수</th>
+                                        
                                         <th>상태</th>
                                         <th>일자</th>
                                     </tr>
@@ -78,10 +78,10 @@
                                            ${donation.mno}
                                         </td>
                                         <td>${donation.dtitle }</td>
-                                        <td>${donation.dcount}</td>
+                                       
                                         <td>${donation.dstate }</td>
                                         <td style="width:200px;">
-                                        <fmt:formatDate value="${donation.ddate}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
+                                        ${donation.ddate }
                                         </td>
                                     </tr>
                                  </c:forEach>

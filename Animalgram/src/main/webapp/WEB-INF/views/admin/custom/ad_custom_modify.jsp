@@ -26,7 +26,7 @@
 	    		  <input type='hidden' name='keyword' value="${cri.keyword}">
 				
 					<div class="form-group">
-						<label class="col-sm-2" for="cno">판매자 번호:</label>
+						<label class="col-sm-2" for="sno">판매자 번호:</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">${custom.sno }</p>
 						</div>
@@ -36,24 +36,24 @@
 						<label class="col-sm-2" for="ctitle">제목:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" placeholder="Title"
-								name="ctitle" style="width: 200px;" maxlength="10"
-								value="${custom.ctitle}">
+								name="cutitle" style="width: 200px;" maxlength="10"
+								value="${custom.cutitle}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2" for="cinfo">정보:</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" placeholder="Content.....(500자 제한)"
-								name="cinfo" style="height:300px; width:400px;" maxlength="500"
-								>${custom.cinfo }</textarea>
+								name="cuinfo" style="height:300px; width:400px;" maxlength="500"
+								>${custom.cuinfo }</textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2" for="cprice">가격:</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" placeholder="Price"
-								name="cprice" style="width: 200px;" maxlength="10"
-								value="${custom.cprice}">
+								name="cuprice" style="width: 200px;" maxlength="10"
+								value="${custom.cuprice}">
 						</div>
 					</div>
 					<br>
