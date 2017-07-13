@@ -7,11 +7,10 @@ public class CustomVO {
 	
 	  private int cuno; 
 	  private int sno; 
-	  private String ctitle;
-	private String cprice;
+	  private int cuprice;
 	  private String cutitle; 
-	  private String cinfo; 
-	  private Date cdate; 
+	  private String cuinfo; 
+	  private Date cudate; 
 	  private String[] files;
 	  private String fullName;
 	  private String mname;
@@ -25,10 +24,9 @@ public class CustomVO {
 
 	@Override
 	public String toString() {
-		return "CustomVO [cuno=" + cuno + ", sno=" + sno + ", ctitle=" + ctitle + ", cprice=" + cprice + ", cutitle="
-				+ cutitle + ", cinfo=" + cinfo + ", cdate=" + cdate + ", files=" + Arrays.toString(files)
-				+ ", fullName=" + fullName + ", mname=" + mname + ", maddr=" + maddr + ", mtel=" + mtel
-				+ ", bsellcount=" + bsellcount + "]";
+		return "CustomVO [cuno=" + cuno + ", sno=" + sno + ", cuprice=" + cuprice + ", cutitle=" + cutitle + ", cuinfo="
+				+ cuinfo + ", cudate=" + cudate + ", files=" + Arrays.toString(files) + ", fullName=" + fullName
+				+ ", mname=" + mname + ", maddr=" + maddr + ", mtel=" + mtel + ", bsellcount=" + bsellcount + "]";
 	}
 
 	public int getCuno() {
@@ -47,20 +45,12 @@ public class CustomVO {
 		this.sno = sno;
 	}
 
-	public String getCtitle() {
-		return ctitle;
+	public int getCuprice() {
+		return cuprice;
 	}
 
-	public void setCtitle(String ctitle) {
-		this.ctitle = ctitle;
-	}
-
-	public String getCprice() {
-		return cprice;
-	}
-
-	public void setCprice(String cprice) {
-		this.cprice = cprice;
+	public void setCuprice(int cuprice) {
+		this.cuprice = cuprice;
 	}
 
 	public String getCutitle() {
@@ -71,20 +61,20 @@ public class CustomVO {
 		this.cutitle = cutitle;
 	}
 
-	public String getCinfo() {
-		return cinfo;
+	public String getCuinfo() {
+		return cuinfo;
 	}
 
-	public void setCinfo(String cinfo) {
-		this.cinfo = cinfo;
+	public void setCuinfo(String cuinfo) {
+		this.cuinfo = cuinfo;
 	}
 
-	public Date getCdate() {
-		return cdate;
+	public Date getCudate() {
+		return cudate;
 	}
 
-	public void setCdate(Date cdate) {
-		this.cdate = cdate;
+	public void setCudate(Date cudate) {
+		this.cudate = cudate;
 	}
 
 	public String[] getFiles() {
@@ -134,6 +124,5 @@ public class CustomVO {
 	public void setBsellcount(int bsellcount) {
 		this.bsellcount = bsellcount;
 	}
-	  
 
 }
